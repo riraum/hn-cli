@@ -57,19 +57,19 @@ jobs:
       - name: test
         run: ./script/test
         
-golangci-lint:
-    runs-on: ubuntu-latest
+    golangci-lint:
+      runs-on: ubuntu-latest
 
-    steps:
-      - uses: actions/checkout@v4
+      steps:
+        - uses: actions/checkout@v4
 
-      - name: Set up Go
-        uses: actions/setup-go@v5
-        with:
-          go-version-file: 'go.mod'
+        - name: Set up Go
+          uses: actions/setup-go@v5
+          with:
+            go-version-file: 'go.mod'
 
-      - name: Generate embed file
-        run: go generate ./...
+        - name: Generate embed file
+          run: go generate ./...
 
-      - name: Launch golangci-lint
-        uses: golangci/golangci-lint-action@v6
+        - name: Launch golangci-lint
+          uses: golangci/golangci-lint-action@v6
