@@ -2,7 +2,15 @@
 # Ref: https://golangci-lint.run/usage/configuration/
 linters:
   enable:
-  # uses go fmt
+    # golangci-lint default
+    - errcheck
+    - gosimple
+    - govet
+    - ineffassign
+    - staticcheck 
+    - unused
+    # added as suggested
+    # uses go fmt
     - gofmt 
     # uses go imports
     - goimports
