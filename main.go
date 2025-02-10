@@ -3,5 +3,5 @@ package main
 import "fmt"
 
 func main() {
-	fmt.Println("Hello hn-cli")
+	fmt.Println("Hello hn-cli!")
 }
