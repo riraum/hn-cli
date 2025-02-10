@@ -1,12 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 type Item struct {
 	title  string
 	author string
 	score  int
-	time   string
+	time   time.Time
 	URL    string
 }
 
