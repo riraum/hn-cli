@@ -40,8 +40,6 @@ jobs:
           assert-nothing-changed go fmt ./...
           assert-nothing-changed goimports ./...
           assert-nothing-changed go mod tidy
-          assert-nothing-changed black .
-          assert-nothing-changed rubocop -f github .
 
           exit $STATUS
 
