@@ -1,0 +1,16 @@
+---
+# Ref: https://golangci-lint.run/usage/configuration/
+linters:
+  enable:
+  # uses go fmt
+    - gofmt 
+    # uses go imports
+    - goimports
+    - lll
+    - misspell
+    - mnd
+    - nolintlint
+    # replacement for go lint
+    - revive 
+    - usestdlibvars
+    - wsl
