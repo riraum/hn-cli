@@ -13,11 +13,11 @@ func TestRelativeTime(t *testing.T) {
 			title: "Random title",
 			author: "Mr Crabs",
 			score: "1337",
-			time: "",
+			time: "1136239445",
 			URL: "example.com/404",
 		},
 		want: "1",
 	},
 
-	
+
 	}
