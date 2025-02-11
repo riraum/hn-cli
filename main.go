@@ -45,23 +45,23 @@ func (t Item) relativeTime() string {
 	}
 	// number of hours, <24
 	if elapsedHours < 24 {
-		timeMarker, h := "%f h", elapsedHours
+		timeMarker, h := "%fh", elapsedHours
 		return fmt.Sprint(h) + timeMarker /* ... formatting with "Nh" ... */
 	}
 	// number of days, <30
 	if elapsedHours < 720 {
-		timeMarker, d := "%f d", days
+		timeMarker, d := "%fd", days
 		return fmt.Sprint(d) + timeMarker /* ... formatting with "Nd" ... */
 	}
 	// number of months, <12
 	if elapsedHours < 8640 {
-		timeMarker, m := "%f m", months
+		timeMarker, m := "%.1fm", months
 		return fmt.Sprint(m) + timeMarker /* ... formatting with "Nm" ... */
 	}
 	// number of years
 	// if elapsedHours > 8640 {
 	// 	return /* ... formatting with "Ny" ... */
 	// }
-	timeMarker, y := "%f y", years
+	timeMarker, y := "%fy", years
 	return fmt.Sprint(y) + timeMarker /* ... formatting with "Ny" ... */
 }

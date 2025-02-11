@@ -15,10 +15,28 @@ func TestRelativeTime(t *testing.T) {
 				// title:  "Random title",
 				// author: "Mr Crabs",
 				// score:  0,
-				time: time.Date(2024, 8, 15, 14, 30, 45, 100, time.Local),
+				time: time.Date(2024, 8, 01, 14, 30, 45, 100, time.Local),
 				// URL:    "example.com/404",
 			},
-			want: "1",
+			want: "5m",
+		},
+		{
+			item: Item{
+				time: time.Date(2025, 1, 01, 14, 30, 45, 100, time.Local),
+			},
+			want: "WIP",
+		},
+		{
+			item: Item{
+				time: time.Date(2025, 2, 01, 14, 30, 45, 100, time.Local),
+			},
+			want: "WIP",
+		},
+		{
+			item: Item{
+				time: time.Date(2025, 2, 01, 14, 30, 45, 100, time.Local),
+			},
+			want: "WIP",
 		},
 	}
 
