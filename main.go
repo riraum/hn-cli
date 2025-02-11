@@ -27,7 +27,7 @@ Figure out how to get 1hr, define it
 func (t Item) relativeTime() string {
 	postTime := t.time
 	// now := time.Now()
-	var returnValue string
+	// var returnValue string
 	// h, _ := time.ParseDuration("1h")
 	// d, _ := time.ParseDuration("1d")
 	// m, _ := time.ParseDuration("1m")
@@ -35,6 +35,9 @@ func (t Item) relativeTime() string {
 	postAge := time.Since(postTime)
 	elapsedTime, _ := time.ParseDuration(postAge.String())
 	elapsedHours := elapsedTime.Hours()
+	days := elapsedHours / 24
+	months := days * 30
+	years := days * 365
 
 	// <  1hr
 	if elapsedHours < 1 {
@@ -42,21 +45,23 @@ func (t Item) relativeTime() string {
 	}
 	// number of hours, <24
 	if elapsedHours < 24 {
-		hrs, rest := "%f h", elapsedHours
-		combine := hrs + fmt.Sprint(rest)
-		return combine /* ... formatting with "Nh" ... */
+		timeMarker, h := "%f h", elapsedHours
+		return fmt.Sprint(h) + timeMarker /* ... formatting with "Nh" ... */
 	}
 	// number of days, <30
 	if elapsedHours < 720 {
-		return /* ... formatting with "Nd" ... */
+		timeMarker, d := "%f d", days
+		return fmt.Sprint(d) + timeMarker /* ... formatting with "Nd" ... */
 	}
 	// number of months, <12
 	if elapsedHours < 8640 {
-		return /* ... formatting with "Nm" ... */
+		timeMarker, m := "%f m", months
+		return fmt.Sprint(m) + timeMarker /* ... formatting with "Nm" ... */
 	}
 	// number of years
 	// if elapsedHours > 8640 {
 	// 	return /* ... formatting with "Ny" ... */
 	// }
-	return /* ... formatting with "Ny" ... */
+	timeMarker, y := "%f y", years
+	return fmt.Sprint(y) + timeMarker /* ... formatting with "Ny" ... */
 }
