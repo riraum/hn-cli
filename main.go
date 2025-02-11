@@ -13,10 +13,7 @@ type Item struct {
 	URL    string
 }
 
-type Items struct {
-	Item []struct {
-	}
-}
+type Items []Item
 
 func main() {
 	fmt.Println("Hello hn-cli")
