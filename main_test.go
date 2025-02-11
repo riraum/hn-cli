@@ -2,7 +2,6 @@ package main
 
 import (
 	"testing"
-	"time"
 )
 
 func TestRelativeTime(t *testing.T) {
@@ -14,7 +13,7 @@ func TestRelativeTime(t *testing.T) {
 			item: Item{
 				title:  "Random title",
 				author: "Mr Crabs",
-				score:  time.Date(1970, 1, 0, 0, 0, 0, 0, time.UTC).Unix(),
+				score:  0,
 				URL:    "example.com/404",
 			},
 			want: "1",
@@ -22,7 +21,11 @@ func TestRelativeTime(t *testing.T) {
 	}
 
 	for _, test := range tests {
+		got := test.item.relativeTime()
 
+		if got != test.want {
+			t.Errorf("relativeTime: %v, want: %v", got, test.want)
+		}
 	}
 
 }
