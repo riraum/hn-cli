@@ -37,7 +37,7 @@ func (t Item) relativeTime() string {
 	elapsedTime, _ := time.ParseDuration(postAge.String())
 	elapsedHours := elapsedTime.Hours()
 	days := elapsedHours / 24
-	months := days * 30
+	months := elapsedHours / 730
 	years := days * 365
 
 	// <  1hr
@@ -46,23 +46,16 @@ func (t Item) relativeTime() string {
 	}
 	// number of hours, <24
 	if elapsedHours < 24 {
-		// timeMarker, h := "%fh", elapsedHours
 		return fmt.Sprint(math.Round(elapsedHours), "hours") /* ... formatting with "Nh" ... */
 	}
 	// number of days, <30
 	if elapsedHours < 720 {
-		// d := days
 		return fmt.Sprint(math.Round(days), "d") /* ... formatting with "Nd" ... */
 	}
 	// number of months, <12
 	if elapsedHours < 8640 {
-		// timeMarker, m := "%fm", months
 		return fmt.Sprint(math.Round(months), "m") /* ... formatting with "Nm" ... */
 	}
 	// number of years
-	// if elapsedHours > 8640 {
-	// 	return /* ... formatting with "Ny" ... */
-	// }
-	// timeMarker, y := "%fy", years
 	return fmt.Sprint(math.Round(years), "y") /* ... formatting with "Ny" ... */
 }

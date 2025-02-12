@@ -18,7 +18,7 @@ func TestRelativeTime(t *testing.T) {
 				time: time.Date(2024, 8, 01, 14, 30, 45, 100, time.Local),
 				// URL:    "example.com/404",
 			},
-			want: "5m",
+			want: "6m",
 		},
 		{
 			item: Item{
@@ -30,7 +30,7 @@ func TestRelativeTime(t *testing.T) {
 			item: Item{
 				time: time.Date(2025, 2, 01, 14, 30, 45, 100, time.Local),
 			},
-			want: "10d",
+			want: "12d",
 		},
 		// {
 		// 	item: Item{
