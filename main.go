@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"math"
 	"time"
 )
 
@@ -45,23 +46,23 @@ func (t Item) relativeTime() string {
 	}
 	// number of hours, <24
 	if elapsedHours < 24 {
-		timeMarker, h := "%fh", elapsedHours
-		return fmt.Sprint(h) + timeMarker /* ... formatting with "Nh" ... */
+		// timeMarker, h := "%fh", elapsedHours
+		return fmt.Sprint(math.Round(elapsedHours), "hours") /* ... formatting with "Nh" ... */
 	}
 	// number of days, <30
 	if elapsedHours < 720 {
-		timeMarker, d := "%fd", days
-		return fmt.Sprint(d) + timeMarker /* ... formatting with "Nd" ... */
+		// d := days
+		return fmt.Sprint(math.Round(days), "d") /* ... formatting with "Nd" ... */
 	}
 	// number of months, <12
 	if elapsedHours < 8640 {
-		timeMarker, m := "%.1fm", months
-		return fmt.Sprint(m) + timeMarker /* ... formatting with "Nm" ... */
+		// timeMarker, m := "%fm", months
+		return fmt.Sprint(math.Round(months), "m") /* ... formatting with "Nm" ... */
 	}
 	// number of years
 	// if elapsedHours > 8640 {
 	// 	return /* ... formatting with "Ny" ... */
 	// }
-	timeMarker, y := "%fy", years
-	return fmt.Sprint(y) + timeMarker /* ... formatting with "Ny" ... */
+	// timeMarker, y := "%fy", years
+	return fmt.Sprint(math.Round(years), "y") /* ... formatting with "Ny" ... */
 }
