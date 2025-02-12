@@ -47,5 +47,4 @@ func TestRelativeTime(t *testing.T) {
 			t.Errorf("relativeTime: %v, want: %v", got, test.want)
 		}
 	}
-
 }

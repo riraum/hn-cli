@@ -3,27 +3,21 @@ package main
 import (
 	"fmt"
 	"math"
-	"net/http"
 	"time"
 )
 
 type Item struct {
-	title  string
-	author string
-	score  int
-	time   time.Time
-	URL    string
+	// title  string
+	// author string
+	// score  int
+	time time.Time
+	URL  string
 }
 
 type Items []Item
 
 func main() {
 	fmt.Println("Hello hn-cli")
-	resp, err := http.Get("https://hacker-news.firebaseio.com/v0/topstories.json")
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
 }
 
 /*
