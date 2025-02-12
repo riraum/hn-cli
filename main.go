@@ -28,11 +28,6 @@ Figure out how to get 1hr, define it
 func (t Item) relativeTime() string {
 	postTime := t.time
 	// now := time.Now()
-	// var returnValue string
-	// h, _ := time.ParseDuration("1h")
-	// d, _ := time.ParseDuration("1d")
-	// m, _ := time.ParseDuration("1m")
-	// y, _ := time.ParseDuration("1y")
 	postAge := time.Since(postTime)
 	elapsedTime, _ := time.ParseDuration(postAge.String())
 	elapsedHours := elapsedTime.Hours()
