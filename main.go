@@ -33,7 +33,7 @@ func (t Item) relativeTime() string {
 	elapsedHours := elapsedTime.Hours()
 	days := elapsedHours / 24
 	months := elapsedHours / 730
-	years := days * 365
+	years := elapsedHours / 8760
 
 	// <  1hr
 	if elapsedHours < 1 {

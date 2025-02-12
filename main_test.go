@@ -32,12 +32,12 @@ func TestRelativeTime(t *testing.T) {
 			},
 			want: "11d",
 		},
-		// {
-		// 	item: Item{
-		// 		time: time.Date(2025, 2, 01, 14, 30, 45, 100, time.Local),
-		// 	},
-		// 	want: "WIP",
-		// },
+		{
+			item: Item{
+				time: time.Date(2024, 2, 01, 14, 30, 45, 100, time.Local),
+			},
+			want: "1y",
+		},
 	}
 
 	for _, test := range tests {
