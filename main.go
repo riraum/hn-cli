@@ -52,7 +52,7 @@ func (t Item) relativeTime() string {
 		return fmt.Sprint(math.Round(days), "d") /* ... formatting with "Nd" ... */
 	}
 	// number of months, <12
-	if elapsedHours < MONTH {
+	if elapsedHours < YEAR {
 		return fmt.Sprint(math.Round(months), "m") /* ... formatting with "Nm" ... */
 	}
 	// number of years
