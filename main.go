@@ -26,8 +26,8 @@ func main() {
 }
 
 func (t Item) relativeTime() string {
-	postTime := t.time
-	postAge := time.Since(postTime)
+	// postTime := t.time
+	postAge := time.Since(t.time)
 	elapsedTime, _ := time.ParseDuration(postAge.String())
 	elapsedHours := elapsedTime.Hours()
 
