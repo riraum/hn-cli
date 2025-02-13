@@ -6,9 +6,9 @@ import (
 	"time"
 )
 
-const HOURS_IN_A_DAY = 24
-const HOURS_IN_A_MONTH = 730
-const HOURS_IN_A_YEAR = 8760
+const hoursInADay = 24
+const hoursInAMonth = 730
+const hoursInAYear = 8760
 
 type Item struct {
 	// *To use later
@@ -35,17 +35,17 @@ func (t Item) relativeTime() string {
 		return "<1h"
 	}
 
-	if elapsedHours < HOURS_IN_A_DAY {
+	if elapsedHours < hoursInADay {
 		return fmt.Sprint(math.Round(elapsedHours), "hours")
 	}
 
-	if elapsedHours < HOURS_IN_A_MONTH {
-		return fmt.Sprint(math.Round(elapsedHours/HOURS_IN_A_DAY), "d")
+	if elapsedHours < hoursInAMonth {
+		return fmt.Sprint(math.Round(elapsedHours/hoursInADay), "d")
 	}
 
-	if elapsedHours < HOURS_IN_A_YEAR {
-		return fmt.Sprint(math.Round(elapsedHours/HOURS_IN_A_MONTH), "m")
+	if elapsedHours < hoursInAYear {
+		return fmt.Sprint(math.Round(elapsedHours/hoursInAMonth), "m")
 	}
 
-	return fmt.Sprint(math.Round(elapsedHours/HOURS_IN_A_YEAR), "y")
+	return fmt.Sprint(math.Round(elapsedHours/hoursInAYear), "y")
 }
