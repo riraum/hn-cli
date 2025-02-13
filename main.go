@@ -15,8 +15,9 @@ type Item struct {
 	// title  string
 	// author string
 	// score  int
-	time time.Time
-	URL  string
+	absolutePostTime  time.Time
+	hoursSincePosting time.Duration
+	URL               string
 }
 
 type Items []Item
@@ -27,7 +28,7 @@ func main() {
 
 func (t Item) relativeTime() string {
 	// postTime := t.time
-	postAge := time.Since(t.time)
+	postAge := time.Since(t.absolutePostTime)
 	elapsedTime, _ := time.ParseDuration(postAge.String())
 	elapsedHours := elapsedTime.Hours()
 
