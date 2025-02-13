@@ -41,8 +41,8 @@ func TestRelativeTime(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		x := Item{absolutePostTime: test.item.absolutePostTime}
-		got := x.relativeTime()
+		absoluteTime := Item{absolutePostTime: test.item.absolutePostTime}
+		got := absoluteTime.relativeTime()
 
 		if got != test.want {
 			t.Errorf("relativeTime: %v, want: %v", got, test.want)
