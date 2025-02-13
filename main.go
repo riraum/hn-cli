@@ -6,6 +6,10 @@ import (
 	"time"
 )
 
+const DAY = 24
+const MONTH = 730
+const YEAR = 8760
+
 type Item struct {
 	// title  string
 	// author string
@@ -31,24 +35,24 @@ func (t Item) relativeTime() string {
 	postAge := time.Since(postTime)
 	elapsedTime, _ := time.ParseDuration(postAge.String())
 	elapsedHours := elapsedTime.Hours()
-	days := elapsedHours / 24
-	months := elapsedHours / 730
-	years := elapsedHours / 8760
+	days := elapsedHours / DAY
+	months := elapsedHours / MONTH
+	years := elapsedHours / YEAR
 
 	// <  1hr
 	if elapsedHours < 1 {
 		return "<1h"
 	}
 	// number of hours, <24
-	if elapsedHours < 24 {
+	if elapsedHours < DAY {
 		return fmt.Sprint(math.Round(elapsedHours), "hours") /* ... formatting with "Nh" ... */
 	}
 	// number of days, <30
-	if elapsedHours < 720 {
+	if elapsedHours < MONTH {
 		return fmt.Sprint(math.Round(days), "d") /* ... formatting with "Nd" ... */
 	}
 	// number of months, <12
-	if elapsedHours < 8640 {
+	if elapsedHours < MONTH {
 		return fmt.Sprint(math.Round(months), "m") /* ... formatting with "Nm" ... */
 	}
 	// number of years
