@@ -6,9 +6,9 @@ import (
 	"time"
 )
 
-const DAY = 24
-const MONTH = 730
-const YEAR = 8760
+const HOURS_IN_A_DAY = 24
+const HOURS_IN_A_MONTH = 730
+const HOURS_IN_A_YEAR = 8760
 
 type Item struct {
 	// *To use later
@@ -30,26 +30,22 @@ func (t Item) relativeTime() string {
 	postAge := time.Since(postTime)
 	elapsedTime, _ := time.ParseDuration(postAge.String())
 	elapsedHours := elapsedTime.Hours()
-	days := elapsedHours / DAY
-	months := elapsedHours / MONTH
-	years := elapsedHours / YEAR
 
-	// <  1hr
 	if elapsedHours < 1 {
 		return "<1h"
 	}
-	// number of hours, <24
-	if elapsedHours < DAY {
+
+	if elapsedHours < HOURS_IN_A_DAY {
 		return fmt.Sprint(math.Round(elapsedHours), "hours")
 	}
-	// number of days, <30
-	if elapsedHours < MONTH {
-		return fmt.Sprint(math.Round(days), "d")
+
+	if elapsedHours < HOURS_IN_A_MONTH {
+		return fmt.Sprint(math.Round(elapsedHours/HOURS_IN_A_DAY), "d")
 	}
-	// number of months, <12
-	if elapsedHours < YEAR {
-		return fmt.Sprint(math.Round(months), "m")
+
+	if elapsedHours < HOURS_IN_A_YEAR {
+		return fmt.Sprint(math.Round(elapsedHours/HOURS_IN_A_MONTH), "m")
 	}
-	// number of years
-	return fmt.Sprint(math.Round(years), "y")
+
+	return fmt.Sprint(math.Round(elapsedHours/HOURS_IN_A_YEAR), "y")
 }
