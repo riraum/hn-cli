@@ -22,7 +22,7 @@ func TestRelativeTime(t *testing.T) {
 		},
 		{
 			item: Item{
-				time: time.Date(2025, 1, 01, 14, 30, 45, 100, time.Local),
+				time: time.Date(2025, 1, 01, 14, 30, 45, 100, time.UTC),
 			},
 			want: "1m",
 		},
