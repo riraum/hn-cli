@@ -28,13 +28,13 @@ func TestRelativeTime(t *testing.T) {
 		},
 		{
 			item: Item{
-				time: time.Date(2025, 2, 01, 14, 30, 45, 100, time.Local),
+				time: time.Date(2025, 2, 01, 14, 30, 45, 100, time.UTC),
 			},
 			want: "12d",
 		},
 		{
 			item: Item{
-				time: time.Date(2024, 2, 01, 14, 30, 45, 100, time.Local),
+				time: time.Date(2024, 2, 01, 14, 30, 45, 100, time.UTC),
 			},
 			want: "1y",
 		},
