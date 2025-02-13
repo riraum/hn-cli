@@ -11,6 +11,7 @@ const MONTH = 730
 const YEAR = 8760
 
 type Item struct {
+	// *To use later
 	// title  string
 	// author string
 	// score  int
@@ -24,14 +25,8 @@ func main() {
 	fmt.Println("Hello hn-cli")
 }
 
-/*
-compare current time and posting time
-if difference of posting time and current time is <= 1h return 1h
-Figure out how to get 1hr, define it
-*/
 func (t Item) relativeTime() string {
 	postTime := t.time
-	// now := time.Now()
 	postAge := time.Since(postTime)
 	elapsedTime, _ := time.ParseDuration(postAge.String())
 	elapsedHours := elapsedTime.Hours()
@@ -45,16 +40,16 @@ func (t Item) relativeTime() string {
 	}
 	// number of hours, <24
 	if elapsedHours < DAY {
-		return fmt.Sprint(math.Round(elapsedHours), "hours") /* ... formatting with "Nh" ... */
+		return fmt.Sprint(math.Round(elapsedHours), "hours")
 	}
 	// number of days, <30
 	if elapsedHours < MONTH {
-		return fmt.Sprint(math.Round(days), "d") /* ... formatting with "Nd" ... */
+		return fmt.Sprint(math.Round(days), "d")
 	}
 	// number of months, <12
 	if elapsedHours < YEAR {
-		return fmt.Sprint(math.Round(months), "m") /* ... formatting with "Nm" ... */
+		return fmt.Sprint(math.Round(months), "m")
 	}
 	// number of years
-	return fmt.Sprint(math.Round(years), "y") /* ... formatting with "Ny" ... */
+	return fmt.Sprint(math.Round(years), "y")
 }
