@@ -27,11 +27,8 @@ func main() {
 }
 
 func (t Item) relativeTime() string {
-	getHoursSincePosting := time.Since(t.absolutePostTime)
-	t.hoursSincePosting = getHoursSincePosting
-	postAge := t.hoursSincePosting
-	elapsedTime, _ := time.ParseDuration(postAge.String())
-	elapsedHours := elapsedTime.Hours()
+	t.hoursSincePosting = time.Since(t.absolutePostTime)
+	elapsedHours := t.hoursSincePosting.Hours()
 
 	if elapsedHours < 1 {
 		return "<1h"
