@@ -55,7 +55,6 @@ func TestRelativeTime(t *testing.T) {
 		// now := time.Now()
 		// diff := now.Sub(test.item.absolutePostTime)
 		// test.item.hoursSincePosting = diff
-
 		// test.item.addHoursSincePosting()
 		// absoluteTime := Item{absolutePostTime: test.item.absolutePostTime}
 		// got := test.item.hoursSincePosting
