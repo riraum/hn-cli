@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"time"
 )
 
@@ -24,7 +23,7 @@ type Items []Item
 
 func main() {
 	fmt.Println("Hello hn-cli")
-	Item.addHoursSincePosting(Item{})
+	// Item.addHoursSincePosting(Item{})
 	// for _, value := range Item.absolutePostTime {
 	// }
 }
@@ -35,23 +34,23 @@ func (t Item) addHoursSincePosting() time.Duration {
 }
 
 func (t Item) relativeTime() string {
-	elapsedHours := t.hoursSincePosting.Hours()
+	elapsedHours := t.hoursSincePosting
 
 	if elapsedHours < 1 {
 		return "<1h"
 	}
 
 	if elapsedHours < hoursInADay {
-		return fmt.Sprint(math.Round(elapsedHours), "hours")
+		return fmt.Sprint((elapsedHours), "h")
 	}
 
 	if elapsedHours < hoursInAMonth {
-		return fmt.Sprint(math.Round(elapsedHours/hoursInADay), "d")
+		return fmt.Sprint((elapsedHours / hoursInADay), "d")
 	}
 
 	if elapsedHours < hoursInAYear {
-		return fmt.Sprint(math.Round(elapsedHours/hoursInAMonth), "m")
+		return fmt.Sprint((elapsedHours / hoursInAMonth), "m")
 	}
 
-	return fmt.Sprint(math.Round(elapsedHours/hoursInAYear), "y")
+	return fmt.Sprint((elapsedHours / hoursInAYear), "y")
 }

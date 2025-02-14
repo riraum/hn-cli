@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"testing"
-	"time"
 )
 
 func TestRelativeTime(t *testing.T) {
@@ -16,36 +15,43 @@ func TestRelativeTime(t *testing.T) {
 				// title:  "Random title",
 				// author: "Mr Crabs",
 				// score:  0,
-				absolutePostTime: time.Date(2024, 8, 13, 14, 30, 45, 100, time.UTC),
+				// absolutePostTime: time.Date(2024, 8, 13, 14, 30, 45, 100, time.UTC),
 				// hoursSincePosting: "4435h35m7.2785059s",
+				// hoursSincePosting: time.ParseDuration("4435h"),
+				hoursSincePosting: 4435,
+
 				// URL:    "example.com/404",
 			},
 			want: "6m",
 		},
 		{
 			item: Item{
-				absolutePostTime: time.Date(2025, 1, 01, 14, 30, 45, 100, time.UTC),
+				// absolutePostTime: time.Date(2025, 1, 01, 14, 30, 45, 100, time.UTC),
 				// hoursSincePosting: 1051h35m7.2785799s,
+				hoursSincePosting: 1051,
 			},
 			want: "1m",
 		},
 		{
 			item: Item{
-				absolutePostTime: time.Date(2025, 2, 01, 14, 30, 45, 100, time.UTC),
+				// absolutePostTime: time.Date(2025, 2, 01, 14, 30, 45, 100, time.UTC),
 				// hoursSincePosting: 307h35m7.2785829s,
+				hoursSincePosting: 307,
 			},
 			want: "12d",
 		},
 		{
 			item: Item{
-				absolutePostTime: time.Date(2024, 2, 01, 14, 30, 45, 100, time.UTC),
+				// absolutePostTime: time.Date(2024, 2, 01, 14, 30, 45, 100, time.UTC),
 				// hoursSincePosting: 9091h35m7.2786449s,
+				hoursSincePosting: 9091,
 			},
 			want: "1y",
 		},
 	}
 
 	for _, test := range tests {
+		// duration.Round(time.Hour).String()
 		// now := time.Now()
 		// diff := now.Sub(test.item.absolutePostTime)
 		// test.item.hoursSincePosting = diff
