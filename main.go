@@ -24,9 +24,6 @@ type Items []Item
 
 func main() {
 	fmt.Println("Hello hn-cli")
-	// Item.addHoursSincePosting(Item{})
-	// for _, value := range Item.absolutePostTime {
-	// }
 }
 
 //	func (t Item) addHoursSincePosting() time.Duration {
