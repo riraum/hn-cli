@@ -29,11 +29,10 @@ func main() {
 	// }
 }
 
-// func (t Item) addHoursSincePosting() time.Duration {
-// 	t.hoursSincePosting = time.Since(t.absolutePostTime)
-// 	return t.hoursSincePosting
-// }
-
+//	func (t Item) addHoursSincePosting() time.Duration {
+//		t.hoursSincePosting = time.Since(t.absolutePostTime)
+//		return t.hoursSincePosting
+//	}
 func (t Item) relativeTime() string {
 	elapsedHours := t.hoursSincePosting.Hours()
 
