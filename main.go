@@ -6,9 +6,11 @@ import (
 	"time"
 )
 
-const hoursInADay = 24
-const hoursInAMonth = 730
-const hoursInAYear = 8760
+const (
+	hoursInADay   = 24
+	hoursInAMonth = 730
+	hoursInAYear  = 8760
+)
 
 type Item struct {
 	// title  string
