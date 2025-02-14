@@ -16,9 +16,7 @@ func TestRelativeTime(t *testing.T) {
 				// score:  0,
 				// absolutePostTime: time.Date(2024, 8, 13, 14, 30, 45, 100, time.UTC),
 				// hoursSincePosting: "4435h35m7.2785059s",
-				// hoursSincePosting: time.ParseDuration("4435h"),
 				timeSincePosting: 15966000000000000,
-
 				// URL:    "example.com/404",
 			},
 			want: "6m",
