@@ -24,10 +24,17 @@ type Items []Item
 
 func main() {
 	fmt.Println("Hello hn-cli")
+	Item.addHoursSincePosting(Item{})
+	// for _, value := range Item.absolutePostTime {
+	// }
+}
+
+func (t Item) addHoursSincePosting() time.Duration {
+	t.hoursSincePosting = time.Since(t.absolutePostTime)
+	return t.hoursSincePosting
 }
 
 func (t Item) relativeTime() string {
-	t.hoursSincePosting = time.Since(t.absolutePostTime)
 	elapsedHours := t.hoursSincePosting.Hours()
 
 	if elapsedHours < 1 {
