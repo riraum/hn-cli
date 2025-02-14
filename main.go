@@ -34,7 +34,7 @@ func (t Item) addHoursSincePosting() time.Duration {
 }
 
 func (t Item) relativeTime() string {
-	elapsedHours := t.hoursSincePosting
+	elapsedHours := t.hoursSincePosting.Hours()
 
 	if elapsedHours < 1 {
 		return "<1h"
