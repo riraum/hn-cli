@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 )
 
@@ -51,20 +50,9 @@ func TestRelativeTime(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		// duration.Round(time.Hour).String()
-		// now := time.Now()
-		// diff := now.Sub(test.item.absolutePostTime)
-		// test.item.hoursSincePosting = diff
-		// test.item.addHoursSincePosting()
-		// absoluteTime := Item{absolutePostTime: test.item.absolutePostTime}
-		// got := test.item.hoursSincePosting
-		// x := test.item
 		got := test.item.relativeTime()
 		// debug
-		fmt.Println(test.item.timeSincePosting)
-		// absoluteTime := Item{absolutePostTime: test.item.absolutePostTime}
-		// got := absolutePostTime.relativeTime()
-
+		// fmt.Println(test.item.timeSincePosting)
 		if got != test.want {
 			t.Errorf("Got: %v, want: %v", got, test.want)
 		}

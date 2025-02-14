@@ -11,7 +11,6 @@ const hoursInAMonth = 730
 const hoursInAYear = 8760
 
 type Item struct {
-	// *To use later
 	// title  string
 	// author string
 	// score  int
