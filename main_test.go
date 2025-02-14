@@ -53,7 +53,7 @@ func TestRelativeTime(t *testing.T) {
 		// got := absolutePostTime.relativeTime()
 
 		if got != test.want {
-			t.Errorf("relativeTime: %v, want: %v", got, test.want)
+			t.Errorf("Got: %v, want: %v", got, test.want)
 		}
 	}
 }
