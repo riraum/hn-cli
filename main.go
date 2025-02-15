@@ -21,7 +21,7 @@ type Item struct {
 	// score  int
 	// absolutePostTime  time.Time
 	timeSincePosting time.Duration
-	URL              string
+	// URL              string
 }
 
 type Items []Item
