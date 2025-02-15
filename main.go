@@ -26,16 +26,18 @@ type Item struct {
 
 type Items []Item
 
-var m Item
-var ms Items
+// var m Item
+// var ms Items
 var mf interface{}
 
 func main() {
 	fmt.Println("Hello hn-cli")
+
 	resp, err := http.Get("https://hacker-news.firebaseio.com/v0/topstories.json")
 	if err != nil {
 		panic(err)
 	}
+
 	defer resp.Body.Close()
 	body, _ := io.ReadAll(resp.Body)
 
