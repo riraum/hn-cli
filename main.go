@@ -1,8 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
+	"io"
 	"math"
+	"net/http"
 	"time"
 )
 
@@ -18,13 +21,40 @@ type Item struct {
 	// score  int
 	// absolutePostTime  time.Time
 	timeSincePosting time.Duration
-	URL              string
+	// URL              string
 }
 
 type Items []Item
 
+var m Item
+var ms Items
+var mf interface{}
+
 func main() {
 	fmt.Println("Hello hn-cli")
+
+	marshallTest, mtErr := json.Marshal(Item{timeSincePosting: 15966000000000000})
+	if mtErr != nil {
+		panic(mtErr)
+	}
+	fmt.Println(marshallTest)
+
+	resp, err := http.Get("https://hacker-news.firebaseio.com/v0/topstories.json")
+	if err != nil {
+		panic(err)
+	}
+
+	defer resp.Body.Close()
+	body, _ := io.ReadAll(resp.Body)
+	// debug
+	fmt.Println(body)
+
+	errj := json.Unmarshal(body, ms)
+	if errj != nil {
+		panic(errj)
+	}
+	// debug
+	fmt.Println(mf)
 }
 
 //	func (t Item) addHoursSincePosting() time.Duration {
