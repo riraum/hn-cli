@@ -39,12 +39,12 @@ func main() {
 	defer resp.Body.Close()
 	body, _ := io.ReadAll(resp.Body)
 
-	errj := json.Unmarshal(body, &m)
+	errj := json.Unmarshal(body, &mf)
 	if errj != nil {
 		panic(errj)
 	}
 	// debug
-	fmt.Println(m)
+	fmt.Println(mf)
 }
 
 //	func (t Item) addHoursSincePosting() time.Duration {
