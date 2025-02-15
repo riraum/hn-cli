@@ -26,12 +26,18 @@ type Item struct {
 
 type Items []Item
 
-// var m Item
-// var ms Items
+var m Item
+var ms Items
 var mf interface{}
 
 func main() {
 	fmt.Println("Hello hn-cli")
+
+	marshallTest, mtErr := json.Marshal(Item{timeSincePosting: 15966000000000000})
+	if mtErr != nil {
+		panic(mtErr)
+	}
+	fmt.Println(marshallTest)
 
 	resp, err := http.Get("https://hacker-news.firebaseio.com/v0/topstories.json")
 	if err != nil {
@@ -40,8 +46,10 @@ func main() {
 
 	defer resp.Body.Close()
 	body, _ := io.ReadAll(resp.Body)
+	// debug
+	fmt.Println(body)
 
-	errj := json.Unmarshal(body, &mf)
+	errj := json.Unmarshal(body, ms)
 	if errj != nil {
 		panic(errj)
 	}
