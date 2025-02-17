@@ -3,9 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io"
 	"math"
-	"net/http"
 	"time"
 )
 
@@ -19,7 +17,7 @@ type Item struct {
 	Title  string `json:"title"`
 	Author string `json:"by"`
 	Score  int    `json:"score"`
-	Id     int    `json:"id"`
+	ID     int    `json:"id"`
 	// time   time.Time
 	// absolutePostTime  time.Time
 	timeSincePosting time.Duration
@@ -46,16 +44,6 @@ var HItems Items
 
 func main() {
 	fmt.Println("Hello hn-cli")
-
-	resp, err := http.Get("https://hacker-news.firebaseio.com/v0/topstories.json")
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
-
-	body, _ := io.ReadAll(resp.Body)
-	// debug
-	fmt.Println(string(body))
 }
 
 func Unmarshal(input string) Item {
