@@ -3,7 +3,9 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"math"
+	"net/http"
 	"time"
 )
 
@@ -14,19 +16,41 @@ const (
 )
 
 type Item struct {
-	Title  string
-	Author string
-	// score  int
+	Title  string `json:"title"`
+	Author string `json:"by"`
+	Score  int    `json:"score"`
+	// time   time.Time
 	// absolutePostTime  time.Time
 	timeSincePosting time.Duration
-	// URL              string
+	URL              string `json:"url"`
 }
 
 type Items []Item
 
-var m Item
-var ms Items
-var mf map[string]interface{}
+type HNItem struct {
+	id          json.Number
+	by          string
+	descendants json.Number
+	kids        []json.Number
+	score       json.Number
+	time        time.Time
+	url         string
+	title       string
+}
+
+type HNItems []HNItem
+
+var HItem Item
+var HItems Items
+var mf []interface{}
+
+var HNPost HNItem
+var HNFrontpage HNItems
+
+var f interface{}
+var fs []interface{}
+
+// var dat []interface{}
 
 // var test Item
 
@@ -34,14 +58,14 @@ func main() {
 	fmt.Println("Hello hn-cli")
 
 	// item1 := Items{}
-	testJSON := Item{"Alice in Wonderland", "Bob", 15966000000000000}
+	testJSON := Item{"Alice in Wonderland", "Bob", 666, 15966000000000000, "example.com/404"}
 
 	var storeData Item
 	marshallData, mErr := json.Marshal(testJSON)
 	if mErr != nil {
 		fmt.Println(mErr)
 	}
-	fmt.Println(marshallData)
+	fmt.Println(string(marshallData))
 
 	unmarschallErr := json.Unmarshal(marshallData, &storeData)
 	if unmarschallErr != nil {
@@ -73,22 +97,22 @@ func main() {
 	// }
 	// fmt.Println(string(marshallTest))
 
-	// resp, err := http.Get("https://hacker-news.firebaseio.com/v0/topstories.json")
-	// if err != nil {
-	// 	panic(err)
-	// }
-	// defer resp.Body.Close()
+	resp, err := http.Get("https://hacker-news.firebaseio.com/v0/topstories.json")
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
 
-	// body, _ := io.ReadAll(resp.Body)
-	// // debug
-	// fmt.Println(body)
-
-	// errj := json.Unmarshal(body, &item1)
-	// if errj != nil {
-	// 	panic(errj)
-	// }
+	body, _ := io.ReadAll(resp.Body)
 	// debug
-	// fmt.Println(mf)
+	fmt.Println(string(body))
+
+	errj := json.Unmarshal(body, &HItems)
+	if errj != nil {
+		panic(errj)
+	}
+	// debug
+	fmt.Println(HItems)
 	// fmt.Println(item1.)
 }
 
