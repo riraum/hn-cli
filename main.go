@@ -26,18 +26,18 @@ type Item struct {
 
 type Items []Item
 
-type HNItem struct {
-	id          int
-	by          string
-	descendants json.Number
-	kids        []json.Number
-	score       json.Number
-	time        time.Time
-	url         string
-	title       string
-}
+// type HNItem struct {
+// 	id          int
+// 	by          string
+// 	descendants json.Number
+// 	kids        []json.Number
+// 	score       json.Number
+// 	time        time.Time
+// 	url         string
+// 	title       string
+// }
 
-type HNItems []HNItem
+// type HNItems []HNItem
 
 var HItem Item
 var HItems Items
@@ -96,16 +96,19 @@ func main() {
 	// fmt.Println(string(testPosts))
 
 	testJSONPost := []byte(`{"id":8863}`)
-	err := json.Unmarshal(testJSONPost, &HItem)
-	if err != nil {
-		panic(err)
+	errPost := json.Unmarshal(testJSONPost, &HItem)
+	if errPost != nil {
+		panic(errPost)
 	}
 	fmt.Println(HItem)
 
-	// testJSONPosts := []byte(`{
-	// 	"id": 8863},
-	// 		"id": 8865,
-	// 	}}`)
+	testJSONPosts := []byte(`[{
+		"id": 8863},{"id": 8865}]`)
+	errPosts := json.Unmarshal(testJSONPosts, &HItems)
+	if errPosts != nil {
+		panic(errPosts)
+	}
+	fmt.Println(HItems)
 
 	// var storeData Item
 	// marshallData, mErr := json.Marshal(testJSON)
