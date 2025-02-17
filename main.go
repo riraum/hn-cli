@@ -44,85 +44,17 @@ var HItems Items
 
 func main() {
 	fmt.Println("Hello hn-cli")
+}
 
-	// testJSON := Item{"Alice in Wonderland", "Bob", 666, 1337, 15966000000000000, "example.com/404"}
-
-	// testPost, testErr := json.Marshal(Item{
-	// 	// "by" : "dhouston",
-	// 	// "descendants" : 71,
-	// 	id: 8863,
-	// 	// "score" : 111,
-	// 	// "time" : 1175714200,
-	// 	// "title" : "My YC app: Dropbox - Throw away your USB drive",
-	// 	// "type" : "story",
-	// 	// "url" : "http://www.getdropbox.com/u/2/screencast.html"
-	// })
-
-	// if testErr != nil {
-	// 	panic(testErr)
-	// }
-
-	// fmt.Println(string(testPost))
-
-	// // uErr := json.Unmarshal(testPost, &HItem)
-	// // if uErr != nil {
-	// // 	panic(uErr)
-	// // }
-	// // fmt.Println(HItem)
-
-	// testPosts, testsErr := json.Marshal(Items{Item{
-	// 	// "by" : "dhouston",
-	// 	// "descendants" : 71,
-	// 	id: 8863,
-	// 	// "score" : 111,
-	// 	// "time" : 1175714200,
-	// 	// "title" : "My YC app: Dropbox - Throw away your USB drive",
-	// 	// "type" : "story",
-	// 	// "url" : "http://www.getdropbox.com/u/2/screencast.html"
-	// },
-	// 	Item{
-	// 		// "by" : "dhouston",
-	// 		// "descendants" : 71,
-	// 		id: 8865,
-	// 		// "score" : 111,
-	// 		// "time" : 1175714200,
-	// 		// "title" : "My YC app: Dropbox - Throw away your USB drive",
-	// 		// "type" : "story",
-	// 		// "url" : "http://www.getdropbox.com/u/2/screencast.html"
-	// 	}})
-	// if testsErr != nil {
-	// 	panic(testsErr)
-	// }
-	// fmt.Println(string(testPosts))
-
-	testJSONPost := []byte(`{"id":8863}`)
-	errPost := json.Unmarshal(testJSONPost, &HItem)
-	if errPost != nil {
-		panic(errPost)
+func Unmarshal(input []byte) Item {
+	var output Item
+	unmarshallErr := json.Unmarshal(input, &output)
+	if unmarshallErr != nil {
+		panic(unmarshallErr)
 	}
-	fmt.Println(HItem)
-
-	testJSONPosts := []byte(`[{
-		"id": 8863},{"id": 8865}]`)
-	errPosts := json.Unmarshal(testJSONPosts, &HItems)
-	if errPosts != nil {
-		panic(errPosts)
-	}
-	fmt.Println(HItems)
-
-	// var storeData Item
-	// marshallData, mErr := json.Marshal(testJSON)
-	// if mErr != nil {
-	// 	fmt.Println(mErr)
-	// }
-	// fmt.Println(string(marshallData))
-
-	// unmarschallErr := json.Unmarshal(marshallData, &storeData)
-	// if unmarschallErr != nil {
-	// 	fmt.Println(unmarschallErr)
-	// }
-	// fmt.Println(storeData)
-
+	// debug
+	fmt.Println(output)
+	return output
 }
 
 //	func (t Item) addHoursSincePosting() time.Duration {
