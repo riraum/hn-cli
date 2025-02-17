@@ -17,7 +17,7 @@ type Item struct {
 	Title  string `json:"title"`
 	Author string `json:"by"`
 	Score  int    `json:"score"`
-	Id     int    `json:"id"`
+	ID     int    `json:"id"`
 	// time   time.Time
 	// absolutePostTime  time.Time
 	timeSincePosting time.Duration
@@ -48,13 +48,16 @@ func main() {
 
 func Unmarshal(input string) Item {
 	stringBytes := []byte(input)
+
 	var output Item
+
 	unmarshallErr := json.Unmarshal(stringBytes, &output)
 	if unmarshallErr != nil {
 		panic(unmarshallErr)
 	}
 	// debug
 	fmt.Println(output)
+
 	return output
 }
 
