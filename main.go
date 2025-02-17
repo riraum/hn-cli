@@ -2,7 +2,9 @@ package main
 
 import (
 	"fmt"
+	"io"
 	"math"
+	"net/http"
 	"time"
 )
 
@@ -13,18 +15,29 @@ const (
 )
 
 type Item struct {
-	// title  string
-	// author string
-	// score  int
+	Title  string `json:"title"`
+	Author string `json:"by"`
+	Score  int    `json:"score"`
+	// time   time.Time
 	// absolutePostTime  time.Time
 	timeSincePosting time.Duration
-	URL              string
+	URL              string `json:"url"`
 }
 
 type Items []Item
 
 func main() {
 	fmt.Println("Hello hn-cli")
+
+	resp, err := http.Get("https://hacker-news.firebaseio.com/v0/topstories.json")
+	if err != nil {
+		panic(err)
+	}
+	defer resp.Body.Close()
+
+	body, _ := io.ReadAll(resp.Body)
+	// debug
+	fmt.Println(string(body))
 }
 
 //	func (t Item) addHoursSincePosting() time.Duration {
