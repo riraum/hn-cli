@@ -46,9 +46,10 @@ func main() {
 	fmt.Println("Hello hn-cli")
 }
 
-func Unmarshal(input []byte) Item {
+func Unmarshal(input string) Item {
+	stringBytes := []byte(input)
 	var output Item
-	unmarshallErr := json.Unmarshal(input, &output)
+	unmarshallErr := json.Unmarshal(stringBytes, &output)
 	if unmarshallErr != nil {
 		panic(unmarshallErr)
 	}
