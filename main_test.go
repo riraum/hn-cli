@@ -46,3 +46,23 @@ func TestRelativeTime(t *testing.T) {
 		}
 	}
 }
+
+func TestUnmarshall(t *testing.T) {
+	tests := []struct {
+		item string
+		want Item
+	}{
+		{
+			item: "Random title",
+			want: Item{
+				Title: "Random title"},
+		},
+	}
+
+	for _, test := range tests {
+		got := Unmarshal(test.item)
+		if got != test.want {
+			t.Errorf("Got: %v, want: %v", got, test.want)
+		}
+	}
+}
