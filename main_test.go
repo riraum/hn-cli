@@ -50,20 +50,20 @@ import (
 func TestMarshall(t *testing.T) {
 	tests := []struct {
 		dataToMarshall Item
-		want           []byte
+		want           string
 	}{
 		{
 			dataToMarshall: Item{
 				"Alice in Wonderland",
 				"Lewis Carroll",
 			},
-			want: {"title": "Alice in Wonderland", "by": "Lewis Carroll"},
+			want: (`{"title":"Alice in Wonderland","by":"Lewis Carroll"}`),
 		},
 	}
 
 	for _, test := range tests {
 		got := Marshall(test.dataToMarshall)
-		if got != test.want {
+		if got != string(test.want) {
 			t.Errorf("Got: %v, want: %v", got, test.want)
 		}
 	}
@@ -71,11 +71,11 @@ func TestMarshall(t *testing.T) {
 
 func TestUnmarshall(t *testing.T) {
 	tests := []struct {
-		input []byte
+		input string
 		want  Item
 	}{
 		{
-			input: []byte("Random title"),
+			input: "Random title",
 			want: Item{
 				Title: "Random title"},
 		},

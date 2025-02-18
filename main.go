@@ -51,18 +51,18 @@ func main() {
 
 }
 
-func Marshall(input Item) []byte {
+func Marshall(input Item) string {
 	dataMarshalled, mErr := json.Marshal(input)
 	if mErr != nil {
 		panic(mErr)
 	}
-	return dataMarshalled
+	return string(dataMarshalled)
 }
 
-func Unmarshal(input []byte) Item {
-	// stringBytes := []byte(input)
+func Unmarshal(input string) Item {
+	stringBytes := []byte(input)
 	var dataUnmarshalled Item
-	uErr := json.Unmarshal(input, &dataUnmarshalled)
+	uErr := json.Unmarshal(stringBytes, &dataUnmarshalled)
 	if uErr != nil {
 		panic(uErr)
 	}
