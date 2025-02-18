@@ -28,7 +28,7 @@ type Items []Item
 // var HItems Items
 
 func main() {
-	fmt.Println("Hello hn-cli")
+	fmt.Println("Hello hn-cli user")
 
 	dataToMarshall := Item{"Alice in Wonderland", "Lewis Carroll"}
 
