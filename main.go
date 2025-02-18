@@ -4,6 +4,8 @@ import (
 	"fmt"
 
 	"github.com/riraum/hn-cli/item"
+
+	"github.com/riraum/hn-cli/http"
 )
 
 func main() {
@@ -24,4 +26,8 @@ func main() {
 	}
 	// debug
 	fmt.Println(dataUnmarshalled)
+	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
+
+	// debug
+	fmt.Println(string(frontpageJSON))
 }
