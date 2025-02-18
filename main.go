@@ -31,13 +31,9 @@ func main() {
 	fmt.Println("Hello hn-cli")
 
 	dataToMarshall := Item{"Alice in Wonderland", "Lewis Carroll"}
-	// dataMarshalled, mErr := json.Marshal(dataToMarshall)
-	// if mErr != nil {
-	// 	panic(mErr)
-	// }
+
 	dataMarshalled := Marshall(dataToMarshall)
 	// debug
-	// fmt.Println(dataMarshalled)
 	fmt.Println(dataMarshalled)
 
 	// dataToUnmarshall := Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
