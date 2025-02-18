@@ -26,6 +26,7 @@ func main() {
 	}
 	// debug
 	fmt.Println(dataUnmarshalled)
+
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 
 	// debug
