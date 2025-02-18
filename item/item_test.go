@@ -37,7 +37,7 @@ func TestRelativeTime(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		got := test.item.relativeTime()
+		got := test.item.RelativeTime()
 		if got != test.want {
 			t.Errorf("Got: %v, want: %v", got, test.want)
 		}

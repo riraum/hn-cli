@@ -13,7 +13,6 @@ const (
 	hoursInAYear  = 8760
 )
 
-//nolint:all
 type Item struct {
 	Title  string `json:"title"`
 	Author string `json:"by"`
@@ -48,7 +47,6 @@ func Unmarshal(input []byte) (Item, error) {
 	return dataUnmarshalled, nil
 }
 
-//nolint:all
 func (t Item) AddHoursSincePosting() time.Duration {
 	t.hoursSincePosting = time.Since(t.absolutePostTime)
 	return t.hoursSincePosting
