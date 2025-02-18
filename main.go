@@ -3,13 +3,15 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"math"
+	"time"
 )
 
-// const (
-// 	hoursInADay   = 24
-// 	hoursInAMonth = 730
-// 	hoursInAYear  = 8760
-// )
+const (
+	hoursInADay   = 24
+	hoursInAMonth = 730
+	hoursInAYear  = 8760
+)
 
 type Item struct {
 	Title  string `json:"title"`
@@ -17,20 +19,18 @@ type Item struct {
 	// Score  int    `json:"score"`
 	// ID     int    `json:"id"`
 	// time   time.Time
-	// absolutePostTime  time.Time
-	// timeSincePosting time.Duration
+	absolutePostTime  time.Time
+	timeSincePosting  time.Duration
+	hoursSincePosting time.Duration
 	// URL string `json:"url"`
 }
 
 type Items []Item
 
-// var HItem Item
-// var HItems Items
-
 func main() {
 	fmt.Println("Hello hn-cli user")
 
-	dataToMarshall := Item{"Alice in Wonderland", "Lewis Carroll"}
+	dataToMarshall := Item{"Alice in Wonderland", , 15966000000000000, 15966000000000000, "Lewis Carroll"}
 
 	dataMarshalled, mErr := Marshall(dataToMarshall)
 	if mErr != nil {
@@ -68,28 +68,29 @@ func Unmarshal(input []byte) (Item, error) {
 	return dataUnmarshalled, nil
 }
 
-//	func (t Item) addHoursSincePosting() time.Duration {
-//		t.hoursSincePosting = time.Since(t.absolutePostTime)
-//		return t.hoursSincePosting
-//	}
-// func (t Item) relativeTime() string {
-// 	elapsedHours := t.timeSincePosting.Hours()
+func (t Item) addHoursSincePosting() time.Duration {
+	t.hoursSincePosting = time.Since(t.absolutePostTime)
+	return t.hoursSincePosting
+}
 
-// 	if elapsedHours < 1 {
-// 		return "<1h"
-// 	}
+func (t Item) relativeTime() string {
+	elapsedHours := t.timeSincePosting.Hours()
 
-// 	if elapsedHours < hoursInADay {
-// 		return fmt.Sprint(math.Round(elapsedHours), "h")
-// 	}
+	if elapsedHours < 1 {
+		return "<1h"
+	}
 
-// 	if elapsedHours < hoursInAMonth {
-// 		return fmt.Sprint(math.Round(elapsedHours/hoursInADay), "d")
-// 	}
+	if elapsedHours < hoursInADay {
+		return fmt.Sprint(math.Round(elapsedHours), "h")
+	}
 
-// 	if elapsedHours < hoursInAYear {
-// 		return fmt.Sprint(math.Round(elapsedHours/hoursInAMonth), "m")
-// 	}
+	if elapsedHours < hoursInAMonth {
+		return fmt.Sprint(math.Round(elapsedHours/hoursInADay), "d")
+	}
 
-// 	return fmt.Sprint(math.Round(elapsedHours/hoursInAYear), "y")
-// }
+	if elapsedHours < hoursInAYear {
+		return fmt.Sprint(math.Round(elapsedHours/hoursInAMonth), "m")
+	}
+
+	return fmt.Sprint(math.Round(elapsedHours/hoursInAYear), "y")
+}
