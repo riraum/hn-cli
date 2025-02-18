@@ -13,5 +13,6 @@ func GetJSON(URL string) []byte {
 	defer resp.Body.Close()
 
 	body, _ := io.ReadAll(resp.Body)
+
 	return body
 }
