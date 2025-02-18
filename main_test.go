@@ -75,9 +75,11 @@ func TestUnmarshall(t *testing.T) {
 		want  Item
 	}{
 		{
-			input: "Random title",
+			input: (`{"title":"Alice in Wonderland","by":"Lewis Carroll"}`),
 			want: Item{
-				Title: "Random title"},
+				"Alice in Wonderland",
+				"Lewis Carroll",
+			},
 		},
 	}
 

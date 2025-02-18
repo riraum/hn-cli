@@ -5,11 +5,11 @@ import (
 	"fmt"
 )
 
-const (
-	hoursInADay   = 24
-	hoursInAMonth = 730
-	hoursInAYear  = 8760
-)
+// const (
+// 	hoursInADay   = 24
+// 	hoursInAMonth = 730
+// 	hoursInAYear  = 8760
+// )
 
 type Item struct {
 	Title  string `json:"title"`
@@ -41,14 +41,8 @@ func main() {
 	fmt.Println("Marshalled data:", string(dataMarshalled))
 
 	// dataToUnmarshall := Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
-	var dataUnmarshalled Item
-	// uErr := json.Unmarshal(dataMarshalled, &dataUnmarshalled)
-	// if uErr != nil {
-	// 	panic(uErr)
-	// }
-	dataUnmarshalled = Unmarshal(dataMarshalled)
+	var dataUnmarshalled Item = Unmarshal(dataMarshalled)
 	fmt.Println("Unmarshalled data:", dataUnmarshalled)
-
 }
 
 func Marshall(input Item) string {
@@ -56,16 +50,20 @@ func Marshall(input Item) string {
 	if mErr != nil {
 		panic(mErr)
 	}
+
 	return string(dataMarshalled)
 }
 
 func Unmarshal(input string) Item {
 	stringBytes := []byte(input)
+
 	var dataUnmarshalled Item
+
 	uErr := json.Unmarshal(stringBytes, &dataUnmarshalled)
 	if uErr != nil {
 		panic(uErr)
 	}
+
 	return dataUnmarshalled
 }
 
