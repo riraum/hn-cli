@@ -1,7 +1,7 @@
 package main
 
 import (
-	"reflect"
+	"bytes"
 	"testing"
 )
 
@@ -63,8 +63,11 @@ func TestMarshall(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		got, _ := Marshall(test.dataToMarshall)
-		if !reflect.DeepEqual(got, test.want) {
+		got, err := Marshall(test.dataToMarshall)
+		if err != nil {
+			panic(err)
+		}
+		if !bytes.Equal(got, test.want) {
 			t.Errorf("Got: %v, want: %v", got, test.want)
 		}
 	}
@@ -85,7 +88,10 @@ func TestUnmarshall(t *testing.T) {
 	}
 
 	for _, test := range tests {
-		got, _ := Unmarshal(test.dataToUnmarshall)
+		got, err := Unmarshal(test.dataToUnmarshall)
+		if err != nil {
+			panic(err)
+		}
 		if got != test.want {
 			t.Errorf("Got: %v, want: %v", got, test.want)
 		}
