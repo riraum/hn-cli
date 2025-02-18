@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"github.com/riraum/hn/cli/item"
+	"github.com/riraum/hn-cli/item"
 )
 
 func main() {

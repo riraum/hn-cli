@@ -49,13 +49,13 @@ func Unmarshal(input []byte) (Item, error) {
 }
 
 //nolint:all
-func (t Item) addHoursSincePosting() time.Duration {
+func (t Item) AddHoursSincePosting() time.Duration {
 	t.hoursSincePosting = time.Since(t.absolutePostTime)
 	return t.hoursSincePosting
 }
 
 // ...
-func (t Item) relativeTime() string {
+func (t Item) RelativeTime() string {
 	elapsedHours := t.timeSincePosting.Hours()
 
 	if elapsedHours < 1 {
