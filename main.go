@@ -32,36 +32,34 @@ func main() {
 
 	dataToMarshall := Item{"Alice in Wonderland", "Lewis Carroll"}
 
-	dataMarshalled := Marshall(dataToMarshall)
+	dataMarshalled, err := Marshall(dataToMarshall)
 	// debug
-	fmt.Println(dataMarshalled)
+	fmt.Println(dataMarshalled, err)
 
 	// dataToUnmarshall := Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
-	dataUnmarshalled := Unmarshal(dataMarshalled)
+	dataUnmarshalled, err := Unmarshal(dataMarshalled)
 	// debug
-	fmt.Println(dataUnmarshalled)
+	fmt.Println(dataUnmarshalled, err)
 }
 
-func Marshall(input Item) string {
-	dataMarshalled, mErr := json.Marshal(input)
-	if mErr != nil {
-		panic(mErr)
+func Marshall(input Item) ([]byte, error) {
+	dataMarshalled, err := json.Marshal(input)
+	if err != nil {
+		return dataMarshalled, err
 	}
 
-	return string(dataMarshalled)
+	return dataMarshalled, nil
 }
 
-func Unmarshal(input string) Item {
-	stringBytes := []byte(input)
-
+func Unmarshal(input []byte) (Item, error) {
 	var dataUnmarshalled Item
 
-	uErr := json.Unmarshal(stringBytes, &dataUnmarshalled)
-	if uErr != nil {
-		panic(uErr)
+	err := json.Unmarshal(input, &dataUnmarshalled)
+	if err != nil {
+		return dataUnmarshalled, err
 	}
 
-	return dataUnmarshalled
+	return dataUnmarshalled, nil
 }
 
 //	func (t Item) addHoursSincePosting() time.Duration {
