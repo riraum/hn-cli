@@ -18,7 +18,6 @@ type Item struct {
 	Author string `json:"by"`
 	// Score  int    `json:"score"`
 	// ID     int    `json:"id"`
-	// time   time.Time
 	absolutePostTime  time.Time
 	timeSincePosting  time.Duration
 	hoursSincePosting time.Duration
@@ -39,7 +38,6 @@ func main() {
 	// debug
 	fmt.Println(dataMarshalled)
 
-	// dataToUnmarshall := Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
 	dataUnmarshalled, uErr := Unmarshal(dataMarshalled)
 	if uErr != nil {
 		panic(uErr)

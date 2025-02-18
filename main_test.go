@@ -12,11 +12,7 @@ func TestRelativeTime(t *testing.T) {
 	}{
 		{
 			item: Item{
-				// title:  "Random title",
-				// author: "Mr Crabs",
-				// score:  0,
 				timeSincePosting: 15966000000000000,
-				// URL:    "example.com/404",
 			},
 			want: "6m",
 		},
