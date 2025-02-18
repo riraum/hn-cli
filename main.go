@@ -2,10 +2,10 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"math"
-	"net/http"
 	"time"
+
+	"github.com/riraum/hn-cli/http"
 )
 
 const (
@@ -29,15 +29,10 @@ type Items []Item
 func main() {
 	fmt.Println("Hello hn-cli")
 
-	resp, err := http.Get("https://hacker-news.firebaseio.com/v0/topstories.json")
-	if err != nil {
-		panic(err)
-	}
-	defer resp.Body.Close()
+	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 
-	body, _ := io.ReadAll(resp.Body)
 	// debug
-	fmt.Println(string(body))
+	fmt.Println(string(frontpageJSON))
 }
 
 //	func (t Item) addHoursSincePosting() time.Duration {

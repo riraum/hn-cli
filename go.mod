@@ -1,3 +1,3 @@
-module github.com/riraum/hn-cli/v2
+module github.com/riraum/hn-cli
 
 go 1.23.6
