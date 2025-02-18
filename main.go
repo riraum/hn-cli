@@ -32,14 +32,20 @@ func main() {
 
 	dataToMarshall := Item{"Alice in Wonderland", "Lewis Carroll"}
 
-	dataMarshalled, err := Marshall(dataToMarshall)
+	dataMarshalled, mErr := Marshall(dataToMarshall)
+	if mErr != nil {
+		panic(mErr)
+	}
 	// debug
-	fmt.Println(dataMarshalled, err)
+	fmt.Println(dataMarshalled)
 
 	// dataToUnmarshall := Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
-	dataUnmarshalled, err := Unmarshal(dataMarshalled)
+	dataUnmarshalled, uErr := Unmarshal(dataMarshalled)
+	if uErr != nil {
+		panic(uErr)
+	}
 	// debug
-	fmt.Println(dataUnmarshalled, err)
+	fmt.Println(dataUnmarshalled)
 }
 
 func Marshall(input Item) ([]byte, error) {
