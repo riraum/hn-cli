@@ -38,11 +38,12 @@ func main() {
 	dataMarshalled := Marshall(dataToMarshall)
 	// debug
 	// fmt.Println(dataMarshalled)
-	fmt.Println("Marshalled:", string(dataMarshalled))
+	fmt.Println(dataMarshalled)
 
 	// dataToUnmarshall := Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
-	var dataUnmarshalled = Unmarshal(dataMarshalled)
-	fmt.Println("Unmarshalled:", dataUnmarshalled)
+	dataUnmarshalled := Unmarshal(dataMarshalled)
+	// debug
+	fmt.Println(dataUnmarshalled)
 }
 
 func Marshall(input Item) string {
