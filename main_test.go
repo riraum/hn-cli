@@ -132,10 +132,24 @@ func TestUnmarshall(t *testing.T) {
 			},
 		},
 		{
-			dataToUnmarshall: []byte(`{"title:"","by":"Mediations"}`),
+			dataToUnmarshall: []byte(`{"title":"Meditations","by":""}`),
 			want: Item{
 				Author: "",
 				Title:  "Meditations",
+			},
+		},
+		{
+			dataToUnmarshall: []byte(`{"title":"","by":"Marcus Aurelius"}`),
+			want: Item{
+				Author: "Marcus Aurelius",
+				Title:  "",
+			},
+		},
+		{
+			dataToUnmarshall: []byte(`{"title":"","by":""}`),
+			want: Item{
+				Author: "",
+				Title:  "",
 			},
 		},
 		{
