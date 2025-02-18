@@ -56,6 +56,43 @@ func TestMarshall(t *testing.T) {
 			},
 			want: []byte(`{"title":"Alice in Wonderland","by":"Lewis Carroll"}`),
 		},
+		{
+			dataToMarshall: Item{
+				Title:  "",
+				Author: "Marcus Aurelius",
+			},
+			want: []byte(`{"title":"","by":"Marcus Aurelius"}`),
+		},
+		{
+			dataToMarshall: Item{
+				Title:  "Meditations",
+				Author: "",
+			},
+			want: []byte(`{"title":"Meditations","by":""}`),
+		},
+		{
+			dataToMarshall: Item{
+				Title:  "",
+				Author: "",
+			},
+			want: []byte(`{"title":"","by":""}`),
+		},
+		{
+			dataToMarshall: Item{
+				Author: "Marcus Aurelius",
+			},
+			want: []byte(`{"title":"","by":"Marcus Aurelius"}`),
+		},
+		{
+			dataToMarshall: Item{
+				Title: "Meditations",
+			},
+			want: []byte(`{"title":"Meditations","by":""}`),
+		},
+		{
+			dataToMarshall: Item{},
+			want:           []byte(`{"title":"","by":""}`),
+		},
 	}
 
 	for _, test := range tests {
@@ -65,7 +102,7 @@ func TestMarshall(t *testing.T) {
 		}
 
 		if !bytes.Equal(got, test.want) {
-			t.Errorf("Got: %v, want: %v", got, test.want)
+			t.Errorf("Got: %v, want: %v", string(got), string(test.want))
 		}
 	}
 }
