@@ -67,6 +67,7 @@ func TestMarshall(t *testing.T) {
 		if err != nil {
 			panic(err)
 		}
+
 		if !bytes.Equal(got, test.want) {
 			t.Errorf("Got: %v, want: %v", got, test.want)
 		}
@@ -92,6 +93,7 @@ func TestUnmarshall(t *testing.T) {
 		if err != nil {
 			panic(err)
 		}
+
 		if got != test.want {
 			t.Errorf("Got: %v, want: %v", got, test.want)
 		}
