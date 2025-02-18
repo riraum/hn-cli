@@ -50,7 +50,7 @@ import (
 func TestMarshall(t *testing.T) {
 	tests := []struct {
 		dataToMarshall Item
-		want           string
+		want           []byte
 	}{
 		{
 			dataToMarshall: Item{

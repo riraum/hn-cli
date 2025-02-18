@@ -29,39 +29,44 @@ type Items []Item
 
 func main() {
 	fmt.Println("Hello hn-cli")
-	dataToMarshall := Item{"Alice in Wonderland", "Lewis Carroll"}
 
+	dataToMarshall := Item{"Alice in Wonderland", "Lewis Carroll"}
 	// dataMarshalled, mErr := json.Marshal(dataToMarshall)
 	// if mErr != nil {
 	// 	panic(mErr)
 	// }
 	dataMarshalled := Marshall(dataToMarshall)
 
-	fmt.Println(string(dataMarshalled))
+	fmt.Println("Marshalled data:", string(dataMarshalled))
+
+	// dataToUnmarshall := Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
+	var dataUnmarshalled Item
+	// uErr := json.Unmarshal(dataMarshalled, &dataUnmarshalled)
+	// if uErr != nil {
+	// 	panic(uErr)
+	// }
+	dataUnmarshalled = Unmarshal(dataMarshalled)
+	fmt.Println("Unmarshalled data:", dataUnmarshalled)
+
 }
 
-func Marshall(input Item) string {
+func Marshall(input Item) []byte {
 	dataMarshalled, mErr := json.Marshal(input)
 	if mErr != nil {
 		panic(mErr)
 	}
-	return string(dataMarshalled)
+	return dataMarshalled
 }
 
-// func Unmarshal(input string) Item {
-// 	stringBytes := []byte(input)
-
-// 	var output Item
-
-// 	unmarshallErr := json.Unmarshal(stringBytes, &output)
-// 	if unmarshallErr != nil {
-// 		panic(unmarshallErr)
-// 	}
-// 	// debug
-// 	fmt.Println(output)
-
-// 	return output
-// }
+func Unmarshal(input []byte) Item {
+	// stringBytes := []byte(input)
+	var output Item
+	uErr := json.Unmarshal(input, &output)
+	if uErr != nil {
+		panic(uErr)
+	}
+	return output
+}
 
 //	func (t Item) addHoursSincePosting() time.Duration {
 //		t.hoursSincePosting = time.Since(t.absolutePostTime)
