@@ -1,6 +1,7 @@
 package main
 
 import (
+	"reflect"
 	"testing"
 )
 
@@ -63,7 +64,7 @@ func TestMarshall(t *testing.T) {
 
 	for _, test := range tests {
 		got, _ := Marshall(test.dataToMarshall)
-		if got != test.want {
+		if !reflect.DeepEqual(got, test.want) {
 			t.Errorf("Got: %v, want: %v", got, test.want)
 		}
 	}
