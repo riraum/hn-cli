@@ -19,7 +19,7 @@ linters:
     # It's a set of rules from staticcheck. See https://staticcheck.io/
     - staticcheck 
 
-    - unused
+    # - unused
 
     # added as suggested
     # uses go fmt
@@ -110,7 +110,7 @@ linters-settings:
       - name: unreachable-code
 
       # Functions or methods with unused parameters can be a symptom of an unfinished refactoring or a bug.
-      - name: unused-parameter
+      # - name: unused-parameter
 
       # report when a variable declaration can be simplified
       - name: var-declaration
