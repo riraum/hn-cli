@@ -30,5 +30,18 @@ func main() {
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 
 	// debug
-	fmt.Println(string(frontpageJSON))
+	// fmt.Println(string(frontpageJSON))
+
+	var frontpage item.Items
+
+	for _, value := range frontpageJSON {
+		post, uFErr := item.Unmarshal(frontpageJSON)
+		if uFErr != nil {
+			panic(uFErr)
+		}
+		fmt.Println(post)
+		frontpage = post
+	}
+	fmt.Println(frontpage)
+	// fmt.Println((unmarshallFrontpage))
 }
