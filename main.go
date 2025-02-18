@@ -30,7 +30,7 @@ type Items []Item
 func main() {
 	fmt.Println("Hello hn-cli user")
 
-	dataToMarshall := Item{"Alice in Wonderland", , 15966000000000000, 15966000000000000, "Lewis Carroll"}
+	dataToMarshall := Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
 
 	dataMarshalled, mErr := Marshall(dataToMarshall)
 	if mErr != nil {

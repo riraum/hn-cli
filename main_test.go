@@ -55,8 +55,8 @@ func TestMarshall(t *testing.T) {
 	}{
 		{
 			dataToMarshall: Item{
-				"Alice in Wonderland",
-				"Lewis Carroll",
+				Title:  "Alice in Wonderland",
+				Author: "Lewis Carroll",
 			},
 			want: []byte(`{"title":"Alice in Wonderland","by":"Lewis Carroll"}`),
 		},
@@ -82,8 +82,8 @@ func TestUnmarshall(t *testing.T) {
 		{
 			dataToUnmarshall: []byte(`{"title":"Alice in Wonderland","by":"Lewis Carroll"}`),
 			want: Item{
-				"Alice in Wonderland",
-				"Lewis Carroll",
+				Title:  "Alice in Wonderland",
+				Author: "Lewis Carroll",
 			},
 		},
 	}
