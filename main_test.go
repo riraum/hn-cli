@@ -98,7 +98,7 @@ func TestMarshall(t *testing.T) {
 	for _, test := range tests {
 		got, err := Marshall(test.dataToMarshall)
 		if err != nil {
-			panic(err)
+			t.Fatal(err)
 		}
 
 		if !bytes.Equal(got, test.want) {
@@ -119,12 +119,35 @@ func TestUnmarshall(t *testing.T) {
 				Author: "Lewis Carroll",
 			},
 		},
+		{
+			dataToUnmarshall: []byte(`{"title":"Meditations"}`),
+			want: Item{
+				Title: "Meditations",
+			},
+		},
+		{
+			dataToUnmarshall: []byte(`{"by":"Marcus Aurelius"}`),
+			want: Item{
+				Author: "Marcus Aurelius",
+			},
+		},
+		{
+			dataToUnmarshall: []byte(`{"title:"","by":"Mediations"}`),
+			want: Item{
+				Author: "",
+				Title:  "Meditations",
+			},
+		},
+		{
+			dataToUnmarshall: []byte(`{}`),
+			want:             Item{},
+		},
 	}
 
 	for _, test := range tests {
 		got, err := Unmarshal(test.dataToUnmarshall)
 		if err != nil {
-			panic(err)
+			t.Fatal(err)
 		}
 
 		if got != test.want {
