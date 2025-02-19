@@ -31,7 +31,7 @@ func main() {
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 
 	// debug
-	fmt.Println(string(frontpageJSON))
+	// fmt.Println(string(frontpageJSON))
 
 	frontpageJSONList := bytes.Split((frontpageJSON), []byte(","))
 	// debug
