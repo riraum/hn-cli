@@ -38,10 +38,10 @@ func main() {
 	// debug
 	// fmt.Println(frontpageJSONList)
 	fmt.Println(postID)
-	// postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
+	postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 	// // debug
 	// fmt.Println(postURL)
-	postURL := "https://hacker-news.firebaseio.com/v0/item/43094260.json"
+	// postURL := "https://hacker-news.firebaseio.com/v0/item/43094260.json"
 	// debug
 	// fmt.Println(postURL)
 	postData := http.GetJSON(postURL)
