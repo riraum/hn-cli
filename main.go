@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"fmt"
 
 	"github.com/riraum/hn-cli/item"
@@ -18,7 +19,7 @@ func main() {
 		panic(mErr)
 	}
 	// debug
-	fmt.Println(dataMarshalled)
+	fmt.Println(string(dataMarshalled))
 
 	dataUnmarshalled, uErr := item.Unmarshal(dataMarshalled)
 	if uErr != nil {
@@ -30,18 +31,37 @@ func main() {
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 
 	// debug
-	// fmt.Println(string(frontpageJSON))
+	fmt.Println(string(frontpageJSON))
 
-	var frontpage item.Items
+	frontpageJSONList := bytes.Split((frontpageJSON), []byte(","))
+	// debug
+	fmt.Println(string(frontpageJSONList[0]))
+	postID := string(frontpageJSONList[0])
+	// debug
+	fmt.Println(postID)
 
-	for _, value := range frontpageJSON {
-		post, uFErr := item.Unmarshal(frontpageJSON)
-		if uFErr != nil {
-			panic(uFErr)
-		}
-		fmt.Println(post)
-		frontpage = post
-	}
-	fmt.Println(frontpage)
+	postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
+
+	postData := http.GetJSON(postURL)
+	fmt.Println(string(postData))
+
+	// for _, value := range frontpageJSON {
+	// 	post, uFErr := item.Unmarshal(frontpageJSON)
+	// 	if uFErr != nil {
+	// 		panic(uFErr)
+	// 	}
+	// 	frontpage = post.Title
+	// }
+	// fmt.Println(post)
+
+	// for _, value := range frontpageJSON {
+	// 	post, uFErr := item.Unmarshal(frontpageJSON)
+	// 	if uFErr != nil {
+	// 		panic(uFErr)
+	// 	}
+	// 	fmt.Println(post)
+	// 	frontpage = post
+	// }
+	// fmt.Println(frontpage)
 	// fmt.Println((unmarshallFrontpage))
 }
