@@ -54,25 +54,26 @@ func main() {
 	}
 	// debug
 	fmt.Println(postUnmarshalled)
-	//	for _, value := range frontpageJSON {
-	//		post, uFErr := item.Unmarshal(frontpageJSON)
-	//		if uFErr != nil {
-	//			panic(uFErr)
-	//		}
-	//		frontpage = post.Title
-	//	}
-	//
-	// fmt.Println(post)
-	//
-	//	for _, value := range frontpageJSON {
-	//		post, uFErr := item.Unmarshal(frontpageJSON)
-	//		if uFErr != nil {
-	//			panic(uFErr)
-	//		}
-	//		fmt.Println(post)
-	//		frontpage = post
-	//	}
-	//
-	// fmt.Println(frontpage)
-	// fmt.Println((unmarshallFrontpage))
 }
+
+//	for _, value := range frontpageJSON {
+//		post, uFErr := item.Unmarshal(frontpageJSON)
+//		if uFErr != nil {
+//			panic(uFErr)
+//		}
+//		frontpage = post.Title
+//	}
+//
+// fmt.Println(post)
+//
+//	for _, value := range frontpageJSON {
+//		post, uFErr := item.Unmarshal(frontpageJSON)
+//		if uFErr != nil {
+//			panic(uFErr)
+//		}
+//		fmt.Println(post)
+//		frontpage = post
+//	}
+//
+// fmt.Println(frontpage)
+// fmt.Println((unmarshallFrontpage))
