@@ -40,10 +40,27 @@ func main() {
 	// debug
 	fmt.Println(postID)
 
-	postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
+	// postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
+	// // debug
+	// fmt.Println(postURL)
+
+	postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/43094260.json")
+	// debug
+	fmt.Println(postURL)
 
 	postData := http.GetJSON(postURL)
+	// debug
 	fmt.Println(string(postData))
+
+	// var postItem item.Item
+
+	postMarshalled, pErr := item.Unmarshal(postData)
+	if pErr != nil {
+		panic(pErr)
+	}
+	// debug
+	fmt.Println(postMarshalled)
+
 	//	for _, value := range frontpageJSON {
 	//		post, uFErr := item.Unmarshal(frontpageJSON)
 	//		if uFErr != nil {
