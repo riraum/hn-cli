@@ -35,7 +35,7 @@ func main() {
 
 	frontpageJSONList := bytes.Split((frontpageJSON), []byte(","))
 	// debug
-	fmt.Println(string(frontpageJSONList[0]))
+	// fmt.Println(string(frontpageJSONList[0]))
 	postID := string(frontpageJSONList[0])
 	// debug
 	fmt.Println(postID)
@@ -46,11 +46,11 @@ func main() {
 
 	postURL := "https://hacker-news.firebaseio.com/v0/item/43094260.json"
 	// debug
-	fmt.Println(postURL)
+	// fmt.Println(postURL)
 
 	postData := http.GetJSON(postURL)
 	// debug
-	fmt.Println(string(postData))
+	// fmt.Println(string(postData))
 
 	// var postItem item.Item
 
