@@ -44,7 +44,7 @@ func main() {
 	// // debug
 	// fmt.Println(postURL)
 
-	postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/43094260.json")
+	postURL := "https://hacker-news.firebaseio.com/v0/item/43094260.json"
 	// debug
 	fmt.Println(postURL)
 
@@ -60,7 +60,6 @@ func main() {
 	}
 	// debug
 	fmt.Println(postMarshalled)
-
 	//	for _, value := range frontpageJSON {
 	//		post, uFErr := item.Unmarshal(frontpageJSON)
 	//		if uFErr != nil {
