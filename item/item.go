@@ -17,11 +17,12 @@ type Item struct {
 	Title  string `json:"title"`
 	Author string `json:"by"`
 	// Score  int    `json:"score"`
-	// ID     int    `json:"id"`
+	// ID                int `json:"id"`
 	absolutePostTime  time.Time
 	timeSincePosting  time.Duration
 	hoursSincePosting time.Duration
-	// URL string `json:"url"`
+	URL               string `json:"url"`
+	Score             int    `json:"score"`
 }
 
 // ...
