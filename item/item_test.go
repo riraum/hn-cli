@@ -54,7 +54,7 @@ func TestMarshall(t *testing.T) {
 				Title:  "Alice in Wonderland",
 				Author: "Lewis Carroll",
 			},
-			want: []byte(`{"title":"Alice in Wonderland","by":"Lewis Carroll","url":"","score":0"}`),
+			want: []byte(`{"title":"Alice in Wonderland","by":"Lewis Carroll","url":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
@@ -75,23 +75,23 @@ func TestMarshall(t *testing.T) {
 				Title:  "",
 				Author: "",
 			},
-			want: []byte(`{"title":"","by":""}`),
+			want: []byte(`{"title":"","by":"","url":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
 				Author: "Marcus Aurelius",
 			},
-			want: []byte(`{"title":"","by":"Marcus Aurelius"}`),
+			want: []byte(`{"title":"","by":"Marcus Aurelius","url":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
 				Title: "Meditations",
 			},
-			want: []byte(`{"title":"Meditations","by":""}`),
+			want: []byte(`{"title":"Meditations","by":"","url":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{},
-			want:           []byte(`{"title":"","by":""}`),
+			want:           []byte(`{"title":"","by":"","url":"","score":0}`),
 		},
 	}
 
