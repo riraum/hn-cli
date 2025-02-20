@@ -17,7 +17,7 @@ type Item struct {
 	Title  string `json:"title"`
 	Author string `json:"by"`
 	// Score  int    `json:"score"`
-	// ID     int    `json:"id"`
+	ID                int `json:"id"`
 	absolutePostTime  time.Time
 	timeSincePosting  time.Duration
 	hoursSincePosting time.Duration
@@ -46,6 +46,18 @@ func Unmarshal(input []byte) (Item, error) {
 
 	return dataUnmarshalled, nil
 }
+
+// func Unmarshal(input [][]byte) (Items, error) {
+// 	var dataUnmarshalled Itemsz
+
+// 	for _, value := range input {
+// 		err := json.Unmarshal(value, &dataUnmarshalled)
+// 		if err != nil {
+// 			return dataUnmarshalled, err
+// 		}
+// 	}
+// 	return dataUnmarshalled, nil
+// }
 
 func (t Item) AddHoursSincePosting() time.Duration {
 	t.hoursSincePosting = time.Since(t.absolutePostTime)
