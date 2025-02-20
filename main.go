@@ -31,7 +31,7 @@ func main() {
 	// debug
 	fmt.Println(string(frontpageJSON))
 
-	var frontpage interface{}
+	var frontpage item.Items
 
 	// for _, value := range frontpageJSON {
 	// 	err := json.Unmarshal(value, &frontpage)
