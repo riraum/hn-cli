@@ -1,7 +1,7 @@
 package main
 
 import (
-	"bytes"
+	"encoding/json"
 	"fmt"
 
 	"github.com/riraum/hn-cli/item"
@@ -27,14 +27,28 @@ func main() {
 	}
 	// debug
 	fmt.Println(dataUnmarshalled)
-
+	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 	// debug
-	// fmt.Println(string(frontpageJSON))
-	frontpageJSONList := bytes.Split((frontpageJSON), []byte(","))
+	fmt.Println(string(frontpageJSON))
+
+	var frontpage item.Items
+
+	for _, value := range frontpageJSON {
+		err := json.Unmarshal(value, &frontpage)
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	frontpageJSONList, fpErr := item.Unmarshal(frontpageJSON)
+	if fpErr != nil {
+		panic(fpErr)
+	}
+	fmt.Println(frontpageJSONList)
 	// debug
 	// fmt.Println(string(frontpageJSONList[0]))
-	postID := string(frontpageJSONList[0])
+	postID := frontpageJSONList
 	// debug
 	// fmt.Println(frontpageJSONList)
 	fmt.Println(postID)
