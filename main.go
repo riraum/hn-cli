@@ -43,10 +43,12 @@ func main() {
 	for _, postID := range frontpageIDs {
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
+
 		postUnmarshalled, pErr := item.Unmarshal(postData)
 		if pErr != nil {
 			panic(pErr)
 		}
+
 		fmt.Println(postUnmarshalled)
 	}
 }
