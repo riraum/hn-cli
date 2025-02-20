@@ -29,74 +29,24 @@ func main() {
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 	// debug
-	fmt.Println(string(frontpageJSON))
+	// fmt.Println(string(frontpageJSON))
 
 	var frontpageIDs []int
-
-	// for _, value := range frontpageJSON {
-	// 	err := json.Unmarshal(value, &frontpage)
-	// 	if err != nil {
-	// 		panic(err)
-	// 	}
-	// }
 
 	err := json.Unmarshal(frontpageJSON, &frontpageIDs)
 	if err != nil {
 		panic(err)
 	}
-	fmt.Println(frontpageIDs)
+	// debug
+	// fmt.Println(frontpageIDs)
 
-	// for _, value := range frontpageIDs {
-
-	// }
-
-	// frontpageJSONList, fpErr := item.Unmarshal(frontpageJSON)
-	// if fpErr != nil {
-	// 	panic(fpErr)
-	// }
-	// fmt.Println(frontpageJSONList)
-	// debug
-	// fmt.Println(string(frontpageJSONList[0]))
-	postID := frontpageIDs[0]
-	// debug
-	// fmt.Println(frontpageJSONList)
-	// fmt.Println(postID)
-	postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
-	// // debug
-	// fmt.Println(postURL)
-	// postURL := "https://hacker-news.firebaseio.com/v0/item/43094260.json"
-	// debug
-	// fmt.Println(postURL)
-	postData := http.GetJSON(postURL)
-	// debug
-	// fmt.Println(string(postData))
-	// var postItem item.Item
-	postUnmarshalled, pErr := item.Unmarshal(postData)
-	if pErr != nil {
-		panic(pErr)
+	for _, postID := range frontpageIDs {
+		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
+		postData := http.GetJSON(postURL)
+		postUnmarshalled, pErr := item.Unmarshal(postData)
+		if pErr != nil {
+			panic(pErr)
+		}
+		fmt.Println(postUnmarshalled)
 	}
-	// debug
-	fmt.Println(postUnmarshalled)
 }
-
-//	for _, value := range frontpageJSON {
-//		post, uFErr := item.Unmarshal(frontpageJSON)
-//		if uFErr != nil {
-//			panic(uFErr)
-//		}
-//		frontpage = post.Title
-//	}
-//
-// fmt.Println(post)
-//
-//	for _, value := range frontpageJSON {
-//		post, uFErr := item.Unmarshal(frontpageJSON)
-//		if uFErr != nil {
-//			panic(uFErr)
-//		}
-//		fmt.Println(post)
-//		frontpage = post
-//	}
-//
-// fmt.Println(frontpage)
-// fmt.Println((unmarshallFrontpage))
