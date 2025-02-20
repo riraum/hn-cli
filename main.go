@@ -46,6 +46,10 @@ func main() {
 	}
 	fmt.Println(frontpageIDs)
 
+	// for _, value := range frontpageIDs {
+
+	// }
+
 	// frontpageJSONList, fpErr := item.Unmarshal(frontpageJSON)
 	// if fpErr != nil {
 	// 	panic(fpErr)
@@ -53,14 +57,14 @@ func main() {
 	// fmt.Println(frontpageJSONList)
 	// debug
 	// fmt.Println(string(frontpageJSONList[0]))
-	// postID := frontpageJSONList
+	postID := frontpageIDs[0]
 	// debug
 	// fmt.Println(frontpageJSONList)
 	// fmt.Println(postID)
-	// postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
+	postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 	// // debug
 	// fmt.Println(postURL)
-	postURL := "https://hacker-news.firebaseio.com/v0/item/43094260.json"
+	// postURL := "https://hacker-news.firebaseio.com/v0/item/43094260.json"
 	// debug
 	// fmt.Println(postURL)
 	postData := http.GetJSON(postURL)
