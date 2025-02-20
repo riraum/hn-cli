@@ -21,7 +21,8 @@ type Item struct {
 	absolutePostTime  time.Time
 	timeSincePosting  time.Duration
 	hoursSincePosting time.Duration
-	// URL string `json:"url"`
+	URL               string `json:"url"`
+	Score             int    `json:"score"`
 }
 
 // ...

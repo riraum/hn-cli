@@ -38,7 +38,6 @@ func main() {
 	}
 	// debug
 	// fmt.Println(frontpageIDs)
-
 	for _, postID := range frontpageIDs {
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
