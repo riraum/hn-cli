@@ -26,13 +26,26 @@ func main() {
 	// }
 	// // debug
 	// fmt.Println(dataUnmarshalled)
+
+	var timeConvert item.Item
+	// convert unix time stampt to time.Time
+	unixToTime := time.Unix(1494505756, 0)
+	timeConvert.AbsolutePostTime = unixToTime
+	// debug
+	fmt.Println(timeConvert.AbsolutePostTime)
+	// time.time to time.Duration conversion
+	// hoursSincePosting := time.Since(unixToTime)
+	timeConvert.AddHoursSincePosting()
+	// timeConvert.HoursSincePosting = hoursSincePosting
+	// debug
+	fmt.Println(timeConvert.HoursSincePosting)
+	// time.Duration to string conversion
+	fmt.Println(timeConvert.RelativeTime())
+
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 	// debug
 	// fmt.Println(string(frontpageJSON))
-
-	t := time.Unix(1494505756, 0)
-	fmt.Println(t)
 
 	var frontpageIDs []int
 
