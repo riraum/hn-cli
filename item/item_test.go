@@ -1,48 +1,47 @@
 package item
 
-// import (
-// 	"bytes"
-// 	"testing"
-// )
+import (
+	"testing"
+)
 
-// func TestRelativeTime(t *testing.T) {
-// 	tests := []struct {
-// 		item Item
-// 		want string
-// 	}{
-// 		{
-// 			item: Item{
-// 				TimeSincePosting: 15966000000000000,
-// 			},
-// 			want: "6m",
-// 		},
-// 		{
-// 			item: Item{
-// 				TimeSincePosting: 3783600000000000,
-// 			},
-// 			want: "1m",
-// 		},
-// 		{
-// 			item: Item{
-// 				TimeSincePosting: 1105200000000000,
-// 			},
-// 			want: "13d",
-// 		},
-// 		{
-// 			item: Item{
-// 				TimeSincePosting: 32727599999999996,
-// 			},
-// 			want: "1y",
-// 		},
-// 	}
+func TestRelativeTime(t *testing.T) {
+	tests := []struct {
+		item Item
+		want string
+	}{
+		{
+			item: Item{
+				TimeSincePosting: 15966000000000000,
+			},
+			want: "6m",
+		},
+		{
+			item: Item{
+				TimeSincePosting: 3783600000000000,
+			},
+			want: "1m",
+		},
+		{
+			item: Item{
+				TimeSincePosting: 1105200000000000,
+			},
+			want: "13d",
+		},
+		{
+			item: Item{
+				TimeSincePosting: 32727599999999996,
+			},
+			want: "1y",
+		},
+	}
 
-// 	for _, test := range tests {
-// 		got := test.item.RelativeTime()
-// 		if got != test.want {
-// 			t.Errorf("Got: %v, want: %v", got, test.want)
-// 		}
-// 	}
-// }
+	for _, test := range tests {
+		got := test.item.RelativeTime()
+		if got != test.want {
+			t.Errorf("Got: %v, want: %v", got, test.want)
+		}
+	}
+}
 
 // func TestMarshall(t *testing.T) {
 // 	tests := []struct {
@@ -108,65 +107,65 @@ package item
 // 	}
 // }
 
-// func TestUnmarshall(t *testing.T) {
-// 	tests := []struct {
-// 		dataToUnmarshall []byte
-// 		want             Item
-// 	}{
-// 		{
-// 			dataToUnmarshall: []byte(`{"title":"Alice in Wonderland","by":"Lewis Carroll","url":"","score":0}`),
-// 			want: Item{
-// 				Title:  "Alice in Wonderland",
-// 				Author: "Lewis Carroll",
-// 			},
-// 		},
-// 		{
-// 			dataToUnmarshall: []byte(`{"title":"Meditations"}`),
-// 			want: Item{
-// 				Title: "Meditations",
-// 			},
-// 		},
-// 		{
-// 			dataToUnmarshall: []byte(`{"by":"Marcus Aurelius"}`),
-// 			want: Item{
-// 				Author: "Marcus Aurelius",
-// 			},
-// 		},
-// 		{
-// 			dataToUnmarshall: []byte(`{"title":"Meditations","by":""}`),
-// 			want: Item{
-// 				Author: "",
-// 				Title:  "Meditations",
-// 			},
-// 		},
-// 		{
-// 			dataToUnmarshall: []byte(`{"title":"","by":"Marcus Aurelius"}`),
-// 			want: Item{
-// 				Author: "Marcus Aurelius",
-// 				Title:  "",
-// 			},
-// 		},
-// 		{
-// 			dataToUnmarshall: []byte(`{"title":"","by":""}`),
-// 			want: Item{
-// 				Author: "",
-// 				Title:  "",
-// 			},
-// 		},
-// 		{
-// 			dataToUnmarshall: []byte(`{}`),
-// 			want:             Item{},
-// 		},
-// 	}
+func TestUnmarshall(t *testing.T) {
+	tests := []struct {
+		dataToUnmarshall []byte
+		want             Item
+	}{
+		{
+			dataToUnmarshall: []byte(`{"title":"Alice in Wonderland","by":"Lewis Carroll","url":"","score":0}`),
+			want: Item{
+				Title:  "Alice in Wonderland",
+				Author: "Lewis Carroll",
+			},
+		},
+		{
+			dataToUnmarshall: []byte(`{"title":"Meditations"}`),
+			want: Item{
+				Title: "Meditations",
+			},
+		},
+		{
+			dataToUnmarshall: []byte(`{"by":"Marcus Aurelius"}`),
+			want: Item{
+				Author: "Marcus Aurelius",
+			},
+		},
+		{
+			dataToUnmarshall: []byte(`{"title":"Meditations","by":""}`),
+			want: Item{
+				Author: "",
+				Title:  "Meditations",
+			},
+		},
+		{
+			dataToUnmarshall: []byte(`{"title":"","by":"Marcus Aurelius"}`),
+			want: Item{
+				Author: "Marcus Aurelius",
+				Title:  "",
+			},
+		},
+		{
+			dataToUnmarshall: []byte(`{"title":"","by":""}`),
+			want: Item{
+				Author: "",
+				Title:  "",
+			},
+		},
+		{
+			dataToUnmarshall: []byte(`{}`),
+			want:             Item{},
+		},
+	}
 
-// 	for _, test := range tests {
-// 		got, err := Unmarshal(test.dataToUnmarshall)
-// 		if err != nil {
-// 			t.Fatal(err)
-// 		}
+	for _, test := range tests {
+		got, err := Unmarshal(test.dataToUnmarshall)
+		if err != nil {
+			t.Fatal(err)
+		}
 
-// 		if got != test.want {
-// 			t.Errorf("Got: %v, want: %v", got, test.want)
-// 		}
-// 	}
-// }
+		if got != test.want {
+			t.Errorf("Got: %v, want: %v", got, test.want)
+		}
+	}
+}
