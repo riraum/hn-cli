@@ -35,15 +35,10 @@ func main() {
 	// debug
 	fmt.Println(timeConvert.AbsolutePostTime)
 	// time.time to time.Duration conversion
-	// hoursSincePosting := time.Since(unixToTime)
-	// timeConvert.AddHoursSincePosting()
-	// timeConvert.HoursSincePosting = hoursSincePosting
-	// debug
 	timeConvert.TimeSincePosting = time.Since(timeConvert.AbsolutePostTime)
 	fmt.Println(timeConvert.TimeSincePosting)
 	// time.Duration to string conversion
 	timeConvert.Time = timeConvert.RelativeTime()
-	fmt.Println(timeConvert.Time)
 	fmt.Println(timeConvert)
 
 	// API code below
@@ -67,6 +62,7 @@ func main() {
 		if pErr != nil {
 			panic(pErr)
 		}
+
 		postUnmarshalled.AbsolutePostTime = time.Unix(postUnmarshalled.UnixPostTime, 0)
 		postUnmarshalled.TimeSincePosting = time.Since(postUnmarshalled.AbsolutePostTime)
 		postUnmarshalled.Time = postUnmarshalled.RelativeTime()
