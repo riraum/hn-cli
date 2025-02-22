@@ -19,12 +19,9 @@ type Item struct {
 	// Score  int    `json:"score"`
 	// ID                int `json:"id"`
 	UnixPostTime int64 `json:"time"`
-	// AbsolutePostTime  time.Time
-	// TimeSincePosting  time.Duration
-	// HoursSincePosting time.Duration
-	Time  string
-	URL   string `json:"url"`
-	Score int    `json:"score"`
+	Time         string
+	URL          string `json:"url"`
+	Score        int    `json:"score"`
 }
 
 // ...

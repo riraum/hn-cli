@@ -1,6 +1,7 @@
 package item
 
 import (
+	"bytes"
 	"testing"
 )
 
@@ -43,69 +44,69 @@ func TestRelativeTime(t *testing.T) {
 	}
 }
 
-// func TestMarshall(t *testing.T) {
-// 	tests := []struct {
-// 		dataToMarshall Item
-// 		want           []byte
-// 	}{
-// 		{
-// 			dataToMarshall: Item{
-// 				Title:        "Alice in Wonderland",
-// 				Author:       "Lewis Carroll",
-// 				UnixPostTime: 1739890030,
-// 			},
-// 			want: []byte(`{"title":"Alice in Wonderland","by":"Lewis Carroll","time":1739890030,"url":"","score":0}`),
-// 		},
-// 		{
-// 			dataToMarshall: Item{
-// 				Title:  "",
-// 				Author: "Marcus Aurelius",
-// 			},
-// 			want: []byte(`{"title":"","by":"Marcus Aurelius","time":0,"url":"","score":0}`),
-// 		},
-// 		{
-// 			dataToMarshall: Item{
-// 				Title:  "Meditations",
-// 				Author: "",
-// 			},
-// 			want: []byte(`{"title":"Meditations","by":"","time":0,"url":"","score":0}`),
-// 		},
-// 		{
-// 			dataToMarshall: Item{
-// 				Title:  "",
-// 				Author: "",
-// 			},
-// 			want: []byte(`{"title":"","by":"","time":0,"url":"","score":0}`),
-// 		},
-// 		{
-// 			dataToMarshall: Item{
-// 				Author: "Marcus Aurelius",
-// 			},
-// 			want: []byte(`{"title":"","by":"Marcus Aurelius","time":0,"url":"","score":0}`),
-// 		},
-// 		{
-// 			dataToMarshall: Item{
-// 				Title: "Meditations",
-// 			},
-// 			want: []byte(`{"title":"Meditations","by":"","time":0,"url":"","score":0}`),
-// 		},
-// 		{
-// 			dataToMarshall: Item{},
-// 			want:           []byte(`{"title":"","by":"","time":0,"url":"","score":0}`),
-// 		},
-// 	}
+func TestMarshall(t *testing.T) {
+	tests := []struct {
+		dataToMarshall Item
+		want           []byte
+	}{
+		{
+			dataToMarshall: Item{
+				Title:        "Alice in Wonderland",
+				Author:       "Lewis Carroll",
+				UnixPostTime: 1739890030,
+			},
+			want: []byte(`{"title":"Alice in Wonderland","by":"Lewis Carroll","time":1739890030,"Time":"","url":"","score":0}`),
+		},
+		{
+			dataToMarshall: Item{
+				Title:  "",
+				Author: "Marcus Aurelius",
+			},
+			want: []byte(`{"title":"","by":"Marcus Aurelius","time":0,"Time":"","url":"","score":0}`),
+		},
+		{
+			dataToMarshall: Item{
+				Title:  "Meditations",
+				Author: "",
+			},
+			want: []byte(`{"title":"Meditations","by":"","time":0,"Time":"","url":"","score":0}`),
+		},
+		{
+			dataToMarshall: Item{
+				Title:  "",
+				Author: "",
+			},
+			want: []byte(`{"title":"","by":"","time":0,"Time":"","url":"","score":0}`),
+		},
+		{
+			dataToMarshall: Item{
+				Author: "Marcus Aurelius",
+			},
+			want: []byte(`{"title":"","by":"Marcus Aurelius","time":0,"Time":"","url":"","score":0}`),
+		},
+		{
+			dataToMarshall: Item{
+				Title: "Meditations",
+			},
+			want: []byte(`{"title":"Meditations","by":"","time":0,"Time":"","url":"","score":0}`),
+		},
+		{
+			dataToMarshall: Item{},
+			want:           []byte(`{"title":"","by":"","time":0,"Time":"","url":"","score":0}`),
+		},
+	}
 
-// 	for _, test := range tests {
-// 		got, err := Marshall(test.dataToMarshall)
-// 		if err != nil {
-// 			t.Fatal(err)
-// 		}
+	for _, test := range tests {
+		got, err := Marshall(test.dataToMarshall)
+		if err != nil {
+			t.Fatal(err)
+		}
 
-// 		if !bytes.Equal(got, test.want) {
-// 			t.Errorf("Got: %v, want: %v", string(got), string(test.want))
-// 		}
-// 	}
-// }
+		if !bytes.Equal(got, test.want) {
+			t.Errorf("Got: %v, want: %v", string(got), string(test.want))
+		}
+	}
+}
 
 func TestUnmarshall(t *testing.T) {
 	tests := []struct {
