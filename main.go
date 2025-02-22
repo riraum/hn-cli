@@ -35,7 +35,7 @@ func main() {
 	fmt.Println(timeConvert.AbsolutePostTime)
 	// time.time to time.Duration conversion
 	// hoursSincePosting := time.Since(unixToTime)
-	timeConvert.AddHoursSincePosting()
+	// timeConvert.AddHoursSincePosting()
 	// timeConvert.HoursSincePosting = hoursSincePosting
 	// debug
 	timeConvert.TimeSincePosting = time.Since(timeConvert.AbsolutePostTime)
