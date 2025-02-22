@@ -38,6 +38,7 @@ func main() {
 	timeConvert.AddHoursSincePosting()
 	// timeConvert.HoursSincePosting = hoursSincePosting
 	// debug
+	timeConvert.TimeSincePosting = 15966000000000000
 	fmt.Println(timeConvert.HoursSincePosting)
 	// time.Duration to string conversion
 	fmt.Println(timeConvert.RelativeTime())
