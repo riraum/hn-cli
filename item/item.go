@@ -49,9 +49,9 @@ func Unmarshal(input []byte) (Item, error) {
 
 // ...
 func (t Item) RelativeTime() string {
-	absolutePostTime := time.Unix(t.UnixPostTime, 0)
-	timesincePosting := time.Since(absolutePostTime)
-	elapsedHours := timesincePosting.Hours()
+	// absolutePostTime := time.Unix(t.UnixPostTime, 0)
+	// timesincePosting := time.Since(absolutePostTime)
+	elapsedHours := time.Since(time.Unix(t.UnixPostTime, 0)).Hours()
 
 	if elapsedHours < 1 {
 		return "<1h"
