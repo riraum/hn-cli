@@ -67,7 +67,9 @@ func main() {
 		if pErr != nil {
 			panic(pErr)
 		}
-
+		postUnmarshalled.AbsolutePostTime = time.Unix(postUnmarshalled.UnixPostTime, 0)
+		postUnmarshalled.TimeSincePosting = time.Since(postUnmarshalled.AbsolutePostTime)
+		postUnmarshalled.Time = postUnmarshalled.RelativeTime()
 		fmt.Println(postUnmarshalled)
 	}
 }
