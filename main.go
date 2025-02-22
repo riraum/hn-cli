@@ -29,7 +29,8 @@ func main() {
 
 	var timeConvert item.Item
 	// convert unix time stampt to time.Time
-	unixToTime := time.Unix(1494505756, 0)
+	timeConvert.UnixPostTime = 1494505756
+	unixToTime := time.Unix(timeConvert.UnixPostTime, 0)
 	timeConvert.AbsolutePostTime = unixToTime
 	// debug
 	fmt.Println(timeConvert.AbsolutePostTime)

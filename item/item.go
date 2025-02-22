@@ -18,7 +18,7 @@ type Item struct {
 	Author string `json:"by"`
 	// Score  int    `json:"score"`
 	// ID                int `json:"id"`
-	UnixPostTime     int `json:"time"`
+	UnixPostTime     int64 `json:"time"`
 	AbsolutePostTime time.Time
 	TimeSincePosting time.Duration
 	// HoursSincePosting time.Duration
