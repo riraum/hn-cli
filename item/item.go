@@ -50,14 +50,7 @@ func Unmarshal(input []byte) (Item, error) {
 	return dataUnmarshalled, nil
 }
 
-// time.time to time.Duration conversion
-// func (t Item) AddHoursSincePosting() time.Duration {
-// 	t.HoursSincePosting = time.Since(t.AbsolutePostTime)
-// 	return t.HoursSincePosting
-// }
-
 // ...
-// time.Duration to string conversion
 func (t Item) RelativeTime() string {
 	absolutePostTime := time.Unix(t.UnixPostTime, 0)
 	timesincePosting := time.Since(absolutePostTime)

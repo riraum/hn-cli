@@ -29,14 +29,6 @@ func main() {
 	var timeConvert item.Item
 	// set initial time as int64
 	timeConvert.UnixPostTime = 1494505756
-	// convert unix time stampt to time.Time
-	// AbsolutePostTime := time.Unix(timeConvert.UnixPostTime, 0)
-	// // debug
-	// fmt.Println(AbsolutePostTime)
-	// // time.time to time.Duration conversion
-	// TimeSincePosting := time.Since(timeConvert.AbsolutePostTime)
-	// fmt.Println(TimeSincePosting)
-	// time.Duration to string conversion
 	timeConvert.Time = timeConvert.RelativeTime()
 	fmt.Println(timeConvert)
 
@@ -62,8 +54,6 @@ func main() {
 			panic(pErr)
 		}
 
-		// postUnmarshalled.AbsolutePostTime = time.Unix(postUnmarshalled.UnixPostTime, 0)
-		// postUnmarshalled.TimeSincePosting = time.Since(postUnmarshalled.AbsolutePostTime)
 		postUnmarshalled.Time = postUnmarshalled.RelativeTime()
 		fmt.Println(postUnmarshalled)
 	}

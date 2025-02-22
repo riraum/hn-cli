@@ -11,25 +11,25 @@ func TestRelativeTime(t *testing.T) {
 	}{
 		{
 			item: Item{
-				TimeSincePosting: 15966000000000000,
+				UnixPostTime: 1725210000,
 			},
 			want: "6m",
 		},
 		{
 			item: Item{
-				TimeSincePosting: 3783600000000000,
+				UnixPostTime: 1737478800,
 			},
 			want: "1m",
 		},
 		{
 			item: Item{
-				TimeSincePosting: 1105200000000000,
+				UnixPostTime: 1739145600,
 			},
 			want: "13d",
 		},
 		{
 			item: Item{
-				TimeSincePosting: 32727599999999996,
+				UnixPostTime: 1708560000,
 			},
 			want: "1y",
 		},
