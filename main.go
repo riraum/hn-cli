@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 
 	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/item"
@@ -25,6 +26,21 @@ func main() {
 	// }
 	// // debug
 	// fmt.Println(dataUnmarshalled)
+
+	var timeConvert item.Item
+	// set initial time as int64
+	timeConvert.UnixPostTime = 1494505756
+	// convert unix time stampt to time.Time
+	timeConvert.AbsolutePostTime = time.Unix(timeConvert.UnixPostTime, 0)
+	// debug
+	fmt.Println(timeConvert.AbsolutePostTime)
+	// time.time to time.Duration conversion
+	timeConvert.TimeSincePosting = time.Since(timeConvert.AbsolutePostTime)
+	fmt.Println(timeConvert.TimeSincePosting)
+	// time.Duration to string conversion
+	timeConvert.Time = timeConvert.RelativeTime()
+	fmt.Println(timeConvert)
+
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 	// debug
@@ -47,6 +63,9 @@ func main() {
 			panic(pErr)
 		}
 
+		postUnmarshalled.AbsolutePostTime = time.Unix(postUnmarshalled.UnixPostTime, 0)
+		postUnmarshalled.TimeSincePosting = time.Since(postUnmarshalled.AbsolutePostTime)
+		postUnmarshalled.Time = postUnmarshalled.RelativeTime()
 		fmt.Println(postUnmarshalled)
 	}
 }
