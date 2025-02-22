@@ -49,12 +49,14 @@ func Unmarshal(input []byte) (Item, error) {
 	return dataUnmarshalled, nil
 }
 
+// time.time to time.Duration conversion
 func (t Item) AddHoursSincePosting() time.Duration {
 	t.hoursSincePosting = time.Since(t.absolutePostTime)
 	return t.hoursSincePosting
 }
 
 // ...
+// time.Duration to string conversion
 func (t Item) RelativeTime() string {
 	elapsedHours := t.timeSincePosting.Hours()
 

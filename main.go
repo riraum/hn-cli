@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"time"
 
 	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/item"
@@ -29,6 +30,9 @@ func main() {
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 	// debug
 	// fmt.Println(string(frontpageJSON))
+
+	t := time.Unix(1494505756, 0)
+	fmt.Println(t)
 
 	var frontpageIDs []int
 
