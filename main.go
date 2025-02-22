@@ -29,7 +29,7 @@ func main() {
 	var timeConvert item.Item
 	// set initial time as int64
 	timeConvert.UnixPostTime = 1494505756
-	timeConvert.Time = timeConvert.RelativeTime()
+	timeConvert.FormattedTime = timeConvert.RelativeTime()
 	fmt.Println(timeConvert)
 
 	// API code below
@@ -54,7 +54,7 @@ func main() {
 			panic(pErr)
 		}
 
-		postUnmarshalled.Time = postUnmarshalled.RelativeTime()
+		postUnmarshalled.FormattedTime = postUnmarshalled.RelativeTime()
 		fmt.Println(postUnmarshalled)
 	}
 }
