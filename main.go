@@ -38,10 +38,11 @@ func main() {
 	timeConvert.AddHoursSincePosting()
 	// timeConvert.HoursSincePosting = hoursSincePosting
 	// debug
-	timeConvert.TimeSincePosting = 15966000000000000
-	fmt.Println(timeConvert.HoursSincePosting)
+	timeConvert.TimeSincePosting = time.Since(timeConvert.AbsolutePostTime)
+	fmt.Println(timeConvert.TimeSincePosting)
 	// time.Duration to string conversion
 	fmt.Println(timeConvert.RelativeTime())
+	fmt.Println(timeConvert)
 
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
