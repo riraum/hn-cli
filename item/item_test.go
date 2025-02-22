@@ -51,11 +51,11 @@ func TestMarshall(t *testing.T) {
 	}{
 		{
 			dataToMarshall: Item{
-				Title:        "Alice in Wonderland",
+				Title:        "Alice",
 				Author:       "Lewis Carroll",
 				UnixPostTime: 1739890030,
 			},
-			want: []byte(`{"title":"Alice in Wonderland","by":"Lewis Carroll","time":1739890030,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"Alice","by":"Lewis Carroll","time":1739890030,"FormattedTime":"","url":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
