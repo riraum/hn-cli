@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+
 	"time"
 
 	"github.com/riraum/hn-cli/http"
@@ -27,11 +28,6 @@ func main() {
 	// }
 	// // debug
 	// fmt.Println(dataUnmarshalled)
-	// Quit command
-	var input string
-	if input == "quit" {
-		os.Exit(0)
-	}
 
 	var timeConvert item.Item
 	// set initial time as int64
@@ -46,6 +42,12 @@ func main() {
 	// time.Duration to string conversion
 	timeConvert.Time = timeConvert.RelativeTime()
 	fmt.Println(timeConvert)
+
+	// Quit command
+	var input string
+	if input == "quit" {
+		os.Exit(0)
+	}
 
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
