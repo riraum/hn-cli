@@ -48,6 +48,7 @@ func main() {
 	if tErr != nil {
 		panic(tErr)
 	}
+
 	fmt.Println("Size:", tWidth, tHeight)
 
 	// API code below
