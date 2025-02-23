@@ -7,10 +7,7 @@ func UI() (string, error) {
 
 	fmt.Printf("Type 'help' for list of commands\n>")
 
-	_, iErr := fmt.Scan(&input)
-	if iErr != nil {
-		return input, iErr
-	}
+	_, err := fmt.Scan(&input)
 
-	return input, nil
+	return input, err
 }
