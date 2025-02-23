@@ -7,6 +7,7 @@ import (
 
 	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/item"
+	"github.com/riraum/hn-cli/ui"
 )
 
 func main() {
@@ -40,15 +41,13 @@ func main() {
 	// time.Duration to string conversion
 	timeConvert.Time = timeConvert.RelativeTime()
 	fmt.Println(timeConvert)
-	// UI
-	var input string
-
-	fmt.Printf("Type 'help' for list of commands\n>")
-
-	_, iErr := fmt.Scan(&input)
-	if iErr != nil {
-		panic(iErr)
+	// UI test code
+	input, uErr := ui.UI()
+	if uErr != nil {
+		panic(uErr)
 	}
+
+	fmt.Println(input)
 
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
