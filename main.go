@@ -5,9 +5,8 @@ import (
 	"fmt"
 	"time"
 
-	"golang.org/x/term"
-
 	"github.com/riraum/hn-cli/http"
+	"github.com/riraum/hn-cli/io"
 	"github.com/riraum/hn-cli/item"
 )
 
@@ -44,7 +43,7 @@ func main() {
 	// timeConvert.Time = timeConvert.RelativeTime()
 	// fmt.Println(timeConvert)
 	// Get terminal size test code
-	tWidth, tHeight, tErr := term.GetSize(0)
+	tWidth, tHeight, tErr := io.GetSize()
 	if tErr != nil {
 		panic(tErr)
 	}
