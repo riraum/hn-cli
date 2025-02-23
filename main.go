@@ -5,11 +5,13 @@ import (
 	"fmt"
 
 	"github.com/riraum/hn-cli/http"
+	"github.com/riraum/hn-cli/io"
 	"github.com/riraum/hn-cli/item"
 )
 
 func main() {
 	fmt.Println("Hello hn-cli user")
+	// Marshall/Unmarshall test code
 	// dataToMarshall := item.Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
 
 	// dataMarshalled, mErr := item.Marshall(dataToMarshall)
@@ -25,12 +27,23 @@ func main() {
 	// }
 	// // debug
 	// fmt.Println(dataUnmarshalled)
-
+	// Time conversion test code
 	var timeConvert item.Item
 	// set initial time as int64
 	timeConvert.UnixPostTime = 1494505756
 	timeConvert.FormattedTime = timeConvert.RelativeTime()
 	fmt.Println(timeConvert)
+	// Get terminal size test code
+	var tWidth int
+
+	var tHeight int
+
+	tWidth, tHeight, tErr := io.TermSize()
+	if tErr != nil {
+		panic(tErr)
+	}
+
+	fmt.Println("Size:", tWidth, tHeight)
 
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
