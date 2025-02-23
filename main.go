@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"os"
 
+	"os"
 	"time"
 
 	"github.com/riraum/hn-cli/http"
@@ -48,6 +48,8 @@ func main() {
 	if input == "quit" {
 		os.Exit(0)
 	}
+
+	fmt.Println(input)
 
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
