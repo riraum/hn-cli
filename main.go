@@ -49,6 +49,7 @@ func main() {
 
 	// UI test code
 	var input string
+
 	input, uErr := ui.UI()
 	if uErr != nil {
 		panic(uErr)
