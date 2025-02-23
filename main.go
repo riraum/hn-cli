@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"time"
 
 	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/item"
@@ -30,15 +29,7 @@ func main() {
 	var timeConvert item.Item
 	// set initial time as int64
 	timeConvert.UnixPostTime = 1494505756
-	// convert unix time stampt to time.Time
-	timeConvert.AbsolutePostTime = time.Unix(timeConvert.UnixPostTime, 0)
-	// debug
-	fmt.Println(timeConvert.AbsolutePostTime)
-	// time.time to time.Duration conversion
-	timeConvert.TimeSincePosting = time.Since(timeConvert.AbsolutePostTime)
-	fmt.Println(timeConvert.TimeSincePosting)
-	// time.Duration to string conversion
-	timeConvert.Time = timeConvert.RelativeTime()
+	timeConvert.FormattedTime = timeConvert.RelativeTime()
 	fmt.Println(timeConvert)
 
 	// API code below
@@ -63,9 +54,7 @@ func main() {
 			panic(pErr)
 		}
 
-		postUnmarshalled.AbsolutePostTime = time.Unix(postUnmarshalled.UnixPostTime, 0)
-		postUnmarshalled.TimeSincePosting = time.Since(postUnmarshalled.AbsolutePostTime)
-		postUnmarshalled.Time = postUnmarshalled.RelativeTime()
+		postUnmarshalled.FormattedTime = postUnmarshalled.RelativeTime()
 		fmt.Println(postUnmarshalled)
 	}
 }
