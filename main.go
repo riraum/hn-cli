@@ -4,14 +4,16 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
-	"time"
 
 	"github.com/riraum/hn-cli/http"
+	"github.com/riraum/hn-cli/io"
 	"github.com/riraum/hn-cli/item"
+	"github.com/riraum/hn-cli/ui"
 )
 
 func main() {
 	fmt.Println("Hello hn-cli user")
+	// Marshall/Unmarshall test code
 	// dataToMarshall := item.Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
 
 	// dataMarshalled, mErr := item.Marshall(dataToMarshall)
@@ -27,20 +29,14 @@ func main() {
 	// }
 	// // debug
 	// fmt.Println(dataUnmarshalled)
-
+	// Time conversion test code
 	var timeConvert item.Item
 	// set initial time as int64
 	timeConvert.UnixPostTime = 1494505756
-	// convert unix time stampt to time.Time
-	timeConvert.AbsolutePostTime = time.Unix(timeConvert.UnixPostTime, 0)
-	// debug
-	fmt.Println(timeConvert.AbsolutePostTime)
-	// time.time to time.Duration conversion
-	timeConvert.TimeSincePosting = time.Since(timeConvert.AbsolutePostTime)
-	fmt.Println(timeConvert.TimeSincePosting)
-	// time.Duration to string conversion
-	timeConvert.Time = timeConvert.RelativeTime()
+	timeConvert.FormattedTime = timeConvert.RelativeTime()
 	fmt.Println(timeConvert)
+	// Get terminal size test code
+	var tWidth int
 
 	// Quit command
 	var input string
@@ -48,6 +44,22 @@ func main() {
 		os.Exit(0)
 	}
 
+	var tHeight int
+
+	tWidth, tHeight, tErr := io.TermSize()
+	if tErr != nil {
+		panic(tErr)
+	}
+
+	fmt.Println("Size:", tWidth, tHeight)
+
+	// UI test code
+	input, uErr := ui.UI()
+	if uErr != nil {
+		panic(uErr)
+	}
+
+	fmt.Println(input)
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 	// debug
@@ -70,9 +82,7 @@ func main() {
 			panic(pErr)
 		}
 
-		postUnmarshalled.AbsolutePostTime = time.Unix(postUnmarshalled.UnixPostTime, 0)
-		postUnmarshalled.TimeSincePosting = time.Since(postUnmarshalled.AbsolutePostTime)
-		postUnmarshalled.Time = postUnmarshalled.RelativeTime()
+		postUnmarshalled.FormattedTime = postUnmarshalled.RelativeTime()
 		fmt.Println(postUnmarshalled)
 	}
 }

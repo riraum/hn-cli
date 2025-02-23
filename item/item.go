@@ -18,13 +18,10 @@ type Item struct {
 	Author string `json:"by"`
 	// Score  int    `json:"score"`
 	// ID                int `json:"id"`
-	UnixPostTime      int64 `json:"time"`
-	AbsolutePostTime  time.Time
-	TimeSincePosting  time.Duration
-	HoursSincePosting time.Duration
-	Time              string
-	URL               string `json:"url"`
-	Score             int    `json:"score"`
+	UnixPostTime  int64 `json:"time"`
+	FormattedTime string
+	URL           string `json:"url"`
+	Score         int    `json:"score"`
 }
 
 // ...
@@ -50,16 +47,9 @@ func Unmarshal(input []byte) (Item, error) {
 	return dataUnmarshalled, nil
 }
 
-// time.time to time.Duration conversion
-func (t Item) AddHoursSincePosting() time.Duration {
-	t.HoursSincePosting = time.Since(t.AbsolutePostTime)
-	return t.HoursSincePosting
-}
-
 // ...
-// time.Duration to string conversion
 func (t Item) RelativeTime() string {
-	elapsedHours := t.TimeSincePosting.Hours()
+	elapsedHours := time.Since(time.Unix(t.UnixPostTime, 0)).Hours()
 
 	if elapsedHours < 1 {
 		return "<1h"
