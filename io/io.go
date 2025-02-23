@@ -5,6 +5,5 @@ import (
 )
 
 func TermSize() (int, int, error) {
-	tWidth, tHeight, err := term.GetSize(0)
-	return tWidth, tHeight, err
+	return term.GetSize(0)
 }
