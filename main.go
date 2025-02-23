@@ -7,6 +7,7 @@ import (
 	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/io"
 	"github.com/riraum/hn-cli/item"
+	"github.com/riraum/hn-cli/ui"
 )
 
 func main() {
@@ -45,6 +46,13 @@ func main() {
 
 	fmt.Println("Size:", tWidth, tHeight)
 
+	// UI test code
+	input, uErr := ui.UI()
+	if uErr != nil {
+		panic(uErr)
+	}
+
+	fmt.Println(input)
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 	// debug
