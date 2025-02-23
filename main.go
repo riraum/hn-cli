@@ -38,12 +38,6 @@ func main() {
 	// Get terminal size test code
 	var tWidth int
 
-	// Quit command
-	var input string
-	if input == "quit" {
-		os.Exit(0)
-	}
-
 	var tHeight int
 
 	tWidth, tHeight, tErr := io.TermSize()
@@ -54,9 +48,15 @@ func main() {
 	fmt.Println("Size:", tWidth, tHeight)
 
 	// UI test code
+	var input string
 	input, uErr := ui.UI()
 	if uErr != nil {
 		panic(uErr)
+	}
+
+	// Quit command
+	if input == "quit" {
+		os.Exit(0)
 	}
 
 	fmt.Println(input)
