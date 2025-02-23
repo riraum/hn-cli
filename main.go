@@ -43,14 +43,12 @@ func main() {
 	// UI
 	var input string
 
-	fmt.Printf(">")
+	fmt.Printf("Type 'help' for list of commands\n>")
 
 	_, iErr := fmt.Scan(&input)
 	if iErr != nil {
 		panic(iErr)
 	}
-
-	fmt.Println(input)
 
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
