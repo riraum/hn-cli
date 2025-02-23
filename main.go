@@ -29,20 +29,24 @@ func main() {
 	// // debug
 	// fmt.Println(dataUnmarshalled)
 	// Time conversion test code
-	// var timeConvert item.Item
-	// // set initial time as int64
-	// timeConvert.UnixPostTime = 1494505756
-	// // convert unix time stampt to time.Time
-	// timeConvert.AbsolutePostTime = time.Unix(timeConvert.UnixPostTime, 0)
-	// // debug
-	// fmt.Println(timeConvert.AbsolutePostTime)
-	// // time.time to time.Duration conversion
-	// timeConvert.TimeSincePosting = time.Since(timeConvert.AbsolutePostTime)
-	// fmt.Println(timeConvert.TimeSincePosting)
-	// // time.Duration to string conversion
-	// timeConvert.Time = timeConvert.RelativeTime()
-	// fmt.Println(timeConvert)
+	var timeConvert item.Item
+	// set initial time as int64
+	timeConvert.UnixPostTime = 1494505756
+	// convert unix time stampt to time.Time
+	timeConvert.AbsolutePostTime = time.Unix(timeConvert.UnixPostTime, 0)
+	// debug
+	fmt.Println(timeConvert.AbsolutePostTime)
+	// time.time to time.Duration conversion
+	timeConvert.TimeSincePosting = time.Since(timeConvert.AbsolutePostTime)
+	fmt.Println(timeConvert.TimeSincePosting)
+	// time.Duration to string conversion
+	timeConvert.Time = timeConvert.RelativeTime()
+	fmt.Println(timeConvert)
 	// Get terminal size test code
+	var tWidth int
+
+	var tHeight int
+
 	tWidth, tHeight, tErr := io.TermSize()
 	if tErr != nil {
 		panic(tErr)
