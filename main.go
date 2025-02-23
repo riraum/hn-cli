@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/io"
@@ -47,9 +48,16 @@ func main() {
 	fmt.Println("Size:", tWidth, tHeight)
 
 	// UI test code
+	var input string
+
 	input, uErr := ui.UI()
 	if uErr != nil {
 		panic(uErr)
+	}
+
+	// Quit command
+	if input == "quit" {
+		os.Exit(0)
 	}
 
 	fmt.Println(input)
