@@ -41,6 +41,7 @@ func main() {
 	// time.Duration to string conversion
 	timeConvert.Time = timeConvert.RelativeTime()
 	fmt.Println(timeConvert)
+
 	// UI test code
 	input, uErr := ui.UI()
 	if uErr != nil {
@@ -48,7 +49,6 @@ func main() {
 	}
 
 	fmt.Println(input)
-
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 	// debug
