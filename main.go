@@ -43,7 +43,7 @@ func main() {
 	// timeConvert.Time = timeConvert.RelativeTime()
 	// fmt.Println(timeConvert)
 	// Get terminal size test code
-	tWidth, tHeight, tErr := io.GetSize()
+	tWidth, tHeight, tErr := io.TermSize()
 	if tErr != nil {
 		panic(tErr)
 	}
