@@ -42,8 +42,14 @@ func main() {
 	fmt.Println(timeConvert)
 	// UI
 	var input string
+
 	fmt.Printf(">")
-	fmt.Scan(&input)
+
+	_, iErr := fmt.Scan(&input)
+	if iErr != nil {
+		panic(iErr)
+	}
+
 	fmt.Println(input)
 
 	// API code below
