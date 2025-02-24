@@ -2,10 +2,7 @@ package item
 
 import (
 	"bytes"
-	"fmt"
-	"math"
 	"testing"
-	"time"
 )
 
 func TestRelativeTime(t *testing.T) {
@@ -15,50 +12,31 @@ func TestRelativeTime(t *testing.T) {
 	}{
 		{
 			item: Item{
-				UnixPostTime: 1725210000,
+				hoursSincePosting: 15966000000000000,
 			},
 			want: "6m",
 		},
 		{
 			item: Item{
-				UnixPostTime: 1737478800,
+				hoursSincePosting: 3783600000000000,
 			},
 			want: "1m",
 		},
 		{
 			item: Item{
-				UnixPostTime: 1739145600,
+				hoursSincePosting: 1105200000000000,
 			},
-			want: "14d",
+			want: "13d",
 		},
 		{
 			item: Item{
-				UnixPostTime: 1708560000,
+				hoursSincePosting: 32727599999999996,
 			},
 			want: "1y",
 		},
 	}
 
 	for _, test := range tests {
-		elapsedHours := time.Since(time.Unix(test.item.UnixPostTime, 0)).Hours()
-		if elapsedHours < 1 {
-			test.want = "<1h"
-		}
-
-		if elapsedHours < hoursInADay {
-			test.want = fmt.Sprint(math.Round(elapsedHours), "h")
-		}
-
-		if elapsedHours < hoursInAMonth {
-			test.want = fmt.Sprint(math.Round(elapsedHours/hoursInADay), "d")
-		}
-
-		if elapsedHours < hoursInAYear {
-			test.want = fmt.Sprint(math.Round(elapsedHours/hoursInAMonth), "m")
-		}
-
-		test.want = fmt.Sprint(math.Round(elapsedHours/hoursInAYear), "y")
-		// test.want = elapsedHours
 		got := test.item.RelativeTime()
 		if got != test.want {
 			t.Errorf("Got: %v, want: %v", got, test.want)
