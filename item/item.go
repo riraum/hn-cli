@@ -45,13 +45,16 @@ func Unmarshal(input []byte) (Item, error) {
 		return dataUnmarshalled, err
 	}
 
-	dataUnmarshalled.hoursSincePosting = time.Duration(time.Since(time.Unix(dataUnmarshalled.UnixPostTime, 0)).Hours())
-
 	return dataUnmarshalled, nil
 }
 
 // ...
 func (t Item) RelativeTime() string {
+	// t.hoursSincePosting = time.Duration(time.Since(time.Unix(t.UnixPostTime, 0)).Hours())
+
+	// absolutePostTime := time.Unix(t.UnixPostTime, 0)
+	t.hoursSincePosting = time.Duration(time.Since(time.Unix(t.UnixPostTime, 0)))
+
 	elapsedHours := t.hoursSincePosting.Hours()
 
 	if elapsedHours < 1 {
