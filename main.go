@@ -3,10 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/io"
 	"github.com/riraum/hn-cli/item"
+	"github.com/riraum/hn-cli/ui"
 )
 
 func main() {
@@ -31,6 +33,7 @@ func main() {
 	var timeConvert item.Item
 	// set initial time as int64
 	timeConvert.UnixPostTime = 1494505756
+	timeConvert.HoursSincePosting = timeConvert.AddHoursSincePosting()
 	timeConvert.FormattedTime = timeConvert.RelativeTime()
 	fmt.Println(timeConvert)
 	// Get terminal size test code
@@ -46,17 +49,17 @@ func main() {
 	fmt.Println("Size:", tWidth, tHeight)
 
 	// UI test code
-	// var input string
+	var input string
 
-	// input, uErr := ui.UI()
-	// if uErr != nil {
-	// 	panic(uErr)
-	// }
+	input, uErr := ui.UI()
+	if uErr != nil {
+		panic(uErr)
+	}
 
-	// // Quit command
-	// if input == "quit" {
-	// 	os.Exit(0)
-	// }
+	// Quit command
+	if input == "quit" {
+		os.Exit(0)
+	}
 
 	// fmt.Println(input)
 	// API code below
@@ -80,6 +83,8 @@ func main() {
 		if pErr != nil {
 			panic(pErr)
 		}
+
+		postUnmarshalled.HoursSincePosting = postUnmarshalled.AddHoursSincePosting()
 
 		postUnmarshalled.FormattedTime = postUnmarshalled.RelativeTime()
 		fmt.Println(postUnmarshalled)
