@@ -3,6 +3,7 @@ package item
 import (
 	"bytes"
 	"testing"
+	"time"
 )
 
 func TestRelativeTime(t *testing.T) {
@@ -160,6 +161,9 @@ func TestUnmarshall(t *testing.T) {
 	}
 
 	for _, test := range tests {
+		now := time.Now().Unix()
+		test.want.hoursSincePosting = time.Duration(time.Since(time.Unix(now, 0)).Hours())
+
 		got, err := Unmarshal(test.dataToUnmarshall)
 		if err != nil {
 			t.Fatal(err)

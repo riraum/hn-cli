@@ -44,6 +44,7 @@ func Unmarshal(input []byte) (Item, error) {
 	if err != nil {
 		return dataUnmarshalled, err
 	}
+
 	dataUnmarshalled.hoursSincePosting = time.Duration(time.Since(time.Unix(dataUnmarshalled.UnixPostTime, 0)).Hours())
 
 	return dataUnmarshalled, nil
