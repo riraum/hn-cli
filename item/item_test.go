@@ -2,6 +2,7 @@ package item
 
 import (
 	"bytes"
+	"fmt"
 	"testing"
 	"time"
 )
@@ -160,10 +161,11 @@ func TestUnmarshall(t *testing.T) {
 		},
 	}
 
-	for _, test := range tests {
-		now := time.Now().Unix()
-		test.want.hoursSincePosting = time.Duration(time.Since(time.Unix(now, 0)).Hours())
+	now := time.Now().Unix()
 
+	for _, test := range tests {
+		test.want.hoursSincePosting = time.Duration(time.Since(time.Unix(now, 0)).Hours())
+		fmt.Println(test.want.hoursSincePosting)
 		got, err := Unmarshal(test.dataToUnmarshall)
 		if err != nil {
 			t.Fatal(err)
