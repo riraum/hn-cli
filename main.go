@@ -73,7 +73,9 @@ func main() {
 	}
 	// debug
 	// fmt.Println(frontpageIDs)
-	for _, postID := range frontpageIDs {
+
+	for i := 0; i <= 10; i++ {
+		postID := frontpageIDs[i]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
 
@@ -86,6 +88,6 @@ func main() {
 
 		frontpage = item.Items{postUnmarshalled}
 		// fmt.Println(postUnmarshalled)
+		fmt.Println(frontpage)
 	}
-	fmt.Println(frontpage[0])
 }
