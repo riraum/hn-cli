@@ -47,7 +47,6 @@ func main() {
 	}
 
 	fmt.Println("Size:", tWidth, tHeight)
-
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 	// debug
@@ -81,7 +80,10 @@ func main() {
 	if uErr != nil {
 		panic(uErr)
 	}
-
+	// Quit command
+	if input == "quit" {
+		os.Exit(0)
+	}
 	// Open comments cmd
 	if input == "comments" {
 		frontpageID := 8863
@@ -91,10 +93,5 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-	}
-
-	// Quit command
-	if input == "quit" {
-		os.Exit(0)
 	}
 }
