@@ -63,6 +63,7 @@ func main() {
 		}}
 		// inputIndex
 		openURL := frontpage[0].URL
+
 		err := browser.OpenURL(openURL)
 		if err != nil {
 			panic(err)
