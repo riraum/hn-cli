@@ -52,6 +52,7 @@ func Unmarshal(input []byte) (Item, error) {
 func (t Item) AddHoursSincePosting() float64 {
 	t.HoursSincePosting = float64((time.Duration(time.Since(time.Unix(t.UnixPostTime, 0))).Hours()))
 	fmt.Println("Addhours() print", t.HoursSincePosting)
+
 	return t.HoursSincePosting
 }
 
