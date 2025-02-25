@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/pkg/browser"
 	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/io"
 	"github.com/riraum/hn-cli/item"
@@ -53,6 +54,18 @@ func main() {
 	input, uErr := ui.UI()
 	if uErr != nil {
 		panic(uErr)
+	}
+
+	// Open comments cmd
+
+	if input == "comments" {
+		frontpageID := 8863
+		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
+
+		err := browser.OpenURL(commentURL)
+		if err != nil {
+			panic(err)
+		}
 	}
 
 	// Quit command
