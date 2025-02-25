@@ -33,7 +33,9 @@ func main() {
 	var timeConvert item.Item
 	// set initial time as int64
 	timeConvert.UnixPostTime = 1494505756
+	fmt.Println("pre hrs print", timeConvert.HoursSincePosting)
 	timeConvert.HoursSincePosting = timeConvert.AddHoursSincePosting()
+	fmt.Println("post hrs print", timeConvert.HoursSincePosting)
 	timeConvert.FormattedTime = timeConvert.RelativeTime()
 	fmt.Println(timeConvert)
 	// Get terminal size test code
