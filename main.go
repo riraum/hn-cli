@@ -60,7 +60,9 @@ func main() {
 	}
 	// debug
 	// fmt.Println(frontpageIDs)
-	for _, postID := range frontpageIDs {
+
+	for i := 0; i <= 10; i++ {
+		postID := frontpageIDs[i]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
 
@@ -70,6 +72,7 @@ func main() {
 		}
 
 		postUnmarshalled.FormattedTime = postUnmarshalled.RelativeTime()
+
 		fmt.Println(postUnmarshalled)
 	}
 
@@ -86,6 +89,19 @@ func main() {
 		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
 		err := browser.OpenURL(commentURL)
+		if err != nil {
+			panic(err)
+		}
+	}
+	// Open article URL
+	if input == "open" {
+		frontpage := item.Items{item.Item{
+			URL: "https://github.com",
+		}}
+		// inputIndex
+		openURL := frontpage[0].URL
+
+		err := browser.OpenURL(openURL)
 		if err != nil {
 			panic(err)
 		}
