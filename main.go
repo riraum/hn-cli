@@ -83,7 +83,6 @@ func main() {
 	}
 
 	// Open comments cmd
-
 	if input == "comments" {
 		frontpageID := 8863
 		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
