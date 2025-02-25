@@ -34,6 +34,7 @@ func main() {
 	var timeConvert item.Item
 	// set initial time as int64
 	timeConvert.UnixPostTime = 1494505756
+	timeConvert.HoursSincePosting = timeConvert.AddHoursSincePosting()
 	timeConvert.FormattedTime = timeConvert.RelativeTime()
 	fmt.Println(timeConvert)
 	// Get terminal size test code
@@ -74,7 +75,7 @@ func main() {
 		os.Exit(0)
 	}
 
-	fmt.Println(input)
+	// fmt.Println(input)
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 	// debug
@@ -96,6 +97,8 @@ func main() {
 		if pErr != nil {
 			panic(pErr)
 		}
+
+		postUnmarshalled.HoursSincePosting = postUnmarshalled.AddHoursSincePosting()
 
 		postUnmarshalled.FormattedTime = postUnmarshalled.RelativeTime()
 		fmt.Println(postUnmarshalled)
