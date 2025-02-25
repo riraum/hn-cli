@@ -97,12 +97,6 @@ func main() {
 			panic(err)
 		}
 	}
-	// Quit command
-	if input == "quit" {
-		os.Exit(0)
-	}
-
-	fmt.Println(input)
 
 	// Quit command
 	if input == "quit" {
