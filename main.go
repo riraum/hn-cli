@@ -48,32 +48,6 @@ func main() {
 
 	fmt.Println("Size:", tWidth, tHeight)
 
-	// UI test code
-	var input string
-
-	input, uErr := ui.UI()
-	if uErr != nil {
-		panic(uErr)
-	}
-
-	// Open comments cmd
-
-	if input == "comments" {
-		frontpageID := 8863
-		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
-
-		err := browser.OpenURL(commentURL)
-		if err != nil {
-			panic(err)
-		}
-	}
-
-	// Quit command
-	if input == "quit" {
-		os.Exit(0)
-	}
-
-	fmt.Println(input)
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 	// debug
@@ -98,5 +72,30 @@ func main() {
 
 		postUnmarshalled.FormattedTime = postUnmarshalled.RelativeTime()
 		fmt.Println(postUnmarshalled)
+	}
+
+	// UI test code
+	var input string
+
+	input, uErr := ui.UI()
+	if uErr != nil {
+		panic(uErr)
+	}
+
+	// Open comments cmd
+
+	if input == "comments" {
+		frontpageID := 8863
+		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
+
+		err := browser.OpenURL(commentURL)
+		if err != nil {
+			panic(err)
+		}
+	}
+
+	// Quit command
+	if input == "quit" {
+		os.Exit(0)
 	}
 }
