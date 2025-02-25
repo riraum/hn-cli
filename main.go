@@ -102,4 +102,5 @@ func main() {
 	if input == "quit" {
 		os.Exit(0)
 	}
+
 }
