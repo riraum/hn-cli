@@ -12,9 +12,9 @@ import (
 	"github.com/riraum/hn-cli/ui"
 )
 
-func openLink(URL string) (string, error) {
+func openLink(URL string) error {
 	err := browser.OpenURL(URL)
-	return URL, err
+	return err
 }
 
 func main() {
@@ -93,7 +93,7 @@ func main() {
 		frontpageID := 8863
 		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
-		_, err := openLink(commentURL)
+		err := openLink(commentURL)
 		if err != nil {
 			panic(err)
 		}
@@ -106,7 +106,7 @@ func main() {
 		// inputIndex
 		openURL := frontpage[0].URL
 
-		_, err := openLink(openURL)
+		err := openLink(openURL)
 		if err != nil {
 			panic(err)
 		}
