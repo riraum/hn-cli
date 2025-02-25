@@ -57,13 +57,12 @@ func main() {
 	}
 
 	// Open article URL
-	frontpage := item.Items{item.Item{
-		URL: "https://github.com",
-	}}
-	// inputIndex
-	openURL := frontpage[0].URL
-
 	if input == "open" {
+		frontpage := item.Items{item.Item{
+			URL: "https://github.com",
+		}}
+		// inputIndex
+		openURL := frontpage[0].URL
 		err := browser.OpenURL(openURL)
 		if err != nil {
 			panic(err)
