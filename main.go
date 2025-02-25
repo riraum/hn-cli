@@ -3,10 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"os"
 
 	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/io"
 	"github.com/riraum/hn-cli/item"
+	"github.com/riraum/hn-cli/ui"
 )
 
 func main() {
@@ -45,19 +47,6 @@ func main() {
 
 	fmt.Println("Size:", tWidth, tHeight)
 
-	// UI test code
-	// var input string
-
-	// input, uErr := ui.UI()
-	// if uErr != nil {
-	// 	panic(uErr)
-	// }
-
-	// // Quit command
-	// if input == "quit" {
-	// 	os.Exit(0)
-	// }
-
 	// fmt.Println(input)
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
@@ -89,5 +78,18 @@ func main() {
 		frontpage = item.Items{postUnmarshalled}
 		// fmt.Println(postUnmarshalled)
 		fmt.Println(frontpage)
+	}
+
+	// UI test code
+	var input string
+
+	input, uErr := ui.UI()
+	if uErr != nil {
+		panic(uErr)
+	}
+
+	// Quit command
+	if input == "quit" {
+		os.Exit(0)
 	}
 }
