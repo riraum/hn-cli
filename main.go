@@ -64,7 +64,10 @@ func main() {
 	openURL := frontpage[0].URL
 
 	if input == "open" {
-		browser.OpenURL(openURL)
+		err := browser.OpenURL(openURL)
+		if err != nil {
+			panic(err)
+		}
 	}
 	// Quit command
 	if input == "quit" {
