@@ -12,31 +12,31 @@ func TestRelativeTime(t *testing.T) {
 	}{
 		{
 			item: Item{
-				HoursSincePosting: 0005200000000000,
+				HoursSincePosting: 0.001,
 			},
 			want: "<1h",
 		},
 		{
 			item: Item{
-				HoursSincePosting: 0555200000000000,
+				HoursSincePosting: 0007,
 			},
 			want: "7h",
 		},
 		{
 			item: Item{
-				HoursSincePosting: 3783600000000000,
+				HoursSincePosting: 730,
 			},
 			want: "1m",
 		},
 		{
 			item: Item{
-				HoursSincePosting: 1105200000000000,
+				HoursSincePosting: 312,
 			},
 			want: "13d",
 		},
 		{
 			item: Item{
-				HoursSincePosting: 32727599999999996,
+				HoursSincePosting: 8760,
 			},
 			want: "1y",
 		},
