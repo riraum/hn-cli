@@ -80,10 +80,6 @@ func main() {
 	if uErr != nil {
 		panic(uErr)
 	}
-	// Quit command
-	if input == "quit" {
-		os.Exit(0)
-	}
 	// Open comments cmd
 	if input == "comments" {
 		frontpageID := 8863
@@ -93,5 +89,9 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
+	}
+	// Quit command
+	if input == "quit" {
+		os.Exit(0)
 	}
 }
