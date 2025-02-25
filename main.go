@@ -54,6 +54,7 @@ func main() {
 	// fmt.Println(string(frontpageJSON))
 
 	var frontpageIDs []int
+
 	var frontpage item.Items
 
 	err := json.Unmarshal(frontpageJSON, &frontpageIDs)
