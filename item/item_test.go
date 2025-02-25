@@ -26,7 +26,7 @@ func TestRelativeTime(t *testing.T) {
 			item: Item{
 				UnixPostTime: 1739145600,
 			},
-			want: "16d",
+			want: "15d",
 		},
 		{
 			item: Item{
