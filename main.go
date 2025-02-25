@@ -55,8 +55,6 @@ func main() {
 
 	var frontpageIDs []int
 
-	var frontpage item.Items
-
 	err := json.Unmarshal(frontpageJSON, &frontpageIDs)
 	if err != nil {
 		panic(err)
@@ -76,9 +74,7 @@ func main() {
 
 		postUnmarshalled.FormattedTime = postUnmarshalled.RelativeTime()
 
-		frontpage = item.Items{postUnmarshalled}
-		// fmt.Println(postUnmarshalled)
-		fmt.Println(frontpage)
+		fmt.Println(postUnmarshalled)
 	}
 
 	// UI test code
