@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/pkg/browser"
 	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/io"
 	"github.com/riraum/hn-cli/item"
@@ -55,6 +56,16 @@ func main() {
 		panic(uErr)
 	}
 
+	// Open article URL
+	frontpage := item.Items{item.Item{
+		URL: "https://github.com",
+	}}
+	// inputIndex
+	openURL := frontpage[0].URL
+
+	if input == "open" {
+		browser.OpenURL(openURL)
+	}
 	// Quit command
 	if input == "quit" {
 		os.Exit(0)
