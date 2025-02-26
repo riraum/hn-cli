@@ -95,15 +95,14 @@ func main() {
 		fmt.Println("PLACEHOLDER")
 	}
 	// List commands
-	startDesc := "'start': Display posts"
-	nextDesc := "'next': gets the next page of items"
-	openDesc := "'open X': opens the item with index/id X in the browser"
-	quitDesc := "'quit': quits the program"
-	refreshDesc := "'refresh': reload the top items"
-	commentsDesc := "'comments': open the comments page in the browser"
-
 	if input == "help" {
-		fmt.Println(startDesc, "\n", nextDesc, "\n", openDesc, "\n", quitDesc, "\n", refreshDesc, "\n", commentsDesc)
+		fmt.Println(
+			"'start': Display posts\n",
+			"'next': gets the next page of items\n",
+			"'open X': opens the item with index/id X in the browser\n",
+			"'quit': quits the program\n",
+			"'refresh': reload the top items\n", "'comments': open the comments page in the browser",
+		)
 	}
 	// Open comments cmd
 	if input == "comments" {
