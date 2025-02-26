@@ -71,17 +71,16 @@ func main() {
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
 
-		postUnmarshalled, pErr := item.Unmarshal(postData)
+		postUnmarsh, pErr := item.Unmarshal(postData)
 		if pErr != nil {
 			panic(pErr)
 		}
-		//
-		postUnmarshalled.Title = fmt.Sprintf("%.25s...", postUnmarshalled.Title)
-		postUnmarshalled.HoursSincePosting = postUnmarshalled.AddHoursSincePosting()
 
-		postUnmarshalled.FormattedTime = postUnmarshalled.RelativeTime()
+		postUnmarsh.Title = fmt.Sprintf("%.25s...", postUnmarsh.Title)
+		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
+		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
-		fmt.Println(postUnmarshalled)
+		fmt.Println(i, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 	}
 
 	// UI test code
