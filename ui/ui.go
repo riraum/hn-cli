@@ -5,7 +5,7 @@ import "fmt"
 func UI() (string, error) {
 	var input string
 
-	fmt.Printf("Type 'help' for list of commands\n>")
+	fmt.Printf("Type `start' to display posts, 'help' for list of commands\n>")
 
 	_, err := fmt.Scan(&input)
 
