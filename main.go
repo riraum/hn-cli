@@ -92,8 +92,7 @@ func main() {
 		frontpageID := 8863
 		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
-		err := openLink(commentURL)
-		if err != nil {
+		if err := openLink(commentURL); err != nil {
 			panic(err)
 		}
 	}
