@@ -13,8 +13,7 @@ import (
 )
 
 func openLink(URL string) error {
-	err := browser.OpenURL(URL)
-	return err
+	return browser.OpenURL(URL)
 }
 
 func main() {
@@ -106,8 +105,7 @@ func main() {
 		// inputIndex
 		openURL := frontpage[0].URL
 
-		err := openLink(openURL)
-		if err != nil {
+		if err := openLink(openURL); err != nil {
 			panic(err)
 		}
 	}
