@@ -12,6 +12,10 @@ import (
 	"github.com/riraum/hn-cli/ui"
 )
 
+func openLink(URL string) error {
+	return browser.OpenURL(URL)
+}
+
 func main() {
 	fmt.Println("Hello hn-cli user")
 	// Marshall/Unmarshall test code
@@ -86,7 +90,15 @@ func main() {
 	if uErr != nil {
 		panic(uErr)
 	}
+	// Open comments cmd
+	if input == "comments" {
+		frontpageID := 8863
+		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
+		if err := openLink(commentURL); err != nil {
+			panic(err)
+		}
+	}
 	// Open article URL
 	if input == "open" {
 		frontpage := item.Items{item.Item{
@@ -95,12 +107,10 @@ func main() {
 		// inputIndex
 		openURL := frontpage[0].URL
 
-		err := browser.OpenURL(openURL)
-		if err != nil {
+		if err := openLink(openURL); err != nil {
 			panic(err)
 		}
 	}
-
 	// Quit command
 	if input == "quit" {
 		os.Exit(0)
