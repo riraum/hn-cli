@@ -85,14 +85,15 @@ func main() {
 
 	// UI test code
 	var input string
+	var inputIndex int
 
 	input, uErr := ui.UI()
 	if uErr != nil {
 		panic(uErr)
 	}
 	// Open comments cmd
-	if input == "comments" {
-		frontpageID := 8863
+	if input == fmt.Sprintf("comments%v", inputIndex) {
+		frontpageID := frontpageIDs[inputIndex]
 		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
 		if err := openLink(commentURL); err != nil {
