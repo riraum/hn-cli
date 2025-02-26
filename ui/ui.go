@@ -2,12 +2,14 @@ package ui
 
 import "fmt"
 
-func UI() (string, error) {
+func UI() (string, int, error) {
 	var input string
+	var inputInt int
 
 	fmt.Printf("Type 'help' for list of commands\n>")
 
-	_, err := fmt.Scan(&input)
+	_, err := fmt.Scanf("%s %d", &input, &inputInt)
+	fmt.Println("debug:", input, inputInt)
 
-	return input, err
+	return input, inputInt, err
 }
