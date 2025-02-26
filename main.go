@@ -80,7 +80,7 @@ func main() {
 
 		postUnmarshalled.FormattedTime = postUnmarshalled.RelativeTime()
 
-		fmt.Println(postUnmarshalled.Score, postUnmarshalled.Author, postUnmarshalled.Title, postUnmarshalled.FormattedTime)
+		fmt.Println(i, postUnmarshalled.Score, postUnmarshalled.Author, postUnmarshalled.Title, postUnmarshalled.FormattedTime)
 	}
 
 	// UI test code
