@@ -76,7 +76,7 @@ func main() {
 			panic(pErr)
 		}
 		//
-		postUnmarshalled.Title = fmt.Sprintf("%.25s", postUnmarshalled.Title)
+		postUnmarshalled.Title = fmt.Sprintf("%.25s...", postUnmarshalled.Title)
 		postUnmarshalled.HoursSincePosting = postUnmarshalled.AddHoursSincePosting()
 
 		postUnmarshalled.FormattedTime = postUnmarshalled.RelativeTime()
