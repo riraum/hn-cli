@@ -2,7 +2,7 @@ package ui
 
 import "fmt"
 
-func UI() (string, int, error) {
+func UI() (string, int, bool, error) {
 	var input string
 
 	var inputInt int
@@ -11,6 +11,9 @@ func UI() (string, int, error) {
 
 	_, err := fmt.Scanf("%s %d", &input, &inputInt)
 	fmt.Println("debug:", input, inputInt)
+	if inputInt == 0 {
+		return input, inputInt, true, err
+	}
 
-	return input, inputInt, err
+	return input, inputInt, false, err
 }

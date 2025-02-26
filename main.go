@@ -88,12 +88,15 @@ func main() {
 
 	// var inputIndex int
 
-	input, inputInt, uErr := ui.UI()
+	input, inputInt, intExists, uErr := ui.UI()
 	if uErr != nil {
 		panic(uErr)
 	}
+	// if intExists == false {
+	// 	break
+	// }
 	// Open comments cmd
-	if input == "comments" {
+	if input == "comments" && intExists {
 		frontpageID := frontpageIDs[inputInt]
 		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
