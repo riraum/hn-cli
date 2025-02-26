@@ -92,12 +92,18 @@ func main() {
 	}
 	// To use once post print code is in function
 	if input == "start" {
-		// PLACEHOLDER
+		fmt.Println("PLACEHOLDER")
 	}
 	// List commands
-	listCmd := "'start': Display posts\n'next': gets the next page of items\n'open X': opens the item with index/id X in the browser\n'quit': quits the program\n'refresh': reload the top items\n'comments': open the comments page in the browser\n"
+	startDesc := "'start': Display posts"
+	nextDesc := "'next': gets the next page of items"
+	openDesc := "'open X': opens the item with index/id X in the browser"
+	quitDesc := "'quit': quits the program"
+	refreshDesc := "'refresh': reload the top items"
+	commentsDesc := "'comments': open the comments page in the browser"
+
 	if input == "help" {
-		fmt.Print(listCmd)
+		fmt.Println(startDesc, "\n", nextDesc, "\n", openDesc, "\n", quitDesc, "\n", refreshDesc, "\n", commentsDesc)
 	}
 	// Open comments cmd
 	if input == "comments" {
