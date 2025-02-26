@@ -3,7 +3,6 @@ package item
 import (
 	"encoding/json"
 	"fmt"
-	"math"
 	"time"
 )
 
@@ -62,16 +61,16 @@ func (t Item) RelativeTime() string {
 	}
 
 	if elapsedHours < hoursInADay {
-		return fmt.Sprint(math.Round(elapsedHours), "h")
+		return fmt.Sprint(int64(elapsedHours), "h")
 	}
 
 	if elapsedHours < hoursInAMonth {
-		return fmt.Sprint(math.Round(elapsedHours/hoursInADay), "d")
+		return fmt.Sprint(int64(elapsedHours/hoursInADay), "d")
 	}
 
 	if elapsedHours < hoursInAYear {
-		return fmt.Sprint(math.Round(elapsedHours/hoursInAMonth), "m")
+		return fmt.Sprint(int64(elapsedHours/hoursInAMonth), "m")
 	}
 
-	return fmt.Sprint(math.Round(elapsedHours/hoursInAYear), "y")
+	return fmt.Sprint(int64(elapsedHours/hoursInAYear), "y")
 }
