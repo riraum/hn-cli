@@ -85,6 +85,7 @@ func main() {
 
 	// UI test code
 	var input string
+
 	var inputIndex int
 
 	input, uErr := ui.UI()
