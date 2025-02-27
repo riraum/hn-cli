@@ -129,12 +129,22 @@ func main() {
 			panic(pErr)
 		}
 
+		if postUnmarsh.URL == "" {
+			frontpageID := frontpageIDs[inputInt]
+			commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
+
+			if err := openLink(commentURL); err != nil {
+				panic(err)
+			}
+		}
+
 		if err := openLink(postUnmarsh.URL); err != nil {
 			panic(err)
 		}
-	}
-	// Quit command
-	if input == "quit" {
-		os.Exit(0)
+
+		// Quit command
+		if input == "quit" {
+			os.Exit(0)
+		}
 	}
 }
