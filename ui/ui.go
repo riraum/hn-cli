@@ -5,14 +5,14 @@ import "fmt"
 func UI() []string {
 	var input string
 
-	var inputInt string
+	var inputNum string
 
 	fmt.Printf("Type `start' to display posts, 'help' for list of commands\n>")
 
-	_, err := fmt.Scanf("%s %s", &input, &inputInt)
-	fmt.Println("debug:", input, inputInt)
+	_, err := fmt.Scanf("%s %s", &input, &inputNum)
+	fmt.Println("debug:", input, inputNum)
 
-	if inputInt == "" {
+	if inputNum == "" {
 		return []string{input}
 	}
 
@@ -20,7 +20,7 @@ func UI() []string {
 		panic(err)
 	}
 
-	rv := []string{input, inputInt}
+	rv := []string{input, inputNum}
 	fmt.Println(rv)
 
 	return rv
