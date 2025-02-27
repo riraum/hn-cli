@@ -129,9 +129,7 @@ func main() {
 			panic(pErr)
 		}
 
-		openURL := postUnmarsh.URL
-
-		if err := openLink(openURL); err != nil {
+		if err := openLink(postUnmarsh.URL); err != nil {
 			panic(err)
 		}
 	}
