@@ -88,7 +88,7 @@ func main() {
 
 	// var inputIndex int
 
-	input, inputInt, intExists, uErr := ui.UI()
+	input, inputInt, uErr := ui.UI()
 	if uErr != nil {
 		panic(uErr)
 	}
@@ -110,7 +110,7 @@ func main() {
 		)
 	}
 	// Open comments cmd
-	if input == "comments" && intExists {
+	if input == "comments" {
 		frontpageID := frontpageIDs[inputInt]
 		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
@@ -120,11 +120,18 @@ func main() {
 	}
 	// Open article URL
 	if input == "open" {
-		frontpage := item.Items{item.Item{
-			URL: "https://github.com",
-		}}
+		// frontpageID := frontpageIDs[inputInt]
+		// articleURL :=
+		postID := frontpageIDs[inputInt]
+		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
+		postData := http.GetJSON(postURL)
+
+		postUnmarsh, pErr := item.Unmarshal(postData)
+		if pErr != nil {
+			panic(pErr)
+		}
 		// inputIndex
-		openURL := frontpage[0].URL
+		openURL := postUnmarsh.URL
 
 		if err := openLink(openURL); err != nil {
 			panic(err)
