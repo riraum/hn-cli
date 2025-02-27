@@ -76,7 +76,7 @@ func main() {
 			panic(pErr)
 		}
 
-		postUnmarsh.Title = fmt.Sprintf("%.*s...", tWidth-28, postUnmarsh.Title)
+		postUnmarsh.Title = fmt.Sprintf("%.*s...", tWidth-30, postUnmarsh.Title) //nolint:all
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
