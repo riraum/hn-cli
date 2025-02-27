@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strconv"
 
 	"github.com/pkg/browser"
 	"github.com/riraum/hn-cli/http"
@@ -84,23 +85,35 @@ func main() {
 	}
 
 	// UI test code
-	var input string
+	// var input string
 
-	// var inputIndex int
+	var inputInt int
 
-	input, inputInt, uErr := ui.UI()
-	if uErr != nil {
-		panic(uErr)
+	var iErr error
+
+	inputValue := ui.UI()
+	inputStr := inputValue[0]
+
+	if len(inputValue) > 1 {
+		inputInt, iErr = strconv.Atoi(inputValue[1])
+		if iErr != nil {
+			panic(iErr)
+		}
 	}
+	// inputErr := inputValue[2]
+
+	// if inputErr != "" {
+	// 	panic(inputErr)
+	// }
 	// if intExists == false {
 	// 	break
 	// }
 	// To use once post print code is in function
-	if input == "start" {
+	if inputStr == "start" {
 		fmt.Println("PLACEHOLDER")
 	}
 	// List commands
-	if input == "help" {
+	if inputStr == "help" {
 		fmt.Println(
 			"'start': Display posts\n",
 			"'next': gets the next page of items\n",
@@ -110,7 +123,7 @@ func main() {
 		)
 	}
 	// Open comments cmd
-	if input == "comments" {
+	if inputStr == "comments" {
 		frontpageID := frontpageIDs[inputInt]
 		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
@@ -119,7 +132,7 @@ func main() {
 		}
 	}
 	// Open article URL
-	if input == "open" {
+	if inputStr == "open" {
 		postID := frontpageIDs[inputInt]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
@@ -144,7 +157,7 @@ func main() {
 		}
 
 		// Quit command
-		if input == "quit" {
+		if inputStr == "quit" {
 			os.Exit(0)
 		}
 	}
