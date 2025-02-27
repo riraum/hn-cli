@@ -85,21 +85,25 @@ func main() {
 	}
 
 	// UI test code
+	const hasIndex = 2
+
+	const hasError = 3
+
 	inputValue := ui.UI()
-	inputStr := inputValue[0]
+	inputStrCMD := inputValue[0]
 
 	var inputInt int
 
 	var iErr error
 
-	if len(inputValue) >= 2 {
+	if len(inputValue) >= hasIndex {
 		inputInt, iErr = strconv.Atoi(inputValue[1])
 		if iErr != nil {
 			panic(iErr)
 		}
 	}
 
-	if len(inputValue) >= 3 {
+	if len(inputValue) >= hasError {
 		inputErr := inputValue[2]
 		if inputErr != "" {
 			panic(inputErr)
@@ -113,11 +117,11 @@ func main() {
 	// 	break
 	// }
 	// To use once post print code is in function
-	if inputStr == "start" {
+	if inputStrCMD == "start" {
 		fmt.Println("PLACEHOLDER")
 	}
 	// List commands
-	if inputStr == "help" {
+	if inputStrCMD == "help" {
 		fmt.Println(
 			"'start': Display posts\n",
 			"'next': gets the next page of items\n",
@@ -127,11 +131,7 @@ func main() {
 		)
 	}
 	// Open comments cmd
-	if inputStr == "comments" {
-		// inputInt, iErr = strconv.Atoi(inputValue[1])
-		// if iErr != nil {
-		// 	panic(iErr)
-		// }
+	if inputStrCMD == "comments" {
 		frontpageID := frontpageIDs[inputInt]
 		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
@@ -140,11 +140,7 @@ func main() {
 		}
 	}
 	// Open article URL
-	if inputStr == "open" {
-		// inputInt, iErr = strconv.Atoi(inputValue[1])
-		// if iErr != nil {
-		// 	panic(iErr)
-		// }
+	if inputStrCMD == "open" {
 		postID := frontpageIDs[inputInt]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
@@ -156,10 +152,6 @@ func main() {
 
 		// CHeck for Ask/Show HN posts, without external URL
 		if postUnmarsh.URL == "" {
-			// inputInt, iErr = strconv.Atoi(inputValue[1])
-			// if iErr != nil {
-			// 	panic(iErr)
-			// }
 			frontpageID := frontpageIDs[inputInt]
 			commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
@@ -173,7 +165,7 @@ func main() {
 		}
 
 		// Quit command
-		if inputStr == "quit" {
+		if inputStrCMD == "quit" {
 			os.Exit(0)
 		}
 	}
