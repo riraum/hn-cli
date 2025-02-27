@@ -7,7 +7,7 @@ func UI() (string, int, bool, error) {
 
 	var inputInt int
 
-	fmt.Printf("Type 'help' for list of commands\n>")
+	fmt.Printf("Type `start' to display posts, 'help' for list of commands\n>")
 
 	_, err := fmt.Scanf("%s %d", &input, &inputInt)
 	fmt.Println("debug:", input, inputInt)

@@ -95,6 +95,20 @@ func main() {
 	// if intExists == false {
 	// 	break
 	// }
+	// To use once post print code is in function
+	if input == "start" {
+		fmt.Println("PLACEHOLDER")
+	}
+	// List commands
+	if input == "help" {
+		fmt.Println(
+			"'start': Display posts\n",
+			"'next': gets the next page of items\n",
+			"'open X': opens the item with index/id X in the browser\n",
+			"'quit': quits the program\n",
+			"'refresh': reload the top items\n", "'comments': open the comments page in the browser",
+		)
+	}
 	// Open comments cmd
 	if input == "comments" && intExists {
 		frontpageID := frontpageIDs[inputInt]
