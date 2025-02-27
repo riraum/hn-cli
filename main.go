@@ -90,7 +90,7 @@ func main() {
 	const hasError = 3
 
 	inputValue := ui.UI()
-	inputStrCMD := inputValue[0]
+	inputCMD := inputValue[0]
 
 	var inputInt int
 
@@ -104,24 +104,18 @@ func main() {
 	}
 
 	if len(inputValue) >= hasError {
-		inputErr := inputValue[2]
-		if inputErr != "" {
-			panic(inputErr)
+		err := inputValue[2]
+		if err != "" {
+			panic(err)
 		}
 	}
 
-	// if inputErr != "" {
-	// 	panic(inputErr)
-	// }
-	// if intExists == false {
-	// 	break
-	// }
 	// To use once post print code is in function
-	if inputStrCMD == "start" {
+	if inputCMD == "start" {
 		fmt.Println("PLACEHOLDER")
 	}
 	// List commands
-	if inputStrCMD == "help" {
+	if inputCMD == "help" {
 		fmt.Println(
 			"'start': Display posts\n",
 			"'next': gets the next page of items\n",
@@ -131,7 +125,7 @@ func main() {
 		)
 	}
 	// Open comments cmd
-	if inputStrCMD == "comments" {
+	if inputCMD == "comments" {
 		frontpageID := frontpageIDs[inputInt]
 		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
@@ -140,7 +134,7 @@ func main() {
 		}
 	}
 	// Open article URL
-	if inputStrCMD == "open" {
+	if inputCMD == "open" {
 		postID := frontpageIDs[inputInt]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
@@ -165,7 +159,7 @@ func main() {
 		}
 
 		// Quit command
-		if inputStrCMD == "quit" {
+		if inputCMD == "quit" {
 			os.Exit(0)
 		}
 	}
