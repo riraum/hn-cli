@@ -89,22 +89,22 @@ func main() {
 
 	const hasError = 3
 
-	inputValue := ui.UI()
-	cmd := inputValue[0]
+	input := ui.UI()
+	cmd := input[0]
 
 	var inputInt int
 
 	var iErr error
 
-	if len(inputValue) >= hasIndex {
-		inputInt, iErr = strconv.Atoi(inputValue[1])
+	if len(input) >= hasIndex {
+		inputInt, iErr = strconv.Atoi(input[1])
 		if iErr != nil {
 			panic(iErr)
 		}
 	}
 
-	if len(inputValue) >= hasError {
-		err := inputValue[2]
+	if len(input) >= hasError {
+		err := input[2]
 		if err != "" {
 			panic(err)
 		}
