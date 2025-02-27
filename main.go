@@ -129,6 +129,7 @@ func main() {
 			panic(pErr)
 		}
 
+		// CHeck for Ask/Show HN posts, without external URL
 		if postUnmarsh.URL == "" {
 			frontpageID := frontpageIDs[inputInt]
 			commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
