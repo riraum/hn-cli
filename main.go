@@ -120,8 +120,6 @@ func main() {
 	}
 	// Open article URL
 	if input == "open" {
-		// frontpageID := frontpageIDs[inputInt]
-		// articleURL :=
 		postID := frontpageIDs[inputInt]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
@@ -130,7 +128,7 @@ func main() {
 		if pErr != nil {
 			panic(pErr)
 		}
-		// inputIndex
+
 		openURL := postUnmarsh.URL
 
 		if err := openLink(openURL); err != nil {
