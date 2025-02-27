@@ -66,6 +66,8 @@ func main() {
 	// debug
 	// fmt.Println(frontpageIDs)
 
+	const accountForRestStr = 30
+
 	for i := 0; i <= 10; i++ {
 		postID := frontpageIDs[i]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
@@ -76,7 +78,7 @@ func main() {
 			panic(pErr)
 		}
 
-		postUnmarsh.Title = fmt.Sprintf("%.25s...", postUnmarsh.Title)
+		postUnmarsh.Title = fmt.Sprintf("%.*s...", tWidth-accountForRestStr, postUnmarsh.Title)
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
