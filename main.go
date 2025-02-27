@@ -85,22 +85,26 @@ func main() {
 	}
 
 	// UI test code
-	// var input string
+	inputValue := ui.UI()
+	inputStr := inputValue[0]
 
 	var inputInt int
 
 	var iErr error
 
-	inputValue := ui.UI()
-	inputStr := inputValue[0]
-
-	if len(inputValue) > 1 {
+	if len(inputValue) >= 2 {
 		inputInt, iErr = strconv.Atoi(inputValue[1])
 		if iErr != nil {
 			panic(iErr)
 		}
 	}
-	// inputErr := inputValue[2]
+
+	if len(inputValue) >= 3 {
+		inputErr := inputValue[2]
+		if inputErr != "" {
+			panic(inputErr)
+		}
+	}
 
 	// if inputErr != "" {
 	// 	panic(inputErr)
@@ -124,6 +128,10 @@ func main() {
 	}
 	// Open comments cmd
 	if inputStr == "comments" {
+		// inputInt, iErr = strconv.Atoi(inputValue[1])
+		// if iErr != nil {
+		// 	panic(iErr)
+		// }
 		frontpageID := frontpageIDs[inputInt]
 		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
@@ -133,6 +141,10 @@ func main() {
 	}
 	// Open article URL
 	if inputStr == "open" {
+		// inputInt, iErr = strconv.Atoi(inputValue[1])
+		// if iErr != nil {
+		// 	panic(iErr)
+		// }
 		postID := frontpageIDs[inputInt]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
@@ -144,6 +156,10 @@ func main() {
 
 		// CHeck for Ask/Show HN posts, without external URL
 		if postUnmarsh.URL == "" {
+			// inputInt, iErr = strconv.Atoi(inputValue[1])
+			// if iErr != nil {
+			// 	panic(iErr)
+			// }
 			frontpageID := frontpageIDs[inputInt]
 			commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 

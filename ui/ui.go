@@ -26,8 +26,12 @@ func UI() []string {
 
 	fmt.Printf("Type `start' to display posts, 'help' for list of commands\n>")
 
-	_, err := fmt.Scanf("%s%s", &input, &inputInt)
+	_, err := fmt.Scanf("%s %s", &input, &inputInt)
 	fmt.Println("debug:", input, inputInt)
+
+	if inputInt == "" {
+		return []string{input}
+	}
 
 	if err != nil {
 		panic(err)
