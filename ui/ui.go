@@ -11,6 +11,7 @@ func UI() (string, int, bool, error) {
 
 	_, err := fmt.Scanf("%s %d", &input, &inputInt)
 	fmt.Println("debug:", input, inputInt)
+
 	if inputInt == 0 {
 		return input, inputInt, true, err
 	}
