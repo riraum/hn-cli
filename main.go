@@ -18,29 +18,6 @@ func openLink(URL string) error {
 
 func main() {
 	fmt.Println("Hello hn-cli user")
-	// Marshall/Unmarshall test code
-	// dataToMarshall := item.Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
-
-	// dataMarshalled, mErr := item.Marshall(dataToMarshall)
-	// if mErr != nil {
-	// 	panic(mErr)
-	// }
-	// // debug
-	// fmt.Println(string(dataMarshalled))
-
-	// dataUnmarshalled, uErr := item.Unmarshal(dataMarshalled)
-	// if uErr != nil {
-	// 	panic(uErr)
-	// }
-	// // debug
-	// fmt.Println(dataUnmarshalled)
-	// Time conversion test code
-	var timeConvert item.Item
-	// set initial time as int64
-	timeConvert.UnixPostTime = 1494505756
-	timeConvert.HoursSincePosting = timeConvert.AddHoursSincePosting()
-	timeConvert.FormattedTime = timeConvert.RelativeTime()
-	fmt.Println(timeConvert)
 	// Get terminal size test code
 	var tWidth int
 
@@ -54,8 +31,6 @@ func main() {
 	fmt.Println("Size:", tWidth, tHeight)
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
-	// debug
-	// fmt.Println(string(frontpageJSON))
 
 	var frontpageIDs []int
 
@@ -63,8 +38,6 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	// debug
-	// fmt.Println(frontpageIDs)
 
 	const accountForRestStr = 30
 
@@ -85,7 +58,7 @@ func main() {
 		fmt.Println(i, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 	}
 
-	// UI test code
+	// UI
 	var input string
 
 	input, uErr := ui.UI()
