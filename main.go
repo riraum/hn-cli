@@ -94,11 +94,12 @@ func main() {
 		fmt.Println("reducableLen", reducableLen)
 
 		if totalOutputLen > tWidth {
+			const roomForDots = 3
 			toReduceLen := (totalOutputLen - tWidth)
 			fmt.Println("toReduceLen", toReduceLen)
-			calcReduceLen := (titleLen - toReduceLen)
+			calcReduceLen := (titleLen - toReduceLen - roomForDots)
 			fmt.Println("calcReduceLen", calcReduceLen)
-			postUnmarsh.Title = fmt.Sprintf("%.*s", calcReduceLen, postUnmarsh.Title)
+			postUnmarsh.Title = fmt.Sprintf("%.*s...", calcReduceLen, postUnmarsh.Title)
 		}
 
 		formattedOutput := fmt.Sprintln(num, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
