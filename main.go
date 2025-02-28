@@ -80,14 +80,19 @@ func main() {
 			panic(pErr)
 		}
 
-		postUnmarsh.Title = fmt.Sprintf("%.*s...", tWidth-accountForRestStr, postUnmarsh.Title)
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
 		num := strconv.Itoa(i)
 		output := fmt.Sprint(num, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
-		charLen := fmt.Sprintln(utf8.RuneCountInString(output))
-		fmt.Println(charLen)
+		totalOutputLen := utf8.RuneCountInString(output)
+
+		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
+		fmt.Println(titleLen)
+
+		postUnmarsh.Title = fmt.Sprintf("%.*s...", tWidth-accountForRestStr, postUnmarsh.Title)
+
+		fmt.Println(totalOutputLen)
 
 		fmt.Println(output)
 	}
