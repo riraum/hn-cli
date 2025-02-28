@@ -4,6 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strconv"
+	"unicode/utf8"
 
 	"github.com/pkg/browser"
 	"github.com/riraum/hn-cli/http"
@@ -82,7 +84,11 @@ func main() {
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
-		fmt.Println(i, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
+		printValues := fmt.Sprintln(strconv.Itoa(i), postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
+		charLen := fmt.Sprintln(utf8.RuneCountInString(printValues))
+		fmt.Println(charLen)
+
+		fmt.Println(printValues)
 	}
 
 	// UI test code
