@@ -62,7 +62,8 @@ func main() {
 
 	err := json.Unmarshal(frontpageJSON, &frontpageIDs)
 	if err != nil {
-		panic(err)
+		eerr := fmt.Errorf("Error message during unmarshalling %g", err)
+		panic(eerr)
 	}
 	// debug
 	// fmt.Println(frontpageIDs)
@@ -89,7 +90,11 @@ func main() {
 
 	const hasError = 3
 
-	input := ui.UI()
+	input, _ := ui.UI()
+	// if inputErr != nil {
+	// 	panic(inputErr)
+	// }
+
 	cmd := input[0]
 
 	var inputInt int
