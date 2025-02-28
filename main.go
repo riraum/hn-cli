@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"os"
+	"strconv"
 
 	"github.com/pkg/browser"
 	"github.com/riraum/hn-cli/http"
@@ -18,6 +19,29 @@ func openLink(URL string) error {
 
 func main() {
 	fmt.Println("Hello hn-cli user")
+	// Marshall/Unmarshall test code
+	// dataToMarshall := item.Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
+
+	// dataMarshalled, mErr := item.Marshall(dataToMarshall)
+	// if mErr != nil {
+	// 	panic(mErr)
+	// }
+	// // debug
+	// fmt.Println(string(dataMarshalled))
+
+	// dataUnmarshalled, uErr := item.Unmarshal(dataMarshalled)
+	// if uErr != nil {
+	// 	panic(uErr)
+	// }
+	// // debug
+	// fmt.Println(dataUnmarshalled)
+	// Time conversion test code
+	var timeConvert item.Item
+	// set initial time as int64
+	timeConvert.UnixPostTime = 1494505756
+	timeConvert.HoursSincePosting = timeConvert.AddHoursSincePosting()
+	timeConvert.FormattedTime = timeConvert.RelativeTime()
+	fmt.Println(timeConvert)
 	// Get terminal size test code
 	var tWidth int
 
@@ -31,46 +55,63 @@ func main() {
 	fmt.Println("Size:", tWidth, tHeight)
 	// API code below
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
+	// debug
+	// fmt.Println(string(frontpageJSON))
 
 	var frontpageIDs []int
 
 	err := json.Unmarshal(frontpageJSON, &frontpageIDs)
 	if err != nil {
+		err := fmt.Errorf("Error message during unmarshalling %g", err)
 		panic(err)
 	}
-
-	const accountForRestStr = 30
+	// debug
+	// fmt.Println(frontpageIDs)
 
 	for i := 0; i <= 10; i++ {
 		postID := frontpageIDs[i]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
 
-		postUnmarsh, pErr := item.Unmarshal(postData)
-		if pErr != nil {
-			panic(pErr)
+		postUnmarsh, err := item.Unmarshal(postData)
+		if err != nil {
+			panic(err)
 		}
 
-		postUnmarsh.Title = fmt.Sprintf("%.*s...", tWidth-accountForRestStr, postUnmarsh.Title)
+		postUnmarsh.Title = fmt.Sprintf("%.25s...", postUnmarsh.Title)
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
 		fmt.Println(i, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 	}
 
-	// UI
-	var input string
+	// UI test code
 
-	input, uErr := ui.UI()
-	if uErr != nil {
-		panic(uErr)
+	const hasIndex = 2
+
+	input, err := ui.UI()
+	if len(input) > 1 && err != nil {
+		panic(err)
 	}
+
+	cmd := input[0]
+
+	var inputInt int
+
+	if len(input) >= hasIndex {
+		var err error
+
+		if inputInt, err = strconv.Atoi(input[1]); err != nil {
+			panic(err)
+		}
+	}
+
 	// To use once post print code is in function
-	if input == "start" {
+	if cmd == "start" {
 		fmt.Println("PLACEHOLDER")
 	}
 	// List commands
-	if input == "help" {
+	if cmd == "help" {
 		fmt.Println(
 			"'start': Display posts\n",
 			"'next': gets the next page of items\n",
@@ -80,8 +121,8 @@ func main() {
 		)
 	}
 	// Open comments cmd
-	if input == "comments" {
-		frontpageID := 8863
+	if cmd == "comments" {
+		frontpageID := frontpageIDs[inputInt]
 		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
 		if err := openLink(commentURL); err != nil {
@@ -89,19 +130,33 @@ func main() {
 		}
 	}
 	// Open article URL
-	if input == "open" {
-		frontpage := item.Items{item.Item{
-			URL: "https://github.com",
-		}}
-		// inputIndex
-		openURL := frontpage[0].URL
+	if cmd == "open" {
+		postID := frontpageIDs[inputInt]
+		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
+		postData := http.GetJSON(postURL)
 
-		if err := openLink(openURL); err != nil {
+		postUnmarsh, err := item.Unmarshal(postData)
+		if err != nil {
 			panic(err)
 		}
-	}
-	// Quit command
-	if input == "quit" {
-		os.Exit(0)
+
+		// Check for Ask/Show HN posts, without external URL
+		if postUnmarsh.URL == "" {
+			frontpageID := frontpageIDs[inputInt]
+			commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
+
+			if err := openLink(commentURL); err != nil {
+				panic(err)
+			}
+		}
+
+		if err := openLink(postUnmarsh.URL); err != nil {
+			panic(err)
+		}
+
+		// Quit command
+		if cmd == "quit" {
+			os.Exit(0)
+		}
 	}
 }
