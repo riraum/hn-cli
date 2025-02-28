@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+
 	"unicode/utf8"
 
 	"github.com/pkg/browser"
@@ -100,6 +101,7 @@ func main() {
 			fmt.Println("toReduceLen", toReduceLen)
 			calcReduceLen := (titleLen - toReduceLen - roomForDots)
 			fmt.Println("calcReduceLen", calcReduceLen)
+
 			postUnmarsh.Title = fmt.Sprintf("%.*s...", calcReduceLen, postUnmarsh.Title)
 		}
 
