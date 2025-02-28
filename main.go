@@ -20,44 +20,17 @@ func openLink(URL string) error {
 
 func main() {
 	fmt.Println("Hello hn-cli user")
-	// Marshall/Unmarshall test code
-	// dataToMarshall := item.Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
-
-	// dataMarshalled, mErr := item.Marshall(dataToMarshall)
-	// if mErr != nil {
-	// 	panic(mErr)
-	// }
-	// // debug
-	// fmt.Println(string(dataMarshalled))
-
-	// dataUnmarshalled, uErr := item.Unmarshal(dataMarshalled)
-	// if uErr != nil {
-	// 	panic(uErr)
-	// }
-	// // debug
-	// fmt.Println(dataUnmarshalled)
-	// Time conversion test code
-	var timeConvert item.Item
-	// set initial time as int64
-	timeConvert.UnixPostTime = 1494505756
-	timeConvert.HoursSincePosting = timeConvert.AddHoursSincePosting()
-	timeConvert.FormattedTime = timeConvert.RelativeTime()
-	fmt.Println(timeConvert)
-	// Get terminal size test code
+	// Get terminal size
 	var tWidth int
 
-	var tHeight int
-
-	tWidth, tHeight, tErr := io.TermSize()
+	tWidth, _, tErr := io.TermSize()
 	if tErr != nil {
 		panic(tErr)
 	}
 
-	fmt.Println("Size:", tWidth, tHeight)
-	// API code below
+	fmt.Println("Width:", tWidth)
+	// API
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
-	// debug
-	// fmt.Println(string(frontpageJSON))
 
 	var frontpageIDs []int
 
@@ -66,8 +39,6 @@ func main() {
 		err := fmt.Errorf("Error message during unmarshalling %g", err)
 		panic(err)
 	}
-	// debug
-	// fmt.Println(frontpageIDs)
 
 	for i := 0; i <= 10; i++ {
 		postID := frontpageIDs[i]
@@ -110,8 +81,7 @@ func main() {
 		fmt.Println(fo)
 	}
 
-	// UI test code
-
+	// UI
 	const hasIndex = 2
 
 	input, err := ui.UI()
