@@ -86,6 +86,7 @@ func main() {
 	}
 
 	// UI test code
+
 	const hasIndex = 2
 
 	input, err := ui.UI()
