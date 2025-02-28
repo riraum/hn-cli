@@ -53,8 +53,8 @@ func main() {
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
-		num := strconv.Itoa(i)
-		o := fmt.Sprintln(num, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
+		index := strconv.Itoa(i)
+		o := fmt.Sprintln(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 
 		totalOutputLen := utf8.RuneCountInString(o)
 		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
@@ -76,7 +76,7 @@ func main() {
 			postUnmarsh.Title = fmt.Sprintf("%.*s...", calcReduceLen, postUnmarsh.Title)
 		}
 
-		fo := fmt.Sprintln(num, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
+		fo := fmt.Sprintln(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 
 		fmt.Println(fo)
 	}
