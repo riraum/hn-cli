@@ -73,9 +73,9 @@ func main() {
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
 
-		postUnmarsh, pErr := item.Unmarshal(postData)
-		if pErr != nil {
-			panic(pErr)
+		postUnmarsh, err := item.Unmarshal(postData)
+		if err != nil {
+			panic(err)
 		}
 
 		postUnmarsh.Title = fmt.Sprintf("%.25s...", postUnmarsh.Title)
@@ -88,7 +88,7 @@ func main() {
 	// UI test code
 	const hasIndex = 2
 
-	const hasError = 3
+	// const hasError = 3
 
 	input, _ := ui.UI()
 	// if inputErr != nil {
@@ -99,21 +99,21 @@ func main() {
 
 	var inputInt int
 
-	var iErr error
-
 	if len(input) >= hasIndex {
-		inputInt, iErr = strconv.Atoi(input[1])
-		if iErr != nil {
-			panic(iErr)
-		}
-	}
+		var err error
 
-	if len(input) >= hasError {
-		err := input[2]
-		if err != "" {
+		inputInt, err = strconv.Atoi(input[1])
+		if err != nil {
 			panic(err)
 		}
 	}
+
+	// if len(input) >= hasError {
+	// 	err := input[2]
+	// 	if err != "" {
+	// 		panic(err)
+	// 	}
+	// }
 
 	// To use once post print code is in function
 	if cmd == "start" {
@@ -144,9 +144,9 @@ func main() {
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
 
-		postUnmarsh, pErr := item.Unmarshal(postData)
-		if pErr != nil {
-			panic(pErr)
+		postUnmarsh, err := item.Unmarshal(postData)
+		if err != nil {
+			panic(err)
 		}
 
 		// CHeck for Ask/Show HN posts, without external URL
