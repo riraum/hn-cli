@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os"
 	"strconv"
-
 	"unicode/utf8"
 
 	"github.com/pkg/browser"
@@ -64,6 +63,7 @@ func main() {
 
 	err := json.Unmarshal(frontpageJSON, &frontpageIDs)
 	if err != nil {
+		err := fmt.Errorf("Error message during unmarshalling %g", err)
 		panic(err)
 	}
 	// debug
@@ -74,9 +74,9 @@ func main() {
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		postData := http.GetJSON(postURL)
 
-		postUnmarsh, pErr := item.Unmarshal(postData)
-		if pErr != nil {
-			panic(pErr)
+		postUnmarsh, err := item.Unmarshal(postData)
+		if err != nil {
+			panic(err)
 		}
 
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
@@ -111,18 +111,32 @@ func main() {
 	}
 
 	// UI test code
-	var input string
 
-	input, uErr := ui.UI()
-	if uErr != nil {
-		panic(uErr)
+	const hasIndex = 2
+
+	input, err := ui.UI()
+	if len(input) > 1 && err != nil {
+		panic(err)
 	}
+
+	cmd := input[0]
+
+	var inputInt int
+
+	if len(input) >= hasIndex {
+		var err error
+
+		if inputInt, err = strconv.Atoi(input[1]); err != nil {
+			panic(err)
+		}
+	}
+
 	// To use once post print code is in function
-	if input == "start" {
+	if cmd == "start" {
 		fmt.Println("PLACEHOLDER")
 	}
 	// List commands
-	if input == "help" {
+	if cmd == "help" {
 		fmt.Println(
 			"'start': Display posts\n",
 			"'next': gets the next page of items\n",
@@ -132,8 +146,8 @@ func main() {
 		)
 	}
 	// Open comments cmd
-	if input == "comments" {
-		frontpageID := 8863
+	if cmd == "comments" {
+		frontpageID := frontpageIDs[inputInt]
 		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
 		if err := openLink(commentURL); err != nil {
@@ -141,19 +155,33 @@ func main() {
 		}
 	}
 	// Open article URL
-	if input == "open" {
-		frontpage := item.Items{item.Item{
-			URL: "https://github.com",
-		}}
-		// inputIndex
-		openURL := frontpage[0].URL
+	if cmd == "open" {
+		postID := frontpageIDs[inputInt]
+		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
+		postData := http.GetJSON(postURL)
 
-		if err := openLink(openURL); err != nil {
+		postUnmarsh, err := item.Unmarshal(postData)
+		if err != nil {
 			panic(err)
 		}
-	}
-	// Quit command
-	if input == "quit" {
-		os.Exit(0)
+
+		// Check for Ask/Show HN posts, without external URL
+		if postUnmarsh.URL == "" {
+			frontpageID := frontpageIDs[inputInt]
+			commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
+
+			if err := openLink(commentURL); err != nil {
+				panic(err)
+			}
+		}
+
+		if err := openLink(postUnmarsh.URL); err != nil {
+			panic(err)
+		}
+
+		// Quit command
+		if cmd == "quit" {
+			os.Exit(0)
+		}
 	}
 }
