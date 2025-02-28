@@ -100,8 +100,7 @@ func main() {
 	if len(input) >= hasIndex {
 		var err error
 
-		inputInt, err = strconv.Atoi(input[1])
-		if err != nil {
+		if inputInt, err = strconv.Atoi(input[1]); err != nil {
 			panic(err)
 		}
 	}
