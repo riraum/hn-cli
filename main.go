@@ -68,8 +68,6 @@ func main() {
 	// debug
 	// fmt.Println(frontpageIDs)
 
-	const accountForRestStr = 30
-
 	for i := 0; i <= 10; i++ {
 		postID := frontpageIDs[i]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
@@ -84,17 +82,28 @@ func main() {
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
 		num := strconv.Itoa(i)
-		output := fmt.Sprint(num, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
+		output := fmt.Sprintln(num, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
+
 		totalOutputLen := utf8.RuneCountInString(output)
-
 		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
-		fmt.Println(titleLen)
+		fmt.Println("titleLen:", titleLen)
+		fmt.Println("totalOutputLen:", totalOutputLen)
+		nonReducableLen := totalOutputLen - titleLen
+		fmt.Println("nonReducableLen:", nonReducableLen)
+		reducableLen := tWidth - nonReducableLen
+		fmt.Println("reducableLen", reducableLen)
 
-		postUnmarsh.Title = fmt.Sprintf("%.*s...", tWidth-accountForRestStr, postUnmarsh.Title)
+		if totalOutputLen > tWidth {
+			toReduceLen := (totalOutputLen - tWidth)
+			fmt.Println("toReduceLen", toReduceLen)
+			calcReduceLen := (titleLen - toReduceLen)
+			fmt.Println("calcReduceLen", calcReduceLen)
+			postUnmarsh.Title = fmt.Sprintf("%.*s", calcReduceLen, postUnmarsh.Title)
+		}
 
-		fmt.Println(totalOutputLen)
+		formattedOutput := fmt.Sprintln(num, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 
-		fmt.Println(output)
+		fmt.Println(formattedOutput)
 	}
 
 	// UI test code
