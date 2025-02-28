@@ -88,9 +88,9 @@ func main() {
 	// UI test code
 	const hasIndex = 2
 
-	input, inputErr := ui.UI()
-	if len(input) > 1 && inputErr != nil {
-		panic(inputErr)
+	input, err := ui.UI()
+	if len(input) > 1 && err != nil {
+		panic(err)
 	}
 
 	cmd := input[0]
