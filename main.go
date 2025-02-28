@@ -62,8 +62,8 @@ func main() {
 
 	err := json.Unmarshal(frontpageJSON, &frontpageIDs)
 	if err != nil {
-		eerr := fmt.Errorf("Error message during unmarshalling %g", err)
-		panic(eerr)
+		err := fmt.Errorf("Error message during unmarshalling %g", err)
+		panic(err)
 	}
 	// debug
 	// fmt.Println(frontpageIDs)
