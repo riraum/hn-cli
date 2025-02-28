@@ -60,10 +60,10 @@ func main() {
 		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
 		fmt.Println("titleLen:", titleLen)
 		fmt.Println("totalOutputLen:", totalOutputLen)
-		nonReducableLen := totalOutputLen - titleLen
-		fmt.Println("nonReducableLen:", nonReducableLen)
-		reducableLen := tWidth - nonReducableLen
-		fmt.Println("reducableLen", reducableLen)
+		// nonReducableLen := totalOutputLen - titleLen
+		// fmt.Println("nonReducableLen:", nonReducableLen)
+		// reducableLen := tWidth - nonReducableLen
+		// fmt.Println("reducableLen", reducableLen)
 
 		if totalOutputLen > tWidth {
 			const roomForDots = 3
