@@ -84,11 +84,12 @@ func main() {
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
-		printValues := fmt.Sprintln(strconv.Itoa(i), postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
-		charLen := fmt.Sprintln(utf8.RuneCountInString(printValues))
+		num := strconv.Itoa(i)
+		output := fmt.Sprint(num, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
+		charLen := fmt.Sprintln(utf8.RuneCountInString(output))
 		fmt.Println(charLen)
 
-		fmt.Println(printValues)
+		fmt.Println(output)
 	}
 
 	// UI test code
