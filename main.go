@@ -88,12 +88,10 @@ func main() {
 	// UI test code
 	const hasIndex = 2
 
-	// const hasError = 3
-
-	input, _ := ui.UI()
-	// if inputErr != nil {
-	// 	panic(inputErr)
-	// }
+	input, inputErr := ui.UI()
+	if len(input) > 1 && inputErr != nil {
+		panic(inputErr)
+	}
 
 	cmd := input[0]
 
@@ -107,13 +105,6 @@ func main() {
 			panic(err)
 		}
 	}
-
-	// if len(input) >= hasError {
-	// 	err := input[2]
-	// 	if err != "" {
-	// 		panic(err)
-	// 	}
-	// }
 
 	// To use once post print code is in function
 	if cmd == "start" {
