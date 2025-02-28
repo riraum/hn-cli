@@ -78,6 +78,13 @@ func main() {
 			panic(err)
 		}
 
+		// Check for Ask/Show HN posts, without external URL
+		if postUnmarsh.URL == "" {
+			commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", postID)
+
+			postUnmarsh.URL = commentURL
+		}
+
 		postUnmarsh.Title = fmt.Sprintf("%.25s...", postUnmarsh.Title)
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
