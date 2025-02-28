@@ -82,9 +82,9 @@ func main() {
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
 		num := strconv.Itoa(i)
-		output := fmt.Sprintln(num, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
+		o := fmt.Sprintln(num, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 
-		totalOutputLen := utf8.RuneCountInString(output)
+		totalOutputLen := utf8.RuneCountInString(o)
 		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
 		fmt.Println("titleLen:", titleLen)
 		fmt.Println("totalOutputLen:", totalOutputLen)
@@ -95,6 +95,7 @@ func main() {
 
 		if totalOutputLen > tWidth {
 			const roomForDots = 3
+
 			toReduceLen := (totalOutputLen - tWidth)
 			fmt.Println("toReduceLen", toReduceLen)
 			calcReduceLen := (titleLen - toReduceLen - roomForDots)
@@ -102,9 +103,9 @@ func main() {
 			postUnmarsh.Title = fmt.Sprintf("%.*s...", calcReduceLen, postUnmarsh.Title)
 		}
 
-		formattedOutput := fmt.Sprintln(num, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
+		fo := fmt.Sprintln(num, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 
-		fmt.Println(formattedOutput)
+		fmt.Println(fo)
 	}
 
 	// UI test code
