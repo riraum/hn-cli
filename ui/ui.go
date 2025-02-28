@@ -10,8 +10,6 @@ func UI() ([]string, error) {
 	fmt.Printf("Type `start' to display posts, 'help' for list of commands\n>")
 
 	_, err := fmt.Scanf("%s %s", &input, &inputNum)
-	fmt.Println("debug:", input, inputNum)
-
 	if err != nil {
 		if inputNum == "" {
 			return []string{input}, err
