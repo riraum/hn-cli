@@ -64,8 +64,8 @@ func main() {
 		spaceForTitle := tWidth - approxOtherLen
 
 		if titleLen > spaceForTitle {
-			// toReduceTitleLen := (titleLen - spaceForTitle)
-			reducedTitleLen := (titleLen - spaceForTitle) + (titleLen - toReduceTitleLen)
+			toReduceTitleLen := (titleLen - spaceForTitle)
+			reducedTitleLen := (titleLen - toReduceTitleLen)
 
 			postUnmarsh.Title = fmt.Sprintf("%.*s...", reducedTitleLen, postUnmarsh.Title)
 		}
