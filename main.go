@@ -55,29 +55,37 @@ func main() {
 
 		// Shortening
 		index := strconv.Itoa(i)
-		o := fmt.Sprintln(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
+		// o := fmt.Sprintln(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 
-		totalLen := utf8.RuneCountInString(o)
+		// totalLen := utf8.RuneCountInString(o)
+		// fmt.Println("totalLen", totalLen)
 
-		if totalLen > tWidth {
-			const dotLen = 3
+		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
+		// fmt.Println("titleLen", titleLen)
 
-			titleLen := utf8.RuneCountInString(postUnmarsh.Title)
+		const approxOtherLen = 28
+
+		spaceForTitle := tWidth - approxOtherLen
+		// fmt.Println("spaceForTitle", spaceForTitle)
+
+		if titleLen > spaceForTitle {
+			// const dotLen = 3
+
 			// fmt.Println("titleLen:", titleLen)
 			// fmt.Println("totalLen:", totalLen)
-			nonReducableLen := totalLen - titleLen
+			// nonReducableLen := totalLen - titleLen
 			// fmt.Println("nonReducableLen:", nonReducableLen)
-			reducableLen := totalLen - nonReducableLen
+			// reducableLen := totalLen - nonReducableLen
 			// fmt.Println("reducableLen", reducableLen)
 
-			if reducableLen > 0 {
-				toReduceLen := (totalLen - tWidth)
-				// fmt.Println("toReduceLen", toReduceLen)
-				reducedTitleLen := (titleLen - toReduceLen - dotLen)
-				// fmt.Println("reducedTitleLen", reducedTitleLen)
+			// if reducableLen > 0 {
+			toReduceTitleLen := (titleLen - spaceForTitle)
+			// fmt.Println("toReduceTitleLen", toReduceTitleLen)
+			reducedTitleLen := (titleLen - toReduceTitleLen)
+			// fmt.Println("reducedTitleLen", reducedTitleLen)
 
-				postUnmarsh.Title = fmt.Sprintf("%.*s...", reducedTitleLen, postUnmarsh.Title)
-			}
+			postUnmarsh.Title = fmt.Sprintf("%.*s...", reducedTitleLen, postUnmarsh.Title)
+			// }
 		}
 
 		fo := fmt.Sprintln(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
