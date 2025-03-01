@@ -19,34 +19,43 @@ func openLink(URL string) error {
 }
 
 func main() {
+	var err error
+
 	fmt.Println("Hello hn-cli user")
 	// Get terminal size
 	var tWidth int
 
-	tWidth, _, tErr := io.TermSize()
-	if tErr != nil {
-		panic(tErr)
+	if tWidth, _, err = io.TermSize(); err != nil {
+		panic(err)
 	}
 
 	fmt.Println("Width:", tWidth)
 	// API
-	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
+	var frontpageJSON []byte
+
+	if frontpageJSON, err = http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json"); err != nil {
+		panic(err)
+	}
 
 	var frontpageIDs []int
 
-	err := json.Unmarshal(frontpageJSON, &frontpageIDs)
-	if err != nil {
-		err := fmt.Errorf("Error message during unmarshalling %g", err)
+	if err = json.Unmarshal(frontpageJSON, &frontpageIDs); err != nil {
 		panic(err)
 	}
 
 	for i := 0; i <= 10; i++ {
 		postID := frontpageIDs[i]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
-		postData := http.GetJSON(postURL)
 
-		postUnmarsh, err := item.Unmarshal(postData)
-		if err != nil {
+		var postData []byte
+
+		if postData, err = http.GetJSON(postURL); err != nil {
+			panic(err)
+		}
+
+		var postUnmarsh item.Item
+
+		if postUnmarsh, err = item.Unmarshal(postData); err != nil {
 			panic(err)
 		}
 
@@ -84,8 +93,8 @@ func main() {
 	// UI
 	const hasIndex = 2
 
-	input, err := ui.UI()
-	if len(input) > 1 && err != nil {
+	var input []string
+	if input, err = ui.UI(); err != nil && len(input) > 1 {
 		panic(err)
 	}
 
@@ -94,8 +103,6 @@ func main() {
 	var inputInt int
 
 	if len(input) >= hasIndex {
-		var err error
-
 		if inputInt, err = strconv.Atoi(input[1]); err != nil {
 			panic(err)
 		}
@@ -128,7 +135,12 @@ func main() {
 	if cmd == "open" {
 		postID := frontpageIDs[inputInt]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
-		postData := http.GetJSON(postURL)
+
+		var postData []byte
+
+		if postData, err = http.GetJSON(postURL); err != nil {
+			panic(err)
+		}
 
 		postUnmarsh, err := item.Unmarshal(postData)
 		if err != nil {
