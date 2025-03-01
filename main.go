@@ -148,16 +148,6 @@ func main() {
 			panic(err)
 		}
 
-		// // Check for Ask/Show HN posts, without external URL
-		// if postUnmarsh.URL == "" {
-		// 	frontpageID := frontpageIDs[inputInt]
-		// 	commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
-
-		// 	if err := openLink(commentURL); err != nil {
-		// 		panic(err)
-		// 	}
-		// }
-
 		if err := openLink(postUnmarsh.URL); err != nil {
 			panic(err)
 		}
