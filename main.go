@@ -28,7 +28,7 @@ func main() {
 		panic(tErr)
 	}
 
-	fmt.Println("termWidth:", tWidth)
+	// fmt.Println("termWidth:", tWidth)
 	// API
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 
