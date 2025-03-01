@@ -82,7 +82,7 @@ func main() {
 
 		fo := fmt.Sprintln(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 
-		fmt.Println(fo)
+		fmt.Print(fo)
 	}
 
 	// UI
