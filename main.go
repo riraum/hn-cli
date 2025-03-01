@@ -63,18 +63,18 @@ func main() {
 			const dotLen = 3
 
 			titleLen := utf8.RuneCountInString(postUnmarsh.Title)
-			fmt.Println("titleLen:", titleLen)
-			fmt.Println("totalLen:", totalLen)
+			// fmt.Println("titleLen:", titleLen)
+			// fmt.Println("totalLen:", totalLen)
 			nonReducableLen := totalLen - titleLen
-			fmt.Println("nonReducableLen:", nonReducableLen)
+			// fmt.Println("nonReducableLen:", nonReducableLen)
 			reducableLen := totalLen - nonReducableLen
-			fmt.Println("reducableLen", reducableLen)
+			// fmt.Println("reducableLen", reducableLen)
 
 			if reducableLen > nonReducableLen {
 				toReduceLen := (totalLen - tWidth)
-				fmt.Println("toReduceLen", toReduceLen)
+				// fmt.Println("toReduceLen", toReduceLen)
 				reducedTitleLen := (titleLen - toReduceLen - dotLen)
-				fmt.Println("reducedTitleLen", reducedTitleLen)
+				// fmt.Println("reducedTitleLen", reducedTitleLen)
 
 				postUnmarsh.Title = fmt.Sprintf("%.*s...", reducedTitleLen, postUnmarsh.Title)
 			}
