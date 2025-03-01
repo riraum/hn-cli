@@ -53,7 +53,7 @@ func main() {
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
-		// Shortening
+		// Trim title
 		index := strconv.Itoa(i)
 
 		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
