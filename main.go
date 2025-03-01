@@ -60,12 +60,10 @@ func main() {
 		authorLen := utf8.RuneCountInString(postUnmarsh.Author)
 
 		const otherLen = 19
-		approxTotalLen := otherLen + authorLen
-		spaceForTitle := tWidth - approxTotalLen
+		spaceForTitle := tWidth - (otherLen + authorLen)
 
 		if titleLen > spaceForTitle {
-			toReduceTitleLen := (titleLen - spaceForTitle)
-			reducedTitleLen := (titleLen - toReduceTitleLen)
+			reducedTitleLen := (titleLen - (titleLen - spaceForTitle))
 
 			postUnmarsh.Title = fmt.Sprintf("%.*s...", reducedTitleLen, postUnmarsh.Title)
 		}
