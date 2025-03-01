@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os"
 	"strconv"
+	"unicode/utf8"
 
 	"github.com/pkg/browser"
 	"github.com/riraum/hn-cli/http"
@@ -19,44 +20,17 @@ func openLink(URL string) error {
 
 func main() {
 	fmt.Println("Hello hn-cli user")
-	// Marshall/Unmarshall test code
-	// dataToMarshall := item.Item{Title: "Alice in Wonderland", Author: "Lewis Carroll"}
-
-	// dataMarshalled, mErr := item.Marshall(dataToMarshall)
-	// if mErr != nil {
-	// 	panic(mErr)
-	// }
-	// // debug
-	// fmt.Println(string(dataMarshalled))
-
-	// dataUnmarshalled, uErr := item.Unmarshal(dataMarshalled)
-	// if uErr != nil {
-	// 	panic(uErr)
-	// }
-	// // debug
-	// fmt.Println(dataUnmarshalled)
-	// Time conversion test code
-	var timeConvert item.Item
-	// set initial time as int64
-	timeConvert.UnixPostTime = 1494505756
-	timeConvert.HoursSincePosting = timeConvert.AddHoursSincePosting()
-	timeConvert.FormattedTime = timeConvert.RelativeTime()
-	fmt.Println(timeConvert)
-	// Get terminal size test code
+	// Get terminal size
 	var tWidth int
 
-	var tHeight int
-
-	tWidth, tHeight, tErr := io.TermSize()
+	tWidth, _, tErr := io.TermSize()
 	if tErr != nil {
 		panic(tErr)
 	}
 
-	fmt.Println("Size:", tWidth, tHeight)
-	// API code below
+	fmt.Println("Width:", tWidth)
+	// API
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
-	// debug
-	// fmt.Println(string(frontpageJSON))
 
 	var frontpageIDs []int
 
@@ -65,8 +39,6 @@ func main() {
 		err := fmt.Errorf("Error message during unmarshalling %g", err)
 		panic(err)
 	}
-	// debug
-	// fmt.Println(frontpageIDs)
 
 	for i := 0; i <= 80; i++ {
 		postID := frontpageIDs[i]
@@ -90,11 +62,35 @@ func main() {
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
-		fmt.Println(i, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
+		index := strconv.Itoa(i)
+		o := fmt.Sprintln(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
+
+		totalOutputLen := utf8.RuneCountInString(o)
+		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
+		fmt.Println("titleLen:", titleLen)
+		fmt.Println("totalOutputLen:", totalOutputLen)
+		// nonReducableLen := totalOutputLen - titleLen
+		// fmt.Println("nonReducableLen:", nonReducableLen)
+		// reducableLen := tWidth - nonReducableLen
+		// fmt.Println("reducableLen", reducableLen)
+
+		if totalOutputLen > tWidth {
+			const roomForDots = 3
+
+			toReduceLen := (totalOutputLen - tWidth)
+			fmt.Println("toReduceLen", toReduceLen)
+			calcReduceLen := (titleLen - toReduceLen - roomForDots)
+			fmt.Println("calcReduceLen", calcReduceLen)
+
+			postUnmarsh.Title = fmt.Sprintf("%.*s...", calcReduceLen, postUnmarsh.Title)
+		}
+
+		fo := fmt.Sprintln(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
+
+		fmt.Println(fo)
 	}
 
-	// UI test code
-
+	// UI
 	const hasIndex = 2
 
 	input, err := ui.UI()
