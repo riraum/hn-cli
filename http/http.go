@@ -2,7 +2,6 @@ package http
 
 import (
 	"io"
-	"log"
 	"net/http"
 )
 
@@ -11,7 +10,7 @@ func GetJSON(URL string) ([]byte, error) {
 
 	resp, err := http.Get(URL)
 	if err != nil {
-		log.Fatal(err)
+		return nil, err
 	}
 
 	defer resp.Body.Close()
