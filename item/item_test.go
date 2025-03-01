@@ -163,6 +163,14 @@ func TestUnmarshall(t *testing.T) {
 			dataToUnmarshall: []byte(`{}`),
 			want:             Item{},
 		},
+		// {
+		// 	dataToUnmarshall: []byte(`{"title":"Demo title","author":"Demo author","url":"",}`),
+		// 	want: Item{
+		// 		Author: "Demo author",
+		// 		Title:  "Demo title",
+		// 		URL:    "",
+		// 	},
+		// },
 	}
 
 	for _, test := range tests {
