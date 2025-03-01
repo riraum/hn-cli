@@ -28,7 +28,7 @@ func main() {
 		panic(tErr)
 	}
 
-	fmt.Println("Width:", tWidth)
+	fmt.Println("termWidth:", tWidth)
 	// API
 	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 
@@ -53,20 +53,22 @@ func main() {
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
+		// Shortening
 		index := strconv.Itoa(i)
 		o := fmt.Sprintln(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 
 		totalOutputLen := utf8.RuneCountInString(o)
-		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
-		fmt.Println("titleLen:", titleLen)
-		fmt.Println("totalOutputLen:", totalOutputLen)
-		// nonReducableLen := totalOutputLen - titleLen
-		// fmt.Println("nonReducableLen:", nonReducableLen)
-		// reducableLen := tWidth - nonReducableLen
-		// fmt.Println("reducableLen", reducableLen)
 
 		if totalOutputLen > tWidth {
 			const roomForDots = 3
+
+			titleLen := utf8.RuneCountInString(postUnmarsh.Title)
+			fmt.Println("titleLen:", titleLen)
+			fmt.Println("totalOutputLen:", totalOutputLen)
+			nonReducableLen := totalOutputLen - titleLen
+			fmt.Println("nonReducableLen:", nonReducableLen)
+			reducableLen := totalOutputLen - nonReducableLen
+			fmt.Println("reducableLen", reducableLen)
 
 			toReduceLen := (totalOutputLen - tWidth)
 			fmt.Println("toReduceLen", toReduceLen)
