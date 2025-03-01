@@ -70,7 +70,7 @@ func main() {
 			reducableLen := totalLen - nonReducableLen
 			// fmt.Println("reducableLen", reducableLen)
 
-			if reducableLen > nonReducableLen {
+			if reducableLen > 0 {
 				toReduceLen := (totalLen - tWidth)
 				// fmt.Println("toReduceLen", toReduceLen)
 				reducedTitleLen := (titleLen - toReduceLen - dotLen)
