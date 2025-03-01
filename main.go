@@ -60,8 +60,8 @@ func main() {
 		authorLen := utf8.RuneCountInString(postUnmarsh.Author)
 
 		const otherLen = 19
-		approxOtherLen := otherLen + authorLen
-		spaceForTitle := tWidth - approxOtherLen
+		approxTotalLen := otherLen + authorLen
+		spaceForTitle := tWidth - approxTotalLen
 
 		if titleLen > spaceForTitle {
 			toReduceTitleLen := (titleLen - spaceForTitle)
