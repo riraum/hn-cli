@@ -63,9 +63,8 @@ func main() {
 		spaceForTitle := tWidth - (otherLen + authorLen)
 
 		if titleLen > spaceForTitle {
-			reducedTitleLen := (titleLen - (titleLen - spaceForTitle))
 
-			postUnmarsh.Title = fmt.Sprintf("%.*s...", reducedTitleLen, postUnmarsh.Title)
+			postUnmarsh.Title = fmt.Sprintf("%.*s...", spaceForTitle, postUnmarsh.Title)
 		}
 
 		fmt.Println(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
