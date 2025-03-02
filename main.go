@@ -29,7 +29,7 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println("Width:", tWidth)
+	// fmt.Println("termWidth:", tWidth)
 	// API
 	var frontpageJSON []byte
 
@@ -62,32 +62,21 @@ func main() {
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
+		// Trim title
 		index := strconv.Itoa(i)
-		o := fmt.Sprintln(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 
-		totalOutputLen := utf8.RuneCountInString(o)
 		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
-		fmt.Println("titleLen:", titleLen)
-		fmt.Println("totalOutputLen:", totalOutputLen)
-		// nonReducableLen := totalOutputLen - titleLen
-		// fmt.Println("nonReducableLen:", nonReducableLen)
-		// reducableLen := tWidth - nonReducableLen
-		// fmt.Println("reducableLen", reducableLen)
+		authorLen := utf8.RuneCountInString(postUnmarsh.Author)
 
-		if totalOutputLen > tWidth {
-			const roomForDots = 3
+		// Approximate length of the rest of the values, where a smaller variation exists, maximum observerded length taken
+		const otherLen = 19
+		spaceForTitle := tWidth - (otherLen + authorLen)
 
-			toReduceLen := (totalOutputLen - tWidth)
-			fmt.Println("toReduceLen", toReduceLen)
-			calcReduceLen := (titleLen - toReduceLen - roomForDots)
-			fmt.Println("calcReduceLen", calcReduceLen)
-
-			postUnmarsh.Title = fmt.Sprintf("%.*s...", calcReduceLen, postUnmarsh.Title)
+		if titleLen > spaceForTitle {
+			postUnmarsh.Title = fmt.Sprintf("%.*s...", spaceForTitle, postUnmarsh.Title)
 		}
 
-		fo := fmt.Sprintln(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
-
-		fmt.Println(fo)
+		fmt.Println(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 	}
 
 	// UI
