@@ -59,11 +59,11 @@ func main() {
 		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
 		authorLen := utf8.RuneCountInString(postUnmarsh.Author)
 
+		// Approximate length of the rest of the values, where a smaller variation exists, maximum observerded length taken
 		const otherLen = 19
 		spaceForTitle := tWidth - (otherLen + authorLen)
 
 		if titleLen > spaceForTitle {
-
 			postUnmarsh.Title = fmt.Sprintf("%.*s...", spaceForTitle, postUnmarsh.Title)
 		}
 
