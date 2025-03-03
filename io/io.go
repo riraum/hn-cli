@@ -11,5 +11,6 @@ func TermSize() (int, error) {
 	if err != nil {
 		return tWidth, fmt.Errorf("Failed to get terminal width %w", err)
 	}
+
 	return tWidth, nil
 }
