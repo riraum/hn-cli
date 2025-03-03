@@ -7,10 +7,9 @@ import (
 )
 
 func TermSize() (int, error) {
-	var tWidth int
-	if tWidth, _, err := term.GetSize(0); err != nil {
-		return tWidth, fmt.Errorf("Failed to get terminal width: %w", err)
+	tWidth, _, err := term.GetSize(0)
+	if err != nil {
+		return tWidth, fmt.Errorf("Failed to get terminal width %w", err)
 	}
-
 	return tWidth, nil
 }
