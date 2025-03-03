@@ -30,8 +30,9 @@ type Items []Item
 
 func Marshall(input Item) ([]byte, error) {
 	dataMarshalled, err := json.Marshal(input)
+
 	if err != nil {
-		return dataMarshalled, err
+		return dataMarshalled, fmt.Errorf("Failed to Marshall %w", err)
 	}
 
 	return dataMarshalled, nil
@@ -40,9 +41,8 @@ func Marshall(input Item) ([]byte, error) {
 func Unmarshal(input []byte) (Item, error) {
 	var dataUnmarshalled Item
 
-	err := json.Unmarshal(input, &dataUnmarshalled)
-	if err != nil {
-		return dataUnmarshalled, err
+	if err := json.Unmarshal(input, &dataUnmarshalled); err != nil {
+		return dataUnmarshalled, fmt.Errorf("Failed to Unmarshall %w", err)
 	}
 
 	return dataUnmarshalled, nil
