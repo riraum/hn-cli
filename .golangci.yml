@@ -43,6 +43,10 @@ linters:
     - usestdlibvars
 
     - wsl
+    - wrapcheck
+    - err113
+    - errname
+    - errorlint
 
 linters-settings:
   revive:
