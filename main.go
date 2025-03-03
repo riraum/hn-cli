@@ -43,8 +43,13 @@ func main() {
 		panic(err)
 	}
 
-	for i := 0; i <= 80; i++ {
+	fmt.Println(frontpageIDs)
+
+	var postUnmarsh item.Item
+
+	for i := 0; i <= 30; i++ {
 		postID := frontpageIDs[i]
+
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 
 		var postData []byte
@@ -52,8 +57,6 @@ func main() {
 		if postData, err = http.GetJSON(postURL); err != nil {
 			panic(err)
 		}
-
-		var postUnmarsh item.Item
 
 		if postUnmarsh, err = item.Unmarshal(postData); err != nil {
 			panic(err)
@@ -68,8 +71,9 @@ func main() {
 		}
 
 		// Get CommentURL
-		frontpageID := frontpageIDs[i]
-		postUnmarsh.CommentURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
+		// frontpageID := frontpageIDs[i]
+
+		postUnmarsh.CommentURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", postID)
 
 		// Get ArticleURL
 		// postID := frontpageIDs[i]
@@ -107,10 +111,10 @@ func main() {
 
 	cmd := input[0]
 
-	var inputInt int
+	// var inputInt int
 
 	if len(input) >= hasIndex {
-		if inputInt, err = strconv.Atoi(input[1]); err != nil {
+		if _, err = strconv.Atoi(input[1]); err != nil {
 			panic(err)
 		}
 	}
@@ -131,29 +135,24 @@ func main() {
 	}
 	// Open comments cmd
 	if cmd == "comments" {
-		frontpageID := frontpageIDs[inputInt]
-		commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
-
-		if err := openLink(commentURL); err != nil {
+		// frontpageID := frontpageIDs[inputInt]
+		// commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
+		if err := openLink(postUnmarsh.CommentURL); err != nil {
 			panic(err)
 		}
 	}
 	// Open article URL
 	if cmd == "open" {
-		postID := frontpageIDs[inputInt]
-		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
-
-		var postData []byte
-
-		if postData, err = http.GetJSON(postURL); err != nil {
-			panic(err)
-		}
-
-		postUnmarsh, err := item.Unmarshal(postData)
-		if err != nil {
-			panic(err)
-		}
-
+		// postID := frontpageIDs[inputInt]
+		// postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
+		// var postData []byte
+		// if postData, err = http.GetJSON(postURL); err != nil {
+		// 	panic(err)
+		// }
+		// postUnmarsh, err := item.Unmarshal(postData)
+		// if err != nil {
+		// 	panic(err)
+		// }
 		if err := openLink(postUnmarsh.ArticleURL); err != nil {
 			panic(err)
 		}
@@ -162,5 +161,4 @@ func main() {
 	if cmd == "quit" {
 		os.Exit(0)
 	}
-
 }
