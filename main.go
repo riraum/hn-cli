@@ -51,12 +51,21 @@ func main() {
 		}
 
 		// Check for Ask/Show HN posts, without external URL
-		if postUnmarsh.URL == "" {
+		if postUnmarsh.ArticleURL == "" {
 			frontpageID := frontpageIDs[i]
 			commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 
-			postUnmarsh.URL = commentURL
+			postUnmarsh.ArticleURL = commentURL
 		}
+
+		// Get CommentURL
+		frontpageID := frontpageIDs[i]
+		postUnmarsh.CommentURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
+
+		// Get ArticleURL
+		// postID := frontpageIDs[i]
+		// postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
+		// postData := http.GetJSON(postURL)
 
 		postUnmarsh.Title = fmt.Sprintf("%.25s...", postUnmarsh.Title)
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
@@ -144,13 +153,13 @@ func main() {
 			panic(err)
 		}
 
-		if err := openLink(postUnmarsh.URL); err != nil {
+		if err := openLink(postUnmarsh.ArticleURL); err != nil {
 			panic(err)
 		}
-
-		// Quit command
-		if cmd == "quit" {
-			os.Exit(0)
-		}
 	}
+	// Quit command
+	if cmd == "quit" {
+		os.Exit(0)
+	}
+
 }
