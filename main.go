@@ -23,31 +23,26 @@ func openLink(URL string) error {
 }
 
 func main() {
-	var err error
-
 	fmt.Println("Hello hn-cli user")
-	// Get terminal size
-	var tWidth int
 
-	if tWidth, err = io.TermSize(); err != nil {
+	// Get terminal size
+	tWidth, err := io.TermSize()
+	if err != nil {
 		panic(err)
 	}
 
-	// fmt.Println("termWidth:", tWidth)
 	// API
-	var frontpageJSON []byte
-
-	if frontpageJSON, err = http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json"); err != nil {
+	frontpageJSON, err := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
+	if err != nil {
 		panic(err)
 	}
 
 	var frontpageIDs []int
 
-	if err = json.Unmarshal(frontpageJSON, &frontpageIDs); err != nil {
+	err = json.Unmarshal(frontpageJSON, &frontpageIDs)
+	if err != nil {
 		panic(err)
 	}
-
-	fmt.Println(frontpageIDs)
 
 	var postUnmarsh item.Item
 
