@@ -12,31 +12,31 @@ func TestRelativeTime(t *testing.T) {
 	}{
 		{
 			item: Item{
-				HoursSinceP: 0.001,
+				HoursSincePosting: 0.001,
 			},
 			want: "<1h",
 		},
 		{
 			item: Item{
-				HoursSinceP: 0007,
+				HoursSincePosting: 0007,
 			},
 			want: "7h",
 		},
 		{
 			item: Item{
-				HoursSinceP: 730,
+				HoursSincePosting: 730,
 			},
 			want: "1m",
 		},
 		{
 			item: Item{
-				HoursSinceP: 370,
+				HoursSincePosting: 370,
 			},
 			want: "15d",
 		},
 		{
 			item: Item{
-				HoursSinceP: 8760,
+				HoursSincePosting: 8760,
 			},
 			want: "1y",
 		},
@@ -61,7 +61,8 @@ func TestMarshall(t *testing.T) {
 				Author:       "L",
 				UnixPostTime: 1739890030,
 			},
-			want: []byte(`{"title":"A","by":"L","time":1739890030,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"A","by":"L","time":1739890030,` +
+				`"HoursSincePosting":0, "FormattedTime":"","url":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
@@ -175,8 +176,8 @@ func TestUnmarshall(t *testing.T) {
 
 	for _, test := range tests {
 		// 	now := time.Now().Unix()
-		// test.want.HoursSinceP = time.Duration(time.Since(time.Unix(now, 0)).Hours())
-		// fmt.Println(test.want.HoursSinceP)
+		// test.want.HoursSincePosting = time.Duration(time.Since(time.Unix(now, 0)).Hours())
+		// fmt.Println(test.want.HoursSincePosting)
 		got, err := Unmarshal(test.dataToUnmarshall)
 		if err != nil {
 			t.Fatal(err)
