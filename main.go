@@ -29,7 +29,7 @@ func main() {
 	// Get terminal size
 	var tWidth int
 
-	if tWidth, _, err = io.TermSize(); err != nil {
+	if tWidth, err = io.TermSize(); err != nil {
 		panic(err)
 	}
 
