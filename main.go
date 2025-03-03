@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/json"
 	"fmt"
 	"os"
 	"strconv"
@@ -42,7 +43,7 @@ func main() {
 
 	var frontpageIDs []int
 
-	if frontpageIDs, err = item.UnmarshallToSlice(frontpageJSON); err != nil {
+	if err = json.Unmarshal(frontpageJSON, &frontpageIDs); err != nil {
 		panic(err)
 	}
 
