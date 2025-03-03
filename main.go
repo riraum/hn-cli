@@ -146,18 +146,14 @@ func main() {
 	if cmd == "open" {
 		// postID := frontpageIDs[i]
 		// postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
-
 		// var postData []byte
-
 		// if postData, err = http.GetJSON(postURL); err != nil {
 		// 	panic(err)
 		// }
-
 		// postUnmarsh, err := item.Unmarshal(postData)
 		// if err != nil {
 		// 	panic(err)
 		// }
-
 		if err := openLink(postUnmarsh.ArticleURL); err != nil {
 			panic(err)
 		}
@@ -166,5 +162,4 @@ func main() {
 	if cmd == "quit" {
 		os.Exit(0)
 	}
-
 }
