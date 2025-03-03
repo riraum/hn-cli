@@ -27,12 +27,10 @@ type Item struct {
 // ...
 type Items []Item
 
-var err error
-
 func Marshall(input Item) ([]byte, error) {
-	var dataMarshalled []byte
+	dataMarshalled, err := json.Marshal(input)
 
-	if dataMarshalled, err = json.Marshal(input); err != nil {
+	if err != nil {
 		return dataMarshalled, fmt.Errorf("Failed to Marshall %w", err)
 	}
 
