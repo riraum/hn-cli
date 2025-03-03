@@ -54,6 +54,7 @@ func UnmarshallToSlice(input []byte) ([]int, error) {
 	if err := json.Unmarshal(input, &sv); err != nil {
 		return sv, fmt.Errorf("Failed to UnmarshallToSlice %w", err)
 	}
+
 	return sv, nil
 }
 
