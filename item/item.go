@@ -32,7 +32,7 @@ func Marshall(input Item) ([]byte, error) {
 
 	var dataMarshalled []byte
 	if dataMarshalled, err = json.Marshal(input); err != nil {
-		return dataMarshalled, err
+		return dataMarshalled, fmt.Errorf("Failed to Marshall %w", err)
 	}
 
 	return dataMarshalled, nil
@@ -42,7 +42,7 @@ func Unmarshal(input []byte) (Item, error) {
 	var dataUnmarshalled Item
 
 	if err := json.Unmarshal(input, &dataUnmarshalled); err != nil {
-		return dataUnmarshalled, err
+		return dataUnmarshalled, fmt.Errorf("Failed to Unmarshall %w", err)
 	}
 
 	return dataUnmarshalled, nil

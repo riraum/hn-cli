@@ -15,7 +15,11 @@ import (
 )
 
 func openLink(URL string) error {
-	return browser.OpenURL(URL)
+	if err := browser.OpenURL(URL); err != nil {
+		return fmt.Errorf("Failed to open `%s`: %w", URL, err)
+	}
+
+	return nil
 }
 
 func main() {

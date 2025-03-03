@@ -12,10 +12,10 @@ func UI() ([]string, error) {
 	_, err := fmt.Scanf("%s %s", &input, &inputNum)
 	if err != nil {
 		if inputNum == "" {
-			return []string{input}, err
+			return []string{input}, fmt.Errorf("Failed to get string input (no index entered) %w", err)
 		}
 
-		return []string{input, inputNum}, err
+		return []string{input, inputNum}, fmt.Errorf("Failed to get string and index input %w", err)
 	}
 
 	if inputNum == "" {
