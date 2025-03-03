@@ -63,21 +63,23 @@ func main() {
 		}
 
 		// Check for Ask/Show HN posts, without external URL
-		if postUnmarsh.URL == "" {
-			frontpageID := frontpageIDs[i]
-			commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
-
-			postUnmarsh.URL = commentURL
+		if postUnmarsh.ArticleURL == "" {
+			// frontpageID := frontpageIDs[i]
+			postUnmarsh.ArticleURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", postID)
 		}
 
 		// Get CommentURL
-		frontpageID := frontpageIDs[i]
-		postUnmarsh.CommentURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
+		// frontpageID := frontpageIDs[i]
+		// postUnmarsh.CommentURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
+		postUnmarsh.CommentURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", postID)
 
 		// Get ArticleURL
 		// postID := frontpageIDs[i]
 		// postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		// postData := http.GetJSON(postURL)
+		// articleURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
+		// postData, err = http.GetJSON(articleURL)
+		postUnmarsh.ArticleURL = postURL
 
 		postUnmarsh.Title = fmt.Sprintf("%.25s...", postUnmarsh.Title)
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
@@ -142,19 +144,19 @@ func main() {
 	}
 	// Open article URL
 	if cmd == "open" {
-		postID := frontpageIDs[inputInt]
-		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
+		// postID := frontpageIDs[i]
+		// postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 
-		var postData []byte
+		// var postData []byte
 
-		if postData, err = http.GetJSON(postURL); err != nil {
-			panic(err)
-		}
+		// if postData, err = http.GetJSON(postURL); err != nil {
+		// 	panic(err)
+		// }
 
-		postUnmarsh, err := item.Unmarshal(postData)
-		if err != nil {
-			panic(err)
-		}
+		// postUnmarsh, err := item.Unmarshal(postData)
+		// if err != nil {
+		// 	panic(err)
+		// }
 
 		if err := openLink(postUnmarsh.ArticleURL); err != nil {
 			panic(err)
