@@ -78,7 +78,7 @@ func main() {
 		// postUnmarsh.ArticleURL = articleURL
 
 		postUnmarsh.Title = fmt.Sprintf("%.25s...", postUnmarsh.Title)
-		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
+		postUnmarsh.HoursSinceP = postUnmarsh.AddHoursSinceP()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
 		// Trim title
