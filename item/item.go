@@ -20,9 +20,8 @@ type Item struct {
 	UnixPostTime      int64 `json:"time"`
 	HoursSincePosting float64
 	FormattedTime     string
-	ArticleURL        string `json:"url"`
-	CommentURL        string
-	Score             int `json:"score"`
+	URL               string `json:"url"`
+	Score             int    `json:"score"`
 }
 
 // ...
