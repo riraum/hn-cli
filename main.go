@@ -46,7 +46,7 @@ func main() {
 
 	var postUnmarsh item.Item
 
-	for i := 0; i <= 30; i++ {
+	for i := 0; i <= 10; i++ {
 		postID := frontpageIDs[i]
 
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
@@ -63,13 +63,10 @@ func main() {
 
 		// Check for Ask/Show HN posts, without external URL
 		if postUnmarsh.ArticleURL == "" {
-			// frontpageID := frontpageIDs[i]
 			postUnmarsh.ArticleURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", postID)
 		}
 
 		// Get CommentURL
-		// frontpageID := frontpageIDs[i]
-		// postUnmarsh.CommentURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 		postUnmarsh.CommentURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", postID)
 
 		// Get ArticleURL
@@ -78,7 +75,7 @@ func main() {
 		// postData := http.GetJSON(postURL)
 		// articleURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		// postData, err = http.GetJSON(articleURL)
-		postUnmarsh.ArticleURL = postURL
+		// postUnmarsh.ArticleURL = articleURL
 
 		postUnmarsh.Title = fmt.Sprintf("%.25s...", postUnmarsh.Title)
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
@@ -110,14 +107,18 @@ func main() {
 	}
 
 	cmd := input[0]
+	// index := input[1]
 
-	// var inputInt int
+	var inputInt int
 
 	if len(input) >= hasIndex {
-		if _, err = strconv.Atoi(input[1]); err != nil {
+		inputInt, err = strconv.Atoi(input[1])
+		if err != nil {
 			panic(err)
 		}
 	}
+
+	fmt.Print(inputInt)
 
 	// To use once post print code is in function
 	if cmd == "start" {
@@ -135,8 +136,6 @@ func main() {
 	}
 	// Open comments cmd
 	if cmd == "comments" {
-		// frontpageID := frontpageIDs[inputInt]
-		// commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 		if err := openLink(postUnmarsh.CommentURL); err != nil {
 			panic(err)
 		}

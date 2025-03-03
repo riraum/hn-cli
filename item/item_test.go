@@ -61,44 +61,44 @@ func TestMarshall(t *testing.T) {
 				Author:       "L",
 				UnixPostTime: 1739890030,
 			},
-			want: []byte(`{"title":"A","by":"L","time":1739890030,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"A","by":"L","time":1739890030,"HoursSincePosting":0,"FormattedTime":"","url":"","CommentURL":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
 				Title:  "",
 				Author: "M",
 			},
-			want: []byte(`{"title":"","by":"M","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"","by":"M","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","CommentURL":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
 				Title:  "Meditations",
 				Author: "",
 			},
-			want: []byte(`{"title":"Meditations","by":"","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"Meditations","by":"","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","CommentURL":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
 				Title:  "",
 				Author: "",
 			},
-			want: []byte(`{"title":"","by":"","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"","by":"","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","CommentURL":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
 				Author: "Marcus",
 			},
-			want: []byte(`{"title":"","by":"Marcus","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"","by":"Marcus","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","CommentURL":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
 				Title: "Meditations",
 			},
-			want: []byte(`{"title":"Meditations","by":"","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"Meditations","by":"","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","CommentURL":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{},
-			want:           []byte(`{"title":"","by":"","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want:           []byte(`{"title":"","by":"","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","CommentURL":"","score":0}`),
 		},
 	}
 
