@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"strconv"
@@ -18,7 +17,6 @@ func openLink(URL string) error {
 	if err := browser.OpenURL(URL); err != nil {
 		return fmt.Errorf("Failed to open `%s`: %w", URL, err)
 	}
-
 	return nil
 }
 
@@ -43,7 +41,7 @@ func main() {
 
 	var frontpageIDs []int
 
-	if err = json.Unmarshal(frontpageJSON, &frontpageIDs); err != nil {
+	if frontpageIDs, err = item.UnmarshallToSlice(frontpageJSON); err != nil {
 		panic(err)
 	}
 

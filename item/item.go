@@ -27,10 +27,11 @@ type Item struct {
 // ...
 type Items []Item
 
-func Marshall(input Item) ([]byte, error) {
-	var err error
+var err error
 
+func Marshall(input Item) ([]byte, error) {
 	var dataMarshalled []byte
+
 	if dataMarshalled, err = json.Marshal(input); err != nil {
 		return dataMarshalled, fmt.Errorf("Failed to Marshall %w", err)
 	}
@@ -46,6 +47,14 @@ func Unmarshal(input []byte) (Item, error) {
 	}
 
 	return dataUnmarshalled, nil
+}
+
+func UnmarshallToSlice(input []byte) ([]int, error) {
+	var sv []int
+	if err := json.Unmarshal(input, &sv); err != nil {
+		return sv, fmt.Errorf("Failed to UnmarshallToSlice %w", err)
+	}
+	return sv, nil
 }
 
 // time.time to time.Duration conversion
