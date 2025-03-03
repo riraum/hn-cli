@@ -15,7 +15,11 @@ import (
 )
 
 func openLink(URL string) error {
-	return browser.OpenURL(URL)
+	if err := browser.OpenURL(URL); err != nil {
+		return fmt.Errorf("Failed to open `%s`: %w", URL, err)
+	}
+
+	return nil
 }
 
 func main() {
@@ -25,7 +29,7 @@ func main() {
 	// Get terminal size
 	var tWidth int
 
-	if tWidth, _, err = io.TermSize(); err != nil {
+	if tWidth, err = io.TermSize(); err != nil {
 		panic(err)
 	}
 
