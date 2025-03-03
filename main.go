@@ -19,34 +19,43 @@ func openLink(URL string) error {
 }
 
 func main() {
+	var err error
+
 	fmt.Println("Hello hn-cli user")
 	// Get terminal size
 	var tWidth int
 
-	tWidth, _, tErr := io.TermSize()
-	if tErr != nil {
-		panic(tErr)
+	if tWidth, _, err = io.TermSize(); err != nil {
+		panic(err)
 	}
 
-	fmt.Println("Width:", tWidth)
+	// fmt.Println("termWidth:", tWidth)
 	// API
-	frontpageJSON := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
+	var frontpageJSON []byte
+
+	if frontpageJSON, err = http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json"); err != nil {
+		panic(err)
+	}
 
 	var frontpageIDs []int
 
-	err := json.Unmarshal(frontpageJSON, &frontpageIDs)
-	if err != nil {
-		err := fmt.Errorf("Error message during unmarshalling %g", err)
+	if err = json.Unmarshal(frontpageJSON, &frontpageIDs); err != nil {
 		panic(err)
 	}
 
 	for i := 0; i <= 80; i++ {
 		postID := frontpageIDs[i]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
-		postData := http.GetJSON(postURL)
 
-		postUnmarsh, err := item.Unmarshal(postData)
-		if err != nil {
+		var postData []byte
+
+		if postData, err = http.GetJSON(postURL); err != nil {
+			panic(err)
+		}
+
+		var postUnmarsh item.Item
+
+		if postUnmarsh, err = item.Unmarshal(postData); err != nil {
 			panic(err)
 		}
 
@@ -71,39 +80,28 @@ func main() {
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
+		// Trim title
 		index := strconv.Itoa(i)
-		o := fmt.Sprintln(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 
-		totalOutputLen := utf8.RuneCountInString(o)
 		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
-		fmt.Println("titleLen:", titleLen)
-		fmt.Println("totalOutputLen:", totalOutputLen)
-		// nonReducableLen := totalOutputLen - titleLen
-		// fmt.Println("nonReducableLen:", nonReducableLen)
-		// reducableLen := tWidth - nonReducableLen
-		// fmt.Println("reducableLen", reducableLen)
+		authorLen := utf8.RuneCountInString(postUnmarsh.Author)
 
-		if totalOutputLen > tWidth {
-			const roomForDots = 3
+		// Approximate length of the rest of the values, where a smaller variation exists, maximum observerded length taken
+		const otherLen = 19
+		spaceForTitle := tWidth - (otherLen + authorLen)
 
-			toReduceLen := (totalOutputLen - tWidth)
-			fmt.Println("toReduceLen", toReduceLen)
-			calcReduceLen := (titleLen - toReduceLen - roomForDots)
-			fmt.Println("calcReduceLen", calcReduceLen)
-
-			postUnmarsh.Title = fmt.Sprintf("%.*s...", calcReduceLen, postUnmarsh.Title)
+		if titleLen > spaceForTitle {
+			postUnmarsh.Title = fmt.Sprintf("%.*s...", spaceForTitle, postUnmarsh.Title)
 		}
 
-		fo := fmt.Sprintln(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
-
-		fmt.Println(fo)
+		fmt.Println(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 	}
 
 	// UI
 	const hasIndex = 2
 
-	input, err := ui.UI()
-	if len(input) > 1 && err != nil {
+	var input []string
+	if input, err = ui.UI(); err != nil && len(input) > 1 {
 		panic(err)
 	}
 
@@ -112,8 +110,6 @@ func main() {
 	var inputInt int
 
 	if len(input) >= hasIndex {
-		var err error
-
 		if inputInt, err = strconv.Atoi(input[1]); err != nil {
 			panic(err)
 		}
@@ -146,7 +142,12 @@ func main() {
 	if cmd == "open" {
 		postID := frontpageIDs[inputInt]
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
-		postData := http.GetJSON(postURL)
+
+		var postData []byte
+
+		if postData, err = http.GetJSON(postURL); err != nil {
+			panic(err)
+		}
 
 		postUnmarsh, err := item.Unmarshal(postData)
 		if err != nil {

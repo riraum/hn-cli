@@ -29,8 +29,10 @@ type Item struct {
 type Items []Item
 
 func Marshall(input Item) ([]byte, error) {
-	dataMarshalled, err := json.Marshal(input)
-	if err != nil {
+	var err error
+
+	var dataMarshalled []byte
+	if dataMarshalled, err = json.Marshal(input); err != nil {
 		return dataMarshalled, err
 	}
 
@@ -40,8 +42,7 @@ func Marshall(input Item) ([]byte, error) {
 func Unmarshal(input []byte) (Item, error) {
 	var dataUnmarshalled Item
 
-	err := json.Unmarshal(input, &dataUnmarshalled)
-	if err != nil {
+	if err := json.Unmarshal(input, &dataUnmarshalled); err != nil {
 		return dataUnmarshalled, err
 	}
 

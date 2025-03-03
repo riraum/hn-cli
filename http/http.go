@@ -5,14 +5,19 @@ import (
 	"net/http"
 )
 
-func GetJSON(URL string) []byte {
+func GetJSON(URL string) ([]byte, error) {
+	var body []byte
+
 	resp, err := http.Get(URL)
 	if err != nil {
-		panic(err)
+		return nil, err
 	}
+
 	defer resp.Body.Close()
 
-	body, _ := io.ReadAll(resp.Body)
+	if body, err := io.ReadAll(resp.Body); err != nil {
+		return body, err
+	}
 
-	return body
+	return body, nil
 }
