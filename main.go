@@ -45,7 +45,7 @@ func main() {
 
 	// UI
 	var input []string
-	if input, err = ui.UI(); err != nil && len(input) > 1 {
+	if input, err := ui.UI(); err != nil && len(input) > 1 {
 		panic(err)
 	}
 
