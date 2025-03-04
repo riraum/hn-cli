@@ -1,7 +1,6 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"os"
 	"strconv"
@@ -37,9 +36,7 @@ func main() {
 		panic(err)
 	}
 
-	var frontpageIDs []int
-
-	err = json.Unmarshal(frontpageJSON, &frontpageIDs)
+	frontpageIDs, err := item.UnmarshallSlice(frontpageJSON)
 	if err != nil {
 		panic(err)
 	}
