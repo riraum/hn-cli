@@ -60,7 +60,7 @@ func Cmds(input []string, post item.Item) (string, error) {
 
 	if len(input) >= hasIndex {
 		if inputInt, err = strconv.Atoi(input[1]); err != nil {
-			panic(err)
+			return input[1], fmt.Errorf("Failed Atoi conversion %w", err)
 		}
 	}
 
@@ -80,7 +80,7 @@ func Cmds(input []string, post item.Item) (string, error) {
 		// frontpageID := frontpageIDs[inputInt]
 		// commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 		if err := openCommentURL(post.CommentURL); err != nil {
-			panic(err)
+			return post.CommentURL, fmt.Errorf("Failed to open URL %w", err)
 		}
 	}
 	// Open article URL
@@ -96,7 +96,7 @@ func Cmds(input []string, post item.Item) (string, error) {
 		// 	panic(err)
 		// }
 		if err := openArticleURL(post.ArticleURL); err != nil {
-			panic(err)
+			return post.ArticleURL, fmt.Errorf("Failed to open URL %w", err)
 		}
 	}
 	// Quit command
