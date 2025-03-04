@@ -11,6 +11,7 @@ func UI() ([]string, error) {
 
 	_, err := fmt.Scanf("%s %s", &input, &inputNum)
 	fmt.Println("input, inputNum:", input, inputNum)
+
 	if err != nil {
 		if inputNum == "" {
 			return []string{input}, fmt.Errorf("Failed to get string input (no index entered) %w", err)
@@ -23,6 +24,8 @@ func UI() ([]string, error) {
 		fmt.Println("input:", input)
 		return []string{input}, nil
 	}
+
 	fmt.Println("input, inputNum:", input, inputNum)
+
 	return []string{input, inputNum}, nil
 }

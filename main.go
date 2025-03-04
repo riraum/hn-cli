@@ -105,22 +105,23 @@ func main() {
 	const hasIndex = 2
 
 	var input []string
-	input, err = ui.UI()
-	if err != nil && len(input) > hasIndex {
+	if input, err = ui.UI(); err != nil && len(input) > 1 {
 		panic(err)
 	}
+
 	fmt.Println("Input slice:", input)
 
 	cmd := input[0]
 
 	var inputInt int
 
-	if len(input) == hasIndex {
+	if len(input) >= hasIndex {
 		if inputInt, err = strconv.Atoi(input[1]); err != nil {
 			panic(err)
 		}
 	}
-	fmt.Println("InputInt:", inputInt)
+
+	fmt.Println("InputInt:", input)
 
 	fmt.Println("inputInt:", inputInt)
 
