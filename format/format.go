@@ -2,6 +2,7 @@ package format
 
 import (
 	"fmt"
+	"log"
 	"strconv"
 	"unicode/utf8"
 
@@ -22,7 +23,7 @@ func Format(frontpageIDs []int, tWidth int) (item.Item, error) {
 		var postData []byte
 
 		if postData, err = http.GetJSON(postURL); err != nil {
-			panic(err)
+			log.Fatalln("Failed to get JSON %w", err)
 		}
 
 		if postUnmarsh, err = item.Unmarshal(postData); err != nil {
