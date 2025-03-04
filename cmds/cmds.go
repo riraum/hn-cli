@@ -9,12 +9,44 @@ import (
 	"github.com/riraum/hn-cli/item"
 )
 
-func OpenLink(URL string) error {
+func openLink(URL string) error {
 	if err := browser.OpenURL(URL); err != nil {
 		return fmt.Errorf("Failed to open `%s`: %w", URL, err)
 	}
 
 	return nil
+}
+
+func openCommentURL(URL string) error {
+	err := openLink(URL)
+	if err != nil {
+		return fmt.Errorf("Failed to open CommentURL %w", err)
+	}
+
+	return nil
+}
+
+func openArticleURL(URL string) error {
+	err := openLink(URL)
+	if err != nil {
+		return fmt.Errorf("Failed to open ArticleURL %w", err)
+	}
+
+	return nil
+}
+
+func help() string {
+	return fmt.Sprintln(
+		"'start': Display posts\n",
+		"'next': gets the next page of items\n",
+		"'open X': opens the item with index/id X in the browser\n",
+		"'quit': quits the program\n",
+		"'refresh': reload the top items\n", "'comments': open the comments page in the browser",
+	)
+}
+
+func quit() {
+	os.Exit(0)
 }
 
 func Cmds(input []string, post item.Item) (string, error) {
@@ -41,20 +73,14 @@ func Cmds(input []string, post item.Item) (string, error) {
 	}
 	// List commands
 	if cmd == "help" {
-		return fmt.Sprintln(
-			"'start': Display posts\n",
-			"'next': gets the next page of items\n",
-			"'open X': opens the item with index/id X in the browser\n",
-			"'quit': quits the program\n",
-			"'refresh': reload the top items\n", "'comments': open the comments page in the browser",
-		), err
+		help()
 	}
 	// Open comments cmd
 	if cmd == "comments" {
 		// frontpageID := frontpageIDs[inputInt]
 		// commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
-		if err := OpenLink(post.CommentURL); err != nil {
-			return post.CommentURL, fmt.Errorf("Failed to open CommentURL %w", err)
+		if err := openCommentURL(post.CommentURL); err != nil {
+			panic(err)
 		}
 	}
 	// Open article URL
@@ -69,13 +95,13 @@ func Cmds(input []string, post item.Item) (string, error) {
 		// if err != nil {
 		// 	panic(err)
 		// }
-		if err := OpenLink(post.ArticleURL); err != nil {
-			return post.ArticleURL, fmt.Errorf("Failed to open ArticleURL %w", err)
+		if err := openArticleURL(post.ArticleURL); err != nil {
+			panic(err)
 		}
 	}
 	// Quit command
 	if cmd == "quit" {
-		os.Exit(0)
+		quit()
 	}
 
 	return "", nil
