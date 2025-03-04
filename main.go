@@ -46,7 +46,7 @@ func main() {
 
 	var postUnmarsh item.Item
 
-	for i := 0; i <= 30; i++ {
+	for i := 0; i <= 10; i++ {
 		postID := frontpageIDs[i]
 
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
@@ -105,19 +105,24 @@ func main() {
 	const hasIndex = 2
 
 	var input []string
-	if input, err = ui.UI(); err != nil && len(input) > 1 {
+	input, err = ui.UI()
+	if err != nil && len(input) > hasIndex {
 		panic(err)
 	}
+	fmt.Println("Input slice:", input)
 
 	cmd := input[0]
 
-	// var inputInt int
+	var inputInt int
 
-	if len(input) >= hasIndex {
-		if _, err = strconv.Atoi(input[1]); err != nil {
+	if len(input) == hasIndex {
+		if inputInt, err = strconv.Atoi(input[1]); err != nil {
 			panic(err)
 		}
 	}
+	fmt.Println("InputInt:", inputInt)
+
+	fmt.Println("inputInt:", inputInt)
 
 	// To use once post print code is in function
 	if cmd == "start" {
