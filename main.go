@@ -101,6 +101,8 @@ func main() {
 		fmt.Println(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 	}
 
+	fmt.Println("postUnmarsh", postUnmarsh)
+
 	// UI
 	const hasIndex = 2
 
