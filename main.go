@@ -34,9 +34,7 @@ func main() {
 
 	// fmt.Println("frontpageIDs", frontpageIDs)
 
-	var postUnmarsh item.Item
-
-	postUnmarsh, err = format.Format(frontpageIDs, tWidth)
+	postUnmarsh, err := format.Format(frontpageIDs, tWidth)
 	if err != nil {
 		panic(err)
 	}
@@ -44,16 +42,15 @@ func main() {
 	fmt.Println("postUnmarsh", postUnmarsh)
 
 	// UI
-	var input []string
-	if input, err := ui.UI(); err != nil && len(input) > 1 {
+	input, err := ui.UI()
+	if err != nil && len(input) > 1 {
 		panic(err)
 	}
 
 	fmt.Println("Input slice:", input)
 
-	var rv string
-
-	if rv, err = cmds.Cmds(input, postUnmarsh); err != nil {
+	rv, err := cmds.Cmds(input, postUnmarsh)
+	if err != nil {
 		panic(err)
 	}
 

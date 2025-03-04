@@ -17,7 +17,7 @@ func OpenLink(URL string) error {
 	return nil
 }
 
-func Cmds(input []string, postUnmarsh item.Item) (string, error) {
+func Cmds(input []string, post item.Item) (string, error) {
 	const hasIndex = 2
 
 	cmd := input[0]
@@ -53,8 +53,8 @@ func Cmds(input []string, postUnmarsh item.Item) (string, error) {
 	if cmd == "comments" {
 		// frontpageID := frontpageIDs[inputInt]
 		// commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
-		if err := OpenLink(postUnmarsh.CommentURL); err != nil {
-			return postUnmarsh.CommentURL, fmt.Errorf("Failed to open CommentURL %w", err)
+		if err := OpenLink(post.CommentURL); err != nil {
+			return post.CommentURL, fmt.Errorf("Failed to open CommentURL %w", err)
 		}
 	}
 	// Open article URL
@@ -69,8 +69,8 @@ func Cmds(input []string, postUnmarsh item.Item) (string, error) {
 		// if err != nil {
 		// 	panic(err)
 		// }
-		if err := OpenLink(postUnmarsh.ArticleURL); err != nil {
-			return postUnmarsh.ArticleURL, fmt.Errorf("Failed to open ArticleURL %w", err)
+		if err := OpenLink(post.ArticleURL); err != nil {
+			return post.ArticleURL, fmt.Errorf("Failed to open ArticleURL %w", err)
 		}
 	}
 	// Quit command
