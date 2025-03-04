@@ -48,6 +48,15 @@ func Unmarshal(input []byte) (Item, error) {
 	return dataUnmarshalled, nil
 }
 
+func UnmarshallSlice(input []byte) ([]int, error) {
+	var sliceUnmarshalled []int
+	if err := json.Unmarshal(input, &sliceUnmarshalled); err != nil {
+		return sliceUnmarshalled, fmt.Errorf("Failed to UnmarshallSlice %w", err)
+	}
+
+	return sliceUnmarshalled, nil
+}
+
 // time.time to time.Duration conversion
 func (t Item) AddHoursSincePosting() float64 {
 	return float64((time.Duration(time.Since(time.Unix(t.UnixPostTime, 0))).Hours()))

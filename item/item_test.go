@@ -3,6 +3,8 @@ package item
 import (
 	"bytes"
 	"testing"
+
+	"golang.org/x/exp/slices"
 )
 
 func TestRelativeTime(t *testing.T) {
@@ -196,6 +198,41 @@ func TestUnmarshall(t *testing.T) {
 		}
 
 		if got != test.want {
+			t.Errorf("Got: %v, want: %v", got, test.want)
+		}
+	}
+}
+
+func TestUnmarshallSlice(t *testing.T) {
+	tests := []struct {
+		UnmarshallSlice []byte
+		want            []int
+		desc            string
+	}{
+		{
+			desc:            "Simple slice",
+			UnmarshallSlice: []byte("[1, 2]"),
+			want:            []int{1, 2},
+		},
+		{
+			desc:            "Empty slice",
+			UnmarshallSlice: []byte("[]"),
+			want:            []int{},
+		},
+		{
+			desc:            "Longer slice",
+			UnmarshallSlice: []byte("[43241122, 43225470, 43244560, 43194100]"),
+			want:            []int{43241122, 43225470, 43244560, 43194100},
+		},
+	}
+
+	for _, test := range tests {
+		got, err := UnmarshallSlice(test.UnmarshallSlice)
+		if err != nil {
+			t.Fatal(err)
+		}
+
+		if !slices.Equal(got, test.want) {
 			t.Errorf("Got: %v, want: %v", got, test.want)
 		}
 	}

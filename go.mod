@@ -4,6 +4,7 @@ go 1.23.6
 
 require (
 	github.com/pkg/browser v0.0.0-20240102092130-5ac0b6a4141c
+	golang.org/x/exp v0.0.0-20250228200357-dead58393ab7
 	golang.org/x/term v0.29.0
 )
 
