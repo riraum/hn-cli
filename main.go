@@ -42,7 +42,7 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println("frontpageIDs", frontpageIDs)
+	// fmt.Println("frontpageIDs", frontpageIDs)
 
 	var postUnmarsh item.Item
 
