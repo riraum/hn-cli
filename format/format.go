@@ -27,7 +27,7 @@ func Format(frontpageIDs []int, tWidth int) (item.Item, error) {
 		}
 
 		if postUnmarsh, err = item.Unmarshal(postData); err != nil {
-			panic(err)
+			log.Fatalln("Failed to Unmarshall %w", err)
 		}
 
 		// Check for Ask/Show HN posts, without external URL
