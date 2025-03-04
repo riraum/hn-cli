@@ -49,7 +49,7 @@ func quit() {
 	os.Exit(0)
 }
 
-func Cmds(input []string, post item.Item) error {
+func Run(input []string, post item.Item) error {
 	const hasIndex = 2
 
 	cmd := input[0]
