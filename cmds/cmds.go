@@ -15,27 +15,28 @@ func openLink(URL string) error {
 	return nil
 }
 
-func Cmds(cmd string) (string, error) {
+func Cmds(cmd, URL string) (string, error) {
+	var err error
 	// To use once post print code is in function
 	if cmd == "start" {
-		fmt.Println("PLACEHOLDER")
+		return fmt.Sprintln("PLACEHOLDER"), err
 	}
 	// List commands
 	if cmd == "help" {
-		fmt.Println(
+		return fmt.Sprintln(
 			"'start': Display posts\n",
 			"'next': gets the next page of items\n",
 			"'open X': opens the item with index/id X in the browser\n",
 			"'quit': quits the program\n",
 			"'refresh': reload the top items\n", "'comments': open the comments page in the browser",
-		)
+		), err
 	}
 	// Open comments cmd
 	if cmd == "comments" {
 		// frontpageID := frontpageIDs[inputInt]
 		// commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
-		if err := openLink(postUnmarsh.CommentURL); err != nil {
-			panic(err)
+		if err := openLink(URL); err != nil {
+			return URL, err
 		}
 	}
 	// Open article URL
@@ -50,12 +51,13 @@ func Cmds(cmd string) (string, error) {
 		// if err != nil {
 		// 	panic(err)
 		// }
-		if err := openLink(postUnmarsh.ArticleURL); err != nil {
-			panic(err)
+		if err := openLink(URL); err != nil {
+			return URL, err
 		}
 	}
 	// Quit command
 	if cmd == "quit" {
 		os.Exit(0)
 	}
+	return "", err
 }
