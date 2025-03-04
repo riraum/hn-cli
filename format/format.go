@@ -70,7 +70,5 @@ func Format(frontpageIDs []int, tWidth int) (item.Item, error) {
 		fmt.Println(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 	}
 
-	fmt.Println("postUnmarsh", postUnmarsh)
-
 	return postUnmarsh, nil
 }
