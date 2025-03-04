@@ -61,44 +61,57 @@ func TestMarshall(t *testing.T) {
 				Author:       "L",
 				UnixPostTime: 1739890030,
 			},
-			want: []byte(`{"title":"A","by":"L","time":1739890030,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"A","by":"L","time":1739890030,` +
+				`"HoursSincePosting":0,"FormattedTime":"","url":"","CommentURL":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
 				Title:  "",
 				Author: "M",
 			},
-			want: []byte(`{"title":"","by":"M","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"","by":"M","time":0,` + `"HoursSincePosting":0,` +
+				`"FormattedTime":"",` +
+				`"url":"","CommentURL":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
 				Title:  "Meditations",
 				Author: "",
 			},
-			want: []byte(`{"title":"Meditations","by":"","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"Meditations","by":"",` +
+				`"time":0,"HoursSincePosting":0,"FormattedTime":"",` +
+				`"url":"","CommentURL":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
 				Title:  "",
 				Author: "",
 			},
-			want: []byte(`{"title":"","by":"","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"","by":"","time":0,` +
+				`"HoursSincePosting":0,"FormattedTime":"","url":"",` +
+				`"CommentURL":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
 				Author: "Marcus",
 			},
-			want: []byte(`{"title":"","by":"Marcus","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"","by":"Marcus","time":0,` +
+				`"HoursSincePosting":0,"FormattedTime":"","url":"",` +
+				`"CommentURL":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{
 				Title: "Meditations",
 			},
-			want: []byte(`{"title":"Meditations","by":"","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"Meditations","by":"",` +
+				`"time":0,"HoursSincePosting":0,"FormattedTime":"",` +
+				`"url":"","CommentURL":"","score":0}`),
 		},
 		{
 			dataToMarshall: Item{},
-			want:           []byte(`{"title":"","by":"","time":0,"HoursSincePosting":0,"FormattedTime":"","url":"","score":0}`),
+			want: []byte(`{"title":"","by":"","time":0,` +
+				`"HoursSincePosting":0,"FormattedTime":"","url":"",` +
+				`"CommentURL":"","score":0}`),
 		},
 	}
 
@@ -120,7 +133,7 @@ func TestUnmarshall(t *testing.T) {
 		want             Item
 	}{
 		{
-			dataToUnmarshall: []byte(`{"title":"Alice in Wonderland","by":"Lewis Carroll","url":"","score":0}`),
+			dataToUnmarshall: []byte(`{"title":"Alice in Wonderland","by":"Lewis Carroll","url":"","CommentURL":"","score":0}`),
 			want: Item{
 				Title:  "Alice in Wonderland",
 				Author: "Lewis Carroll",
@@ -163,12 +176,20 @@ func TestUnmarshall(t *testing.T) {
 			dataToUnmarshall: []byte(`{}`),
 			want:             Item{},
 		},
+		// {
+		// 	dataToUnmarshall: []byte(`{"title":"Demo title","author":"Demo author","url":"","CommentURL":"",}`),
+		// 	want: Item{
+		// 		Author: "Demo author",
+		// 		Title:  "Demo title",
+		// 		URL:    "",
+		// 	},
+		// },
 	}
 
 	for _, test := range tests {
 		// 	now := time.Now().Unix()
-		// test.want.hoursSincePosting = time.Duration(time.Since(time.Unix(now, 0)).Hours())
-		// fmt.Println(test.want.hoursSincePosting)
+		// test.want.HoursSincePosting = time.Duration(time.Since(time.Unix(now, 0)).Hours())
+		// fmt.Println(test.want.HoursSincePosting)
 		got, err := Unmarshal(test.dataToUnmarshall)
 		if err != nil {
 			t.Fatal(err)

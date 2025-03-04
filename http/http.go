@@ -7,8 +7,6 @@ import (
 )
 
 func GetJSON(URL string) ([]byte, error) {
-	var body []byte
-
 	resp, err := http.Get(URL)
 	if err != nil {
 		return nil, fmt.Errorf("Failed to GET `%s`: %w", URL, err)
@@ -16,7 +14,8 @@ func GetJSON(URL string) ([]byte, error) {
 
 	defer resp.Body.Close()
 
-	if body, err := io.ReadAll(resp.Body); err != nil {
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
 		return body, fmt.Errorf("Failed to read response body: %w", err)
 	}
 
