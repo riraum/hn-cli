@@ -35,15 +35,17 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	// fmt.Println("frontpageJSON", frontpageJSON)
 
 	frontpageIDs, err := item.UnmarshallSlice(frontpageJSON)
 	if err != nil {
 		panic(err)
 	}
+	fmt.Println("frontpageIDs", frontpageIDs)
 
 	var postUnmarsh item.Item
 
-	for i := 0; i <= 30; i++ {
+	for i := 0; i <= 10; i++ {
 		postID := frontpageIDs[i]
 
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
