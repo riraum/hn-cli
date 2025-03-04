@@ -207,10 +207,22 @@ func TestUnmarshallSlice(t *testing.T) {
 	tests := []struct {
 		UnmarshallSlice []byte
 		want            []int
+		desc            string
 	}{
 		{
-			UnmarshallSlice: []byte(`{"":0,"":1}`),
-			want:            []int{0, 1},
+			desc:            "Simple slice",
+			UnmarshallSlice: []byte("[1, 2]"),
+			want:            []int{1, 2},
+		},
+		{
+			desc:            "Empty slice",
+			UnmarshallSlice: []byte("[]"),
+			want:            []int{},
+		},
+		{
+			desc:            "Longer slice",
+			UnmarshallSlice: []byte("[43241122, 43225470, 43244560, 43194100]"),
+			want:            []int{43241122, 43225470, 43244560, 43194100},
 		},
 	}
 
@@ -219,6 +231,7 @@ func TestUnmarshallSlice(t *testing.T) {
 		if err != nil {
 			t.Fatal(err)
 		}
+
 		if !slices.Equal(got, test.want) {
 			t.Errorf("Got: %v, want: %v", got, test.want)
 		}
