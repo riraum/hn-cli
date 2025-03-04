@@ -10,17 +10,22 @@ func UI() ([]string, error) {
 	fmt.Printf("Type `start' to display posts, 'help' for list of commands\n>")
 
 	_, err := fmt.Scanf("%s %s", &input, &inputNum)
+	fmt.Println("input, inputNum:", input, inputNum)
+
 	if err != nil {
 		if inputNum == "" {
-			return nil, fmt.Errorf("Failed to get `%s` string input (no index entered) %w", []string{input}, err)
+			return []string{input}, fmt.Errorf("Failed to get string input (no index entered) %w", err)
 		}
 
-		return nil, fmt.Errorf("Failed to get `%s` string and index input %w", []string{input, inputNum}, err)
+		return []string{input, inputNum}, fmt.Errorf("Failed to get string and index input %w", err)
 	}
 
 	if inputNum == "" {
+		fmt.Println("input:", input)
 		return []string{input}, nil
 	}
+
+	fmt.Println("input, inputNum:", input, inputNum)
 
 	return []string{input, inputNum}, nil
 }
