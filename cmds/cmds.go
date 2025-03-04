@@ -49,7 +49,7 @@ func quit() {
 	os.Exit(0)
 }
 
-func Cmds(input []string, post item.Item) (string, error) {
+func Cmds(input []string, post item.Item) error {
 	const hasIndex = 2
 
 	cmd := input[0]
@@ -60,7 +60,7 @@ func Cmds(input []string, post item.Item) (string, error) {
 
 	if len(input) >= hasIndex {
 		if inputInt, err = strconv.Atoi(input[1]); err != nil {
-			return input[1], fmt.Errorf("Failed Atoi conversion %w", err)
+			return fmt.Errorf("Failed Atoi conversion %w", err)
 		}
 	}
 
@@ -69,18 +69,18 @@ func Cmds(input []string, post item.Item) (string, error) {
 	fmt.Println("inputInt:", inputInt)
 	// To use once post print code is in function
 	if cmd == "start" {
-		return fmt.Sprintln("PLACEHOLDER"), err
+		fmt.Sprintln("PLACEHOLDER")
 	}
 	// List commands
 	if cmd == "help" {
-		help()
+		fmt.Print(help())
 	}
 	// Open comments cmd
 	if cmd == "comments" {
 		// frontpageID := frontpageIDs[inputInt]
 		// commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 		if err := openCommentURL(post.CommentURL); err != nil {
-			return post.CommentURL, fmt.Errorf("Failed to open URL %w", err)
+			return fmt.Errorf("Failed to open URL %w", err)
 		}
 	}
 	// Open article URL
@@ -96,7 +96,7 @@ func Cmds(input []string, post item.Item) (string, error) {
 		// 	panic(err)
 		// }
 		if err := openArticleURL(post.ArticleURL); err != nil {
-			return post.ArticleURL, fmt.Errorf("Failed to open URL %w", err)
+			return fmt.Errorf("Failed to open URL %w", err)
 		}
 	}
 	// Quit command
@@ -104,5 +104,5 @@ func Cmds(input []string, post item.Item) (string, error) {
 		quit()
 	}
 
-	return "", nil
+	return nil
 }
