@@ -26,21 +26,16 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	// fmt.Println("frontpageJSON", frontpageJSON)
 
 	frontpageIDs, err := item.UnmarshallSlice(frontpageJSON)
 	if err != nil {
 		panic(err)
 	}
 
-	// fmt.Println("frontpageIDs", frontpageIDs)
-
 	postUnmarshSlice, err := format.Format(frontpageIDs, tWidth)
 	if err != nil {
 		panic(err)
 	}
-
-	// fmt.Println("postUnmarshSlice", postUnmarshSlice)
 
 	// UI
 	input, err := ui.UI()
@@ -57,8 +52,6 @@ func main() {
 			panic(err)
 		}
 	}
-
-	// fmt.Println("Input slice:", input)
 
 	err = cmds.Run(input[0], postUnmarshSlice[inputInt])
 	if err != nil {

@@ -12,7 +12,6 @@ func UI() ([]string, error) {
 	fmt.Printf("Type `start' to display posts, 'help' for list of commands\n>")
 
 	_, err := fmt.Scanf("%s %s", &input, &inputNum)
-	// fmt.Println("input, inputNum:", input, inputNum)
 
 	if input == "" {
 		return []string{""}, fmt.Errorf("Empty input %w", err)
@@ -30,8 +29,6 @@ func UI() ([]string, error) {
 		fmt.Println("input:", input)
 		return []string{input}, nil
 	}
-
-	// fmt.Println("input, inputNum:", input, inputNum)
 
 	return []string{input, inputNum}, nil
 }
