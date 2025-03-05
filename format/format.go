@@ -8,10 +8,10 @@ import (
 	"github.com/riraum/hn-cli/item"
 )
 
-func Format(postUnmarshSlice item.Items, tWidth int) error {
+func Format(posts item.Items, tWidth int) error {
 	// var postUnmarshSlice item.Items
 	for i := 0; i <= 10; i++ {
-		postUnmarsh := postUnmarshSlice[i]
+		postUnmarsh := posts[i]
 
 		postUnmarsh.Title = fmt.Sprintf("%.25s...", postUnmarsh.Title)
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
