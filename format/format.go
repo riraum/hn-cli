@@ -63,7 +63,5 @@ func Format(frontpageIDs []int, tWidth int) (item.Items, error) {
 		fmt.Println(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 	}
 
-	// fmt.Println("postUnmarshSlice", postUnmarshSlice)
-
 	return postUnmarshSlice, nil
 }
