@@ -13,11 +13,9 @@ const (
 )
 
 type Item struct {
-	Title  string `json:"title"`
-	Author string `json:"by"`
-	// Score  int    `json:"score"`
-	// ID                int `json:"id"`
-	UnixPostTime      int64 `json:"time"`
+	Title             string `json:"title"`
+	Author            string `json:"by"`
+	UnixPostTime      int64  `json:"time"`
 	HoursSincePosting float64
 	FormattedTime     string
 	ArticleURL        string `json:"url"`

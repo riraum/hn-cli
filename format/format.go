@@ -2,58 +2,23 @@ package format
 
 import (
 	"fmt"
-	"log"
 	"strconv"
 	"unicode/utf8"
 
-	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/item"
 )
 
-func Format(frontpageIDs []int, tWidth int) (item.Item, error) {
-	var postUnmarsh item.Item
-
-	var err error
-
+func Format(posts item.Items, tWidth int) error {
+	// var postUnmarshSlice item.Items
 	for i := 0; i <= 10; i++ {
-		postID := frontpageIDs[i]
-
-		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
-
-		var postData []byte
-
-		if postData, err = http.GetJSON(postURL); err != nil {
-			log.Fatalln("Failed to get JSON %w", err)
-		}
-
-		if postUnmarsh, err = item.Unmarshal(postData); err != nil {
-			log.Fatalln("Failed to Unmarshall %w", err)
-		}
-
-		// Check for Ask/Show HN posts, without external URL
-		if postUnmarsh.ArticleURL == "" {
-			// frontpageID := frontpageIDs[i]
-			postUnmarsh.ArticleURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", postID)
-		}
-
-		// Get CommentURL
-		// frontpageID := frontpageIDs[i]
-		// postUnmarsh.CommentURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
-		postUnmarsh.CommentURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", postID)
-
-		// Get ArticleURL
-		// postID := frontpageIDs[i]
-		// postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
-		// postData := http.GetJSON(postURL)
-		// articleURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
-		// postData, err = http.GetJSON(articleURL)
-		postUnmarsh.ArticleURL = postURL
+		postUnmarsh := posts[i]
 
 		postUnmarsh.Title = fmt.Sprintf("%.25s...", postUnmarsh.Title)
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
 		// Trim title
+		// index := postUnmarshSlice[index]
 		index := strconv.Itoa(i)
 
 		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
@@ -70,5 +35,5 @@ func Format(frontpageIDs []int, tWidth int) (item.Item, error) {
 		fmt.Println(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 	}
 
-	return postUnmarsh, nil
+	return nil
 }
