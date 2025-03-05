@@ -13,8 +13,6 @@ import (
 func Format(frontpageIDs []int, tWidth int) (item.Items, error) {
 	var postUnmarshSlice item.Items
 
-	// postUnmarsh = append(postUnmarsh)
-
 	var err error
 
 	for i := 0; i <= 10; i++ {
@@ -30,30 +28,17 @@ func Format(frontpageIDs []int, tWidth int) (item.Items, error) {
 			log.Fatalln("Failed to get JSON %w", err)
 		}
 
-		// postUnmarshSL := append(postUnmarshSlice)
-
 		if postUnmarsh, err = item.Unmarshal(postData); err != nil {
 			log.Fatalln("Failed to Unmarshall %w", err)
 		}
 
 		// Check for Ask/Show HN posts, without external URL
 		if postUnmarsh.ArticleURL == "" {
-			// frontpageID := frontpageIDs[i]
 			postUnmarsh.ArticleURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", postID)
 		}
 
 		// Get CommentURL
-		// frontpageID := frontpageIDs[i]
-		// postUnmarsh.CommentURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 		postUnmarsh.CommentURL = fmt.Sprintf("https://news.ycombinator.com/item?id=%v", postID)
-
-		// Get ArticleURL
-		// postID := frontpageIDs[i]
-		// postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
-		// postData := http.GetJSON(postURL)
-		// articleURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
-		// postData, err = http.GetJSON(articleURL)
-		postUnmarsh.ArticleURL = postURL
 
 		postUnmarsh.Title = fmt.Sprintf("%.25s...", postUnmarsh.Title)
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()

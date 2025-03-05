@@ -40,7 +40,7 @@ func main() {
 		panic(err)
 	}
 
-	fmt.Println("postUnmarshSlice", postUnmarshSlice)
+	// fmt.Println("postUnmarshSlice", postUnmarshSlice)
 
 	// UI
 	input, err := ui.UI()
@@ -58,7 +58,7 @@ func main() {
 		}
 	}
 
-	fmt.Println("Input slice:", input)
+	// fmt.Println("Input slice:", input)
 
 	err = cmds.Run(input[0], postUnmarshSlice[inputInt])
 	if err != nil {
