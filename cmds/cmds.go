@@ -68,23 +68,21 @@ func Run(input []string, post item.Item) error {
 
 	fmt.Println("inputInt:", inputInt)
 	// To use once post print code is in function
-	if cmd == "start" {
+	switch cmd {
+	case "start":
 		fmt.Sprintln("PLACEHOLDER")
-	}
 	// List commands
-	if cmd == "help" {
+	case "help":
 		fmt.Print(help())
-	}
 	// Open comments cmd
-	if cmd == "comments" {
+	case "comments":
 		// frontpageID := frontpageIDs[inputInt]
 		// commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 		if err := openCommentURL(post.CommentURL); err != nil {
 			return fmt.Errorf("Failed to open URL %w", err)
 		}
-	}
 	// Open article URL
-	if cmd == "open" {
+	case "open":
 		// postID := frontpageIDs[i]
 		// postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 		// var postData []byte
@@ -98,9 +96,8 @@ func Run(input []string, post item.Item) error {
 		if err := openArticleURL(post.ArticleURL); err != nil {
 			return fmt.Errorf("Failed to open URL %w", err)
 		}
-	}
 	// Quit command
-	if cmd == "quit" {
+	case "quit":
 		quit()
 	}
 
