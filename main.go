@@ -32,7 +32,7 @@ func main() {
 		panic(err)
 	}
 
-	posts, err := http.BuildStructSlice(frontpageIDs)
+	posts, err := http.GetPostsFromIDs(frontpageIDs)
 	if err != nil {
 		panic(err)
 	}

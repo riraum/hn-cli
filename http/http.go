@@ -25,7 +25,7 @@ func GetJSON(URL string) ([]byte, error) {
 	return body, nil
 }
 
-func BuildStructSlice(frontpageIDs []int) (item.Items, error) {
+func GetPostsFromIDs(frontpageIDs []int) (item.Items, error) {
 	var postUnmarshSlice item.Items
 
 	var err error
