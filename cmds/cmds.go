@@ -65,23 +65,11 @@ func Run(input string, post item.Item) error {
 		fmt.Print(help())
 	// Open comments cmd
 	case "comments":
-		// frontpageID := frontpageIDs[inputInt]
-		// commentURL := fmt.Sprintf("https://news.ycombinator.com/item?id=%v", frontpageID)
 		if err := openCommentURL(post.CommentURL); err != nil {
 			return fmt.Errorf("Failed to open URL %w", err)
 		}
 	// Open article URL
 	case "open":
-		// postID := frontpageIDs[i]
-		// postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
-		// var postData []byte
-		// if postData, err = http.GetJSON(postURL); err != nil {
-		// 	panic(err)
-		// }
-		// postUnmarsh, err := item.Unmarshal(postData)
-		// if err != nil {
-		// 	panic(err)
-		// }
 		if err := openArticleURL(post.ArticleURL); err != nil {
 			return fmt.Errorf("Failed to open URL %w", err)
 		}
