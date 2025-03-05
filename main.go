@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/riraum/hn-cli/cmds"
 	"github.com/riraum/hn-cli/format"
@@ -34,12 +35,12 @@ func main() {
 
 	// fmt.Println("frontpageIDs", frontpageIDs)
 
-	postUnmarsh, err := format.Format(frontpageIDs, tWidth)
+	postUnmarshSlice, err := format.Format(frontpageIDs, tWidth)
 	if err != nil {
 		panic(err)
 	}
 
-	fmt.Println("postUnmarsh", postUnmarsh)
+	fmt.Println("postUnmarshSlice", postUnmarshSlice)
 
 	// UI
 	input, err := ui.UI()
@@ -47,9 +48,19 @@ func main() {
 		panic(err)
 	}
 
+	const hasIndex = 2
+
+	var inputInt int
+
+	if len(input) >= hasIndex {
+		if inputInt, err = strconv.Atoi(input[1]); err != nil {
+			panic(err)
+		}
+	}
+
 	fmt.Println("Input slice:", input)
 
-	err = cmds.Run(input, postUnmarsh)
+	err = cmds.Run(input, postUnmarshSlice[inputInt])
 	if err != nil {
 		panic(err)
 	}

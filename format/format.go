@@ -10,12 +10,16 @@ import (
 	"github.com/riraum/hn-cli/item"
 )
 
-func Format(frontpageIDs []int, tWidth int) (item.Item, error) {
-	var postUnmarsh item.Item
+func Format(frontpageIDs []int, tWidth int) (item.Items, error) {
+	var postUnmarshSlice item.Items
+
+	// postUnmarsh = append(postUnmarsh)
 
 	var err error
 
 	for i := 0; i <= 10; i++ {
+		var postUnmarsh item.Item
+
 		postID := frontpageIDs[i]
 
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
@@ -25,6 +29,8 @@ func Format(frontpageIDs []int, tWidth int) (item.Item, error) {
 		if postData, err = http.GetJSON(postURL); err != nil {
 			log.Fatalln("Failed to get JSON %w", err)
 		}
+
+		// postUnmarshSL := append(postUnmarshSlice)
 
 		if postUnmarsh, err = item.Unmarshal(postData); err != nil {
 			log.Fatalln("Failed to Unmarshall %w", err)
@@ -67,8 +73,12 @@ func Format(frontpageIDs []int, tWidth int) (item.Item, error) {
 			postUnmarsh.Title = fmt.Sprintf("%.*s...", spaceForTitle, postUnmarsh.Title)
 		}
 
+		postUnmarshSlice = append(postUnmarshSlice, postUnmarsh)
+
 		fmt.Println(index, postUnmarsh.Score, postUnmarsh.Author, postUnmarsh.Title, postUnmarsh.FormattedTime, "ago")
 	}
 
-	return postUnmarsh, nil
+	fmt.Println("postUnmarshSlice", postUnmarshSlice)
+
+	return postUnmarshSlice, nil
 }

@@ -64,7 +64,7 @@ func Run(input []string, post item.Item) error {
 		}
 	}
 
-	fmt.Println("InputInt:", input)
+	fmt.Println("input:", input)
 
 	fmt.Println("inputInt:", inputInt)
 	// To use once post print code is in function
