@@ -1,6 +1,8 @@
 package ui
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func UI() ([]string, error) {
 	var input string
