@@ -3,7 +3,6 @@ package cmds
 import (
 	"fmt"
 	"os"
-	"strconv"
 
 	"github.com/pkg/browser"
 	"github.com/riraum/hn-cli/item"
@@ -49,26 +48,10 @@ func quit() {
 	os.Exit(0)
 }
 
-func Run(input []string, post item.Item) error {
-	const hasIndex = 2
-
-	cmd := input[0]
-
-	var inputInt int
-
-	var err error
-
-	if len(input) >= hasIndex {
-		if inputInt, err = strconv.Atoi(input[1]); err != nil {
-			return fmt.Errorf("Failed Atoi conversion %w", err)
-		}
-	}
-
+func Run(input string, post item.Item) error {
 	fmt.Println("input:", input)
-
-	fmt.Println("inputInt:", inputInt)
 	// To use once post print code is in function
-	switch cmd {
+	switch input {
 	case "start":
 		fmt.Sprintln("PLACEHOLDER")
 	// List commands

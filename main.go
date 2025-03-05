@@ -60,7 +60,7 @@ func main() {
 
 	fmt.Println("Input slice:", input)
 
-	err = cmds.Run(input, postUnmarshSlice[inputInt])
+	err = cmds.Run(input[0], postUnmarshSlice[inputInt])
 	if err != nil {
 		panic(err)
 	}
