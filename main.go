@@ -32,7 +32,12 @@ func main() {
 		panic(err)
 	}
 
-	postUnmarshSlice, err := format.Format(frontpageIDs, tWidth)
+	postunMarshSlice, err := http.GetURL(frontpageIDs)
+	if err != nil {
+		panic(err)
+	}
+
+	err = format.Format(postunMarshSlice, tWidth)
 	if err != nil {
 		panic(err)
 	}
@@ -53,7 +58,7 @@ func main() {
 		}
 	}
 
-	err = cmds.Run(input[0], postUnmarshSlice[inputInt])
+	err = cmds.Run(input[0], postunMarshSlice[inputInt])
 	if err != nil {
 		panic(err)
 	}
