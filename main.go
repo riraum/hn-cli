@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"strconv"
 
 	"github.com/riraum/hn-cli/cmds"
@@ -13,39 +14,47 @@ import (
 )
 
 func main() {
-	fmt.Println("Hello hn-cli user")
+	fmt.Println("Hello hn-cli user\nTalking to the API...")
+
+	const errTxt = "Goodbye"
 
 	// Get terminal size
 	tWidth, err := io.TermSize()
 	if err != nil {
-		panic(err)
+		fmt.Println(errTxt, err)
+		os.Exit(1)
 	}
 
 	// API
 	frontpageJSON, err := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 	if err != nil {
-		panic(err)
+		fmt.Println(errTxt, err)
+		os.Exit(1)
 	}
 
 	frontpageIDs, err := item.UnmarshallSlice(frontpageJSON)
 	if err != nil {
-		panic(err)
+		fmt.Println(errTxt, err)
+		os.Exit(1)
 	}
 
 	posts, err := http.GetPostsFromIDs(frontpageIDs)
 	if err != nil {
-		panic(err)
+		fmt.Println(errTxt, err)
+		os.Exit(1)
 	}
 
 	err = format.Format(posts, tWidth)
 	if err != nil {
-		panic(err)
+		fmt.Println(errTxt, err)
+		os.Exit(1)
 	}
 
 	// UI
 	input, err := ui.UI()
 	if err != nil && len(input) > 1 {
-		panic(err)
+		fmt.Println(errTxt, err)
+		os.Exit(1)
 	}
 
 	const hasIndex = 2
@@ -54,12 +63,14 @@ func main() {
 
 	if len(input) >= hasIndex {
 		if inputInt, err = strconv.Atoi(input[1]); err != nil {
-			panic(err)
+			fmt.Println(errTxt, err)
+			os.Exit(1)
 		}
 	}
 
 	err = cmds.Run(input[0], posts[inputInt])
 	if err != nil {
-		panic(err)
+		fmt.Println(errTxt, err)
+		os.Exit(1)
 	}
 }
