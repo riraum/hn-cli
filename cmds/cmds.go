@@ -49,16 +49,11 @@ func quit() {
 }
 
 func Run(input string, post item.Item) error {
-	// To use once post print code is in function
-	if input == "" {
-		fmt.Sprintln("You didn't enter anything. Will print help", help())
-	}
-
 	switch input {
-	// case "":
-	// fmt.Sprintln("You didn't enter anything. Will print help", help())
+	case "":
+		fmt.Println("You didn't enter anything. Will print help", help())
 	case "start":
-		fmt.Sprintln("PLACEHOLDER")
+		fmt.Println("PLACEHOLDER")
 	// List commands
 	case "help":
 		fmt.Print(help())
