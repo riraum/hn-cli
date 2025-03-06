@@ -21,7 +21,7 @@ func main() {
 	// Get terminal size
 	tWidth, err := io.TermSize()
 	if err != nil {
-		fmt.Println("errTxt", err)
+		fmt.Println(errTxt, err)
 		os.Exit(1)
 	}
 
