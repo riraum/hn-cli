@@ -49,12 +49,16 @@ func quit() {
 }
 
 func Run(input string, post item.Item) error {
+	const wipMessage = "Logic not yet implemented"
+
 	switch input {
 	case "":
 		fmt.Println("You didn't enter anything. Will print help", help())
 	case "start":
-		fmt.Println("PLACEHOLDER")
+		fmt.Println(wipMessage)
 	// List commands
+	case "refresh":
+		fmt.Println(wipMessage)
 	case "help":
 		fmt.Print(help())
 	// Open comments cmd
