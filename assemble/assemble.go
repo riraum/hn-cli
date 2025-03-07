@@ -10,6 +10,7 @@ import (
 
 func Show(tWidth int) (item.Items, error) {
 	fmt.Println("Talking to the API...")
+
 	frontpageJSON, err := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
 	if err != nil {
 		return nil, fmt.Errorf("Failed to GetJSON %w", err)
