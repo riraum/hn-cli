@@ -9,6 +9,10 @@ import (
 	"github.com/riraum/hn-cli/item"
 )
 
+/*
+  - http/http.go: does all the GetIds, GetPosts, ...
+    it is a very low-level package that does only HTTP calls and maybe JSON unmarshalling.
+*/
 func GetJSON(URL string) ([]byte, error) {
 	resp, err := http.Get(URL)
 	if err != nil {

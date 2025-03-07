@@ -8,6 +8,14 @@ import (
 	"github.com/riraum/hn-cli/item"
 )
 
+/*
+format/format.go: does the formatting for displaying
+
+	This provides low-level string functions like
+	`func Resize(in string, width) string`
+	...
+	This package would only work on `strings`, not `Item`
+*/
 func Format(posts item.Items, tWidth int) error {
 	for i := 0; i <= 10; i++ {
 		postUnmarsh := posts[i]
