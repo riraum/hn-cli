@@ -8,7 +8,7 @@ import (
 	"github.com/riraum/hn-cli/item"
 )
 
-func Show(tWidth int) (item.Items, error) {
+func GetAndFormatPosts(tWidth int) (item.Items, error) {
 	fmt.Println("Talking to the API...")
 
 	frontpageJSON, err := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")

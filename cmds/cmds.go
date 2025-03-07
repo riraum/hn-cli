@@ -49,7 +49,7 @@ func quit() {
 	os.Exit(0)
 }
 
-func Run(input string, post item.Item, tWidth int) error {
+func Run(input string, post item.Item, tWidth int) (item.Items, error) {
 	const wipMessage = "Logic not yet implemented"
 
 	switch input {
@@ -59,29 +59,29 @@ func Run(input string, post item.Item, tWidth int) error {
 		fmt.Println(wipMessage)
 	// List commands
 	case "refresh":
-		// var posts item.Items
-		_, err := assemble.Show(tWidth)
+		posts, err := assemble.GetAndFormatPosts(tWidth)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
 		}
-		// fmt.Println(posts)
+
+		return posts, nil
 	case "help":
 		fmt.Print(help())
 	// Open comments cmd
 	case "comments":
 		if err := openCommentURL(post.CommentURL); err != nil {
-			return fmt.Errorf("Failed to open URL %w", err)
+			return nil, fmt.Errorf("Failed to open URL %w", err)
 		}
 	// Open article URL
 	case "open":
 		if err := openArticleURL(post.ArticleURL); err != nil {
-			return fmt.Errorf("Failed to open URL %w", err)
+			return nil, fmt.Errorf("Failed to open URL %w", err)
 		}
 	// Quit command
 	case "quit":
 		quit()
 	}
 
-	return nil
+	return nil, nil
 }

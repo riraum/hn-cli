@@ -27,7 +27,7 @@ func main() {
 	// API
 	var posts item.Items
 
-	posts, err = assemble.Show(tWidth)
+	posts, err = assemble.GetAndFormatPosts(tWidth)
 	if err != nil {
 		fmt.Println(errTxt, err)
 		os.Exit(1)
@@ -51,7 +51,7 @@ func main() {
 		}
 	}
 
-	err = cmds.Run(input[0], posts[inputInt], tWidth)
+	_, err = cmds.Run(input[0], posts[inputInt], tWidth)
 	if err != nil {
 		fmt.Println(errTxt, err)
 		os.Exit(1)
