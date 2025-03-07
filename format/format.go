@@ -9,16 +9,13 @@ import (
 )
 
 func Format(posts item.Items, tWidth int) error {
-	// var postUnmarshSlice item.Items
 	for i := 0; i <= 10; i++ {
 		postUnmarsh := posts[i]
 
-		postUnmarsh.Title = fmt.Sprintf("%.25s...", postUnmarsh.Title)
 		postUnmarsh.HoursSincePosting = postUnmarsh.AddHoursSincePosting()
 		postUnmarsh.FormattedTime = postUnmarsh.RelativeTime()
 
 		// Trim title
-		// index := postUnmarshSlice[index]
 		index := strconv.Itoa(i)
 
 		titleLen := utf8.RuneCountInString(postUnmarsh.Title)
