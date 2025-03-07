@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/pkg/browser"
+	"github.com/riraum/hn-cli/assemble"
 	"github.com/riraum/hn-cli/item"
 )
 
@@ -48,7 +49,7 @@ func quit() {
 	os.Exit(0)
 }
 
-func Run(input string, post item.Item) error {
+func Run(input string, post item.Item, tWidth int) error {
 	const wipMessage = "Logic not yet implemented"
 
 	switch input {
@@ -58,7 +59,13 @@ func Run(input string, post item.Item) error {
 		fmt.Println(wipMessage)
 	// List commands
 	case "refresh":
-		fmt.Println(wipMessage)
+		// var posts item.Items
+		_, err := assemble.Show(tWidth)
+		if err != nil {
+			fmt.Println(err)
+			os.Exit(1)
+		}
+		// fmt.Println(posts)
 	case "help":
 		fmt.Print(help())
 	// Open comments cmd

@@ -5,16 +5,15 @@ import (
 	"os"
 	"strconv"
 
+	"github.com/riraum/hn-cli/assemble"
 	"github.com/riraum/hn-cli/cmds"
-	"github.com/riraum/hn-cli/format"
-	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/io"
 	"github.com/riraum/hn-cli/item"
 	"github.com/riraum/hn-cli/ui"
 )
 
 func main() {
-	fmt.Println("Hello hn-cli user\nTalking to the API...")
+	fmt.Println("Hello hn-cli user")
 
 	const errTxt = "Goodbye"
 
@@ -26,25 +25,9 @@ func main() {
 	}
 
 	// API
-	frontpageJSON, err := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
-	if err != nil {
-		fmt.Println(errTxt, err)
-		os.Exit(1)
-	}
+	var posts item.Items
 
-	frontpageIDs, err := item.UnmarshallSlice(frontpageJSON)
-	if err != nil {
-		fmt.Println(errTxt, err)
-		os.Exit(1)
-	}
-
-	posts, err := http.GetPostsFromIDs(frontpageIDs)
-	if err != nil {
-		fmt.Println(errTxt, err)
-		os.Exit(1)
-	}
-
-	err = format.Format(posts, tWidth)
+	posts, err = assemble.Show(tWidth)
 	if err != nil {
 		fmt.Println(errTxt, err)
 		os.Exit(1)
@@ -68,7 +51,7 @@ func main() {
 		}
 	}
 
-	err = cmds.Run(input[0], posts[inputInt])
+	err = cmds.Run(input[0], posts[inputInt], tWidth)
 	if err != nil {
 		fmt.Println(errTxt, err)
 		os.Exit(1)
