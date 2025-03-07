@@ -9,7 +9,6 @@ import (
 	"github.com/riraum/hn-cli/format"
 	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/io"
-	"github.com/riraum/hn-cli/item"
 	"github.com/riraum/hn-cli/ui"
 )
 
@@ -27,9 +26,10 @@ func main() {
 	}
 
 	// API
-	var frontpageJSON []byte
+	// var frontpageJSON []byte
+	var frontpageIDs []int
 
-	err = http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json", &frontpageJSON)
+	err = http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json", &frontpageIDs)
 	if err != nil {
 		fmt.Println("AAA", errTxt, err)
 		os.Exit(1)
@@ -39,11 +39,12 @@ func main() {
 	// 	os.Exit(1)
 	// }
 
-	frontpageIDs, err := item.UnmarshallSlice(frontpageJSON)
-	if err != nil {
-		fmt.Println(errTxt, err)
-		os.Exit(1)
-	}
+	// frontpageIDs, err = item.UnmarshallSlice(frontpageJSON)
+	// if err != nil {
+	// 	fmt.Println(errTxt, err)
+	// 	os.Exit(1)
+	// }
+	// var postsTest item.Items
 
 	posts, err := http.GetPostsFromIDs(frontpageIDs)
 	if err != nil {
