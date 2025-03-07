@@ -34,6 +34,7 @@ func main() {
 		fmt.Println("AAA", errTxt, err)
 		os.Exit(1)
 	}
+	fmt.Println("frontpageIDs", frontpageIDs)
 	// if StatusRequestURITooLong !=  {
 	// 	fmt.Println(errTxt, StatusRequestURITooLong)
 	// 	os.Exit(1)
