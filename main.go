@@ -27,11 +27,17 @@ func main() {
 	}
 
 	// API
-	frontpageJSON, err := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
+	var frontpageJSON []byte
+
+	err = http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json", &frontpageJSON)
 	if err != nil {
-		fmt.Println(errTxt, err)
+		fmt.Println("AAA", errTxt, err)
 		os.Exit(1)
 	}
+	// if StatusRequestURITooLong !=  {
+	// 	fmt.Println(errTxt, StatusRequestURITooLong)
+	// 	os.Exit(1)
+	// }
 
 	frontpageIDs, err := item.UnmarshallSlice(frontpageJSON)
 	if err != nil {

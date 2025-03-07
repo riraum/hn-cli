@@ -1,8 +1,8 @@
 package http
 
 import (
+	"encoding/json"
 	"fmt"
-	"io"
 	"log"
 	"net/http"
 
@@ -13,20 +13,27 @@ import (
   - http/http.go: does all the GetIds, GetPosts, ...
     it is a very low-level package that does only HTTP calls and maybe JSON unmarshalling.
 */
-func GetJSON(URL string) ([]byte, error) {
+func GetJSON(URL string, out any) error {
 	resp, err := http.Get(URL)
 	if err != nil {
-		return nil, fmt.Errorf("Failed to GET `%s`: %w", URL, err)
+		return fmt.Errorf("Failed to GET `%s`: %w", URL, err)
 	}
 
 	defer resp.Body.Close()
 
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return body, fmt.Errorf("Failed to read response body: %w", err)
-	}
-
-	return body, nil
+	// if out != nil {
+	// 	if err :=
+	return json.NewDecoder(resp.Body).Decode(out)
+	// ; err != nil {
+	// 		return http.StatusRequestURITooLong, fmt.Errorf("Failed to decode %w", err)
+	// 	}
+	// }
+	// return resp.StatusCode, nil
+	// body, err := io.ReadAll(resp.Body)
+	// if err != nil {
+	// 	return body, fmt.Errorf("Failed to read response body: %w", err)
+	// }
+	// return body, nil
 }
 
 func GetPostsFromIDs(frontpageIDs []int) (item.Items, error) {
@@ -43,7 +50,8 @@ func GetPostsFromIDs(frontpageIDs []int) (item.Items, error) {
 
 		var postData []byte
 
-		if postData, err = GetJSON(postURL); err != nil {
+		err = GetJSON(postURL, &postData)
+		if err != nil {
 			log.Fatalln("Failed to get JSON %w", err)
 		}
 
