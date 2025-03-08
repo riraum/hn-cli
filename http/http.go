@@ -16,23 +16,22 @@ import (
 	"github.com/riraum/hn-cli/item"
 )
 
-func GetJSON(URL string, out any) (int, error) {
-	const httpStatusSample = 1337
+func GetJSON(URL string, out any) error {
 
 	resp, err := http.Get(URL)
 	if err != nil {
-		return httpStatusSample, fmt.Errorf("Failed to GET `%s`: %w", URL, err)
+		return fmt.Errorf("Failed to GET `%s`: %w", URL, err)
 	}
 
 	defer resp.Body.Close()
 
 	if out != nil {
 		if err = json.NewDecoder(resp.Body).Decode(out); err != nil {
-			return http.StatusRequestURITooLong, fmt.Errorf("Failed to decode %w", err)
+			return fmt.Errorf("Failed to decode %w", err)
 		}
 	}
 
-	return resp.StatusCode, nil
+	return nil
 }
 
 func GetPostsFromIDs(frontpageIDs []int) (item.Items, error) {
@@ -45,9 +44,9 @@ func GetPostsFromIDs(frontpageIDs []int) (item.Items, error) {
 
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 
-		httpStatus, err := GetJSON(postURL, &postUnmarsh)
+		err := GetJSON(postURL, &postUnmarsh)
 		if err != nil {
-			log.Fatalln("%w Failed to Unmarshall %w", httpStatus, err)
+			log.Fatalln("Failed to Unmarshall %w", err)
 		}
 
 		// Check for Ask/Show HN posts, without external URL

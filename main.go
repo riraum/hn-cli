@@ -28,12 +28,11 @@ func main() {
 	}
 
 	// API
-	// var frontpageJSON []byte
 	var frontpageIDs []int
 
-	httpStatus, err := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json", &frontpageIDs)
+	err = http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json", &frontpageIDs)
 	if err != nil {
-		fmt.Println("HTTP status code", httpStatus, err)
+		fmt.Println(errTxt, err)
 		os.Exit(1)
 	}
 
