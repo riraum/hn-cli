@@ -33,11 +33,6 @@ func GetJSON(URL string, out any) (int, error) {
 	}
 
 	return resp.StatusCode, nil
-	// body, err := io.ReadAll(resp.Body)
-	// if err != nil {
-	// 	return body, fmt.Errorf("Failed to read response body: %w", err)
-	// }
-	// return body, nil
 }
 
 func GetPostsFromIDs(frontpageIDs []int) (item.Items, error) {
