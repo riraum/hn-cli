@@ -1,5 +1,5 @@
 /*
-Package items provides: stores the current posts internally use http/http.go to fetch the new posts and format/format.go to format the posts.
+Package items provides: stores the current posts internally
 
 the exposed methods might be:
 	`func (p Items) Get(page int) error`
@@ -46,24 +46,24 @@ func Marshall(input Item) ([]byte, error) {
 	return dataMarshalled, nil
 }
 
-func Unmarshal(input []byte) (Item, error) {
-	var dataUnmarshalled Item
+// func Unmarshal(input []byte) (Item, error) {
+// 	var dataUnmarshalled Item
 
-	if err := json.Unmarshal(input, &dataUnmarshalled); err != nil {
-		return dataUnmarshalled, fmt.Errorf("Failed to Unmarshall %w", err)
-	}
+// 	if err := json.Unmarshal(input, &dataUnmarshalled); err != nil {
+// 		return dataUnmarshalled, fmt.Errorf("Failed to Unmarshall %w", err)
+// 	}
 
-	return dataUnmarshalled, nil
-}
+// 	return dataUnmarshalled, nil
+// }
 
-func UnmarshallSlice(input []byte) ([]int, error) {
-	var sliceUnmarshalled []int
-	if err := json.Unmarshal(input, &sliceUnmarshalled); err != nil {
-		return sliceUnmarshalled, fmt.Errorf("Failed to UnmarshallSlice %w", err)
-	}
+// func UnmarshallSlice(input []byte) ([]int, error) {
+// 	var sliceUnmarshalled []int
+// 	if err := json.Unmarshal(input, &sliceUnmarshalled); err != nil {
+// 		return sliceUnmarshalled, fmt.Errorf("Failed to UnmarshallSlice %w", err)
+// 	}
 
-	return sliceUnmarshalled, nil
-}
+// 	return sliceUnmarshalled, nil
+// }
 
 // time.time to time.Duration conversion
 func (t Item) AddHoursSincePosting() float64 {

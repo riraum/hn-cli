@@ -31,23 +31,17 @@ func main() {
 	// var frontpageJSON []byte
 	var frontpageIDs []int
 
-	err = http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json", &frontpageIDs)
+	httpStatus, err := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json", &frontpageIDs)
 	if err != nil {
-		fmt.Println("AAA", errTxt, err)
+		fmt.Println("HTTP status code", httpStatus, err)
 		os.Exit(1)
 	}
-	fmt.Println("frontpageIDs", frontpageIDs)
+
+	// fmt.Println("frontpageIDs", frontpageIDs)
 	// if StatusRequestURITooLong !=  {
 	// 	fmt.Println(errTxt, StatusRequestURITooLong)
 	// 	os.Exit(1)
 	// }
-
-	// frontpageIDs, err = item.UnmarshallSlice(frontpageJSON)
-	// if err != nil {
-	// 	fmt.Println(errTxt, err)
-	// 	os.Exit(1)
-	// }
-	// var postsTest item.Items
 
 	posts, err := http.GetPostsFromIDs(frontpageIDs)
 	if err != nil {

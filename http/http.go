@@ -16,22 +16,23 @@ import (
 	"github.com/riraum/hn-cli/item"
 )
 
-func GetJSON(URL string, out any) error {
+func GetJSON(URL string, out any) (int, error) {
+	const httpStatusSample = 1337
+
 	resp, err := http.Get(URL)
 	if err != nil {
-		return fmt.Errorf("Failed to GET `%s`: %w", URL, err)
+		return httpStatusSample, fmt.Errorf("Failed to GET `%s`: %w", URL, err)
 	}
 
 	defer resp.Body.Close()
 
-	// if out != nil {
-	// 	if err :=
-	return json.NewDecoder(resp.Body).Decode(out)
-	// ; err != nil {
-	// 		return http.StatusRequestURITooLong, fmt.Errorf("Failed to decode %w", err)
-	// 	}
-	// }
-	// return resp.StatusCode, nil
+	if out != nil {
+		if err = json.NewDecoder(resp.Body).Decode(out); err != nil {
+			return http.StatusRequestURITooLong, fmt.Errorf("Failed to decode %w", err)
+		}
+	}
+
+	return resp.StatusCode, nil
 	// body, err := io.ReadAll(resp.Body)
 	// if err != nil {
 	// 	return body, fmt.Errorf("Failed to read response body: %w", err)
@@ -42,7 +43,7 @@ func GetJSON(URL string, out any) error {
 func GetPostsFromIDs(frontpageIDs []int) (item.Items, error) {
 	var postUnmarshSlice item.Items
 
-	var err error
+	// var err error
 
 	for i := 0; i <= 10; i++ {
 		var postUnmarsh item.Item
@@ -51,15 +52,9 @@ func GetPostsFromIDs(frontpageIDs []int) (item.Items, error) {
 
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 
-		var postData []byte
-
-		err = GetJSON(postURL, &postData)
+		httpStatus, err := GetJSON(postURL, &postUnmarsh)
 		if err != nil {
-			log.Fatalln("Failed to get JSON %w", err)
-		}
-
-		if postUnmarsh, err = item.Unmarshal(postData); err != nil {
-			log.Fatalln("Failed to Unmarshall %w", err)
+			log.Fatalln("%w Failed to Unmarshall %w", httpStatus, err)
 		}
 
 		// Check for Ask/Show HN posts, without external URL
