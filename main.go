@@ -1,3 +1,6 @@
+/*
+Package main provides: usage of `Item` and `Cmds` only
+*/
 package main
 
 import (
@@ -12,7 +15,6 @@ import (
 	"github.com/riraum/hn-cli/ui"
 )
 
-// - main.go: uses `Item` and `Cmds` only
 func main() {
 	fmt.Println("Hello hn-cli user\nTalking to the API...")
 

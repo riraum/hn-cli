@@ -1,3 +1,10 @@
+/*
+Package http provides: http interactions with the HackerNews API.
+
+It does all the GetIds, GetPosts, ...
+it is a very low-level package that does only HTTP calls and maybe JSON unmarshalling.
+*/
+
 package http
 
 import (
@@ -9,10 +16,6 @@ import (
 	"github.com/riraum/hn-cli/item"
 )
 
-/*
-  - http/http.go: does all the GetIds, GetPosts, ...
-    it is a very low-level package that does only HTTP calls and maybe JSON unmarshalling.
-*/
 func GetJSON(URL string, out any) error {
 	resp, err := http.Get(URL)
 	if err != nil {

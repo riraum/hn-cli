@@ -1,3 +1,13 @@
+/*
+Package items provides: stores the current posts internally use http/http.go to fetch the new posts and format/format.go to format the posts.
+
+the exposed methods might be:
+	`func (p Items) Get(page int) error`
+	`func (p Items) Refresh() error`
+	`func (p Items) Print(tWidth int) error`
+	...
+*/
+
 package item
 
 import (
@@ -6,15 +16,6 @@ import (
 	"time"
 )
 
-/*
-items/items.go: stores the current posts internally use http/http.go to fetch the new posts and format/format.go to format the posts.
-
-	the exposed methods might be:
-	`func (p Items) Get(page int) error`
-	`func (p Items) Refresh() error`
-	`func (p Items) Print(tWidth int) error`
-	...
-*/
 const (
 	hoursInADay   = 24
 	hoursInAMonth = 730
