@@ -38,8 +38,6 @@ func GetJSON(URL string, out any) (int, error) {
 func GetPostsFromIDs(frontpageIDs []int) (item.Items, error) {
 	var postUnmarshSlice item.Items
 
-	// var err error
-
 	for i := 0; i <= 10; i++ {
 		var postUnmarsh item.Item
 
