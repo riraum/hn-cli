@@ -48,6 +48,7 @@ func TestGetJSON(t *testing.T) {
 		if err != nil {
 			t.Fatalf("Expected no error, got %v", err)
 		}
+
 		fmt.Println(want)
 
 		if !slices.Equal(want, []int{0, 1}) {
