@@ -1,7 +1,6 @@
 package http
 
 import (
-	"encoding/json"
 	"fmt"
 	"io"
 	"log"
@@ -15,16 +14,16 @@ func TestGetJSON(t *testing.T) {
 	t.Run("ABC", func(t *testing.T) {
 		t.Parallel()
 
-		slice := []int{0, 1}
-		byteIn, err := json.Marshal(slice)
-		if err != nil {
-			log.Fatal(err)
-		}
+		// slice := []int{0, 1}
+		// byteIn, err := json.Marshal(slice)
+		// if err != nil {
+		// 	log.Fatal(err)
+		// }
 
 		// testserver
 		ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusOK)
-			fmt.Fprintln(w, byteIn)
+			fmt.Fprintln(w, `[0,1]`)
 		}))
 		defer ts.Close()
 
