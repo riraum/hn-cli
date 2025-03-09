@@ -11,16 +11,9 @@ import (
 )
 
 func TestGetJSON(t *testing.T) {
-	t.Run("ABC", func(t *testing.T) {
+	t.Run("Valid []int", func(t *testing.T) {
 		t.Parallel()
 
-		// slice := []int{0, 1}
-		// byteIn, err := json.Marshal(slice)
-		// if err != nil {
-		// 	log.Fatal(err)
-		// }
-
-		// testserver
 		ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
 			w.WriteHeader(http.StatusOK)
 			fmt.Fprintln(w, `[0,1]`)
@@ -40,7 +33,6 @@ func TestGetJSON(t *testing.T) {
 		}
 
 		fmt.Printf("%s", byteOut)
-		// testserver end
 
 		var want []int
 
@@ -48,8 +40,6 @@ func TestGetJSON(t *testing.T) {
 		if err != nil {
 			t.Fatalf("Expected no error, got %v", err)
 		}
-
-		fmt.Println(want)
 
 		if !slices.Equal(want, []int{0, 1}) {
 			t.Fatal("Expected want")
