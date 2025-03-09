@@ -16,7 +16,8 @@ func TestGetJSON(t *testing.T) {
 
 		// testserver
 		ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-			fmt.Fprintln(w, []byte{0, 1})
+			w.WriteHeader(http.StatusOK)
+			fmt.Fprintln(w, `{"":"0","":"1"}`)
 		}))
 		defer ts.Close()
 
