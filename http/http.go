@@ -17,7 +17,6 @@ import (
 )
 
 func GetJSON(URL string, out any) error {
-
 	resp, err := http.Get(URL)
 	if err != nil {
 		return fmt.Errorf("Failed to GET `%s`: %w", URL, err)

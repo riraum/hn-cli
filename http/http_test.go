@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"net/http/httptest"
+	"slices"
 	"testing"
 )
 
@@ -23,8 +24,10 @@ func TestGetJSON(t *testing.T) {
 		if err != nil {
 			log.Fatal(err)
 		}
+
 		intslice, err := io.ReadAll(res.Body)
 		res.Body.Close()
+
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -32,20 +35,21 @@ func TestGetJSON(t *testing.T) {
 		fmt.Printf("%s", intslice)
 		// testserver end
 
-		testString1 := struct{ ABC string }{ABC: "URL"}
-		want1 := []int{0, 1}
+		// testString1 := struct{ ABC string }{ABC: "URL"}
+		// want1 := []int{0, 1}
 
-		err = GetJSON(testString1, &want1)
+		var want []int
+
+		err = GetJSON(ts.URL, &want)
 		if err != nil {
 			t.Fatalf("Expected no error, got %v", err)
 		}
 
-		if !testString1.want1 {
+		if !slices.Equal(want, []int{0, 1}) {
 			t.Fatal("Expected want")
 		}
-
-		testString2 := "https://hacker-news.firebaseio.com/v0/topstories.json"
-		want2 := []int{}
+		// testString2 := "https://hacker-news.firebaseio.com/v0/topstories.json"
+		// want2 := []int{}
 	},
 	)
 }
