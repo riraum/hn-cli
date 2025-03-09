@@ -15,7 +15,8 @@ func TestGetJSON(t *testing.T) {
 	t.Run("ABC", func(t *testing.T) {
 		t.Parallel()
 
-		byteIn, err := json.Marshal([]int{0, 1})
+		slice := []int{0, 1}
+		byteIn, err := json.Marshal(slice)
 		if err != nil {
 			log.Fatal(err)
 		}
