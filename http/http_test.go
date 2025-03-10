@@ -34,15 +34,17 @@ func TestGetJSON(t *testing.T) {
 
 		fmt.Printf("%s", byteOut)
 
-		var want []int
+		var got []int
 
-		err = GetJSON(ts.URL, &want)
+		want := []int{0, 1}
+
+		err = GetJSON(ts.URL, &got)
 		if err != nil {
 			t.Fatalf("Expected no error, got %v", err)
 		}
 
-		if !slices.Equal(want, []int{0, 1}) {
-			t.Fatal("Expected want")
+		if !slices.Equal(want, got) {
+			t.Fatalf("Expected %v, got %v", want, got)
 		}
 	},
 	)
