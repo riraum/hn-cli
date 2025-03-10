@@ -23,7 +23,6 @@ func GetJSON(URL string, out any) error {
 	}
 
 	defer resp.Body.Close()
-	fmt.Println(resp.Body)
 
 	if out != nil {
 		if err = json.NewDecoder(resp.Body).Decode(out); err != nil {
