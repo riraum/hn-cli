@@ -1,3 +1,6 @@
+/*
+Package main provides: usage of `Item` and `Cmds` only
+*/
 package main
 
 import (
@@ -9,51 +12,44 @@ import (
 	"github.com/riraum/hn-cli/format"
 	"github.com/riraum/hn-cli/http"
 	"github.com/riraum/hn-cli/io"
-	"github.com/riraum/hn-cli/item"
 	"github.com/riraum/hn-cli/ui"
 )
 
 func main() {
 	fmt.Println("Hello hn-cli user\nTalking to the API...")
 
-	const errTxt = "Goodbye"
-
 	// Get terminal size
 	tWidth, err := io.TermSize()
 	if err != nil {
-		fmt.Println(errTxt, err)
+		fmt.Printf("failed to get terminal width: %v", err)
 		os.Exit(1)
 	}
 
 	// API
-	frontpageJSON, err := http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json")
-	if err != nil {
-		fmt.Println(errTxt, err)
-		os.Exit(1)
-	}
+	var frontpageIDs []int
 
-	frontpageIDs, err := item.UnmarshallSlice(frontpageJSON)
+	err = http.GetJSON("https://hacker-news.firebaseio.com/v0/topstories.json", &frontpageIDs)
 	if err != nil {
-		fmt.Println(errTxt, err)
+		fmt.Printf("failed to get frontpage JSON: %v", err)
 		os.Exit(1)
 	}
 
 	posts, err := http.GetPostsFromIDs(frontpageIDs)
 	if err != nil {
-		fmt.Println(errTxt, err)
+		fmt.Printf("failed to GetPostsFromIDs: %v", err)
 		os.Exit(1)
 	}
 
 	err = format.Format(posts, tWidth)
 	if err != nil {
-		fmt.Println(errTxt, err)
+		fmt.Printf("failed to format: %v", err)
 		os.Exit(1)
 	}
 
 	// UI
 	input, err := ui.UI()
 	if err != nil && len(input) > 1 {
-		fmt.Println(errTxt, err)
+		fmt.Printf("failed to run UI: %v", err)
 		os.Exit(1)
 	}
 
@@ -63,14 +59,14 @@ func main() {
 
 	if len(input) >= hasIndex {
 		if inputInt, err = strconv.Atoi(input[1]); err != nil {
-			fmt.Println(errTxt, err)
+			fmt.Printf("failed to get and convert input index: %v", err)
 			os.Exit(1)
 		}
 	}
 
 	err = cmds.Run(input[0], posts[inputInt])
 	if err != nil {
-		fmt.Println(errTxt, err)
+		fmt.Printf("failed to run command: %v", err)
 		os.Exit(1)
 	}
 }

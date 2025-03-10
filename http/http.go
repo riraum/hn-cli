@@ -1,34 +1,40 @@
+/*
+Package http provides: http interactions with the HackerNews API.
+
+It does all the GetIds, GetPosts, ...
+it is a very low-level package that does only HTTP calls and maybe JSON unmarshalling.
+*/
+
 package http
 
 import (
+	"encoding/json"
 	"fmt"
-	"io"
 	"log"
 	"net/http"
 
 	"github.com/riraum/hn-cli/item"
 )
 
-func GetJSON(URL string) ([]byte, error) {
+func GetJSON(URL string, out any) error {
 	resp, err := http.Get(URL)
 	if err != nil {
-		return nil, fmt.Errorf("Failed to GET `%s`: %w", URL, err)
+		return fmt.Errorf("Failed to GET `%s`: %w", URL, err)
 	}
 
 	defer resp.Body.Close()
 
-	body, err := io.ReadAll(resp.Body)
-	if err != nil {
-		return body, fmt.Errorf("Failed to read response body: %w", err)
+	if out != nil {
+		if err = json.NewDecoder(resp.Body).Decode(out); err != nil {
+			return fmt.Errorf("Failed to decode %w", err)
+		}
 	}
 
-	return body, nil
+	return nil
 }
 
 func GetPostsFromIDs(frontpageIDs []int) (item.Items, error) {
 	var postUnmarshSlice item.Items
-
-	var err error
 
 	for i := 0; i <= 10; i++ {
 		var postUnmarsh item.Item
@@ -37,13 +43,8 @@ func GetPostsFromIDs(frontpageIDs []int) (item.Items, error) {
 
 		postURL := fmt.Sprintf("https://hacker-news.firebaseio.com/v0/item/%v.json", postID)
 
-		var postData []byte
-
-		if postData, err = GetJSON(postURL); err != nil {
-			log.Fatalln("Failed to get JSON %w", err)
-		}
-
-		if postUnmarsh, err = item.Unmarshal(postData); err != nil {
+		err := GetJSON(postURL, &postUnmarsh)
+		if err != nil {
 			log.Fatalln("Failed to Unmarshall %w", err)
 		}
 

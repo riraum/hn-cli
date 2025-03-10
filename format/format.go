@@ -1,3 +1,12 @@
+/*
+Package format provides: formatting for displaying
+
+This provides low-level string functions like
+	`func Resize(in string, width) string`
+	...
+	This package would only work on `strings`, not `Item`
+*/
+
 package format
 
 import (
