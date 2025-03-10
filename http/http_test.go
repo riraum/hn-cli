@@ -2,8 +2,6 @@ package http
 
 import (
 	"fmt"
-	"io"
-	"log"
 	"net/http"
 	"net/http/httptest"
 	"slices"
@@ -20,25 +18,25 @@ func TestGetJSON(t *testing.T) {
 		}))
 		defer ts.Close()
 
-		res, err := http.Get(ts.URL)
-		if err != nil {
-			log.Fatal(err)
-		}
+		// res, err := http.Get(ts.URL)
+		// if err != nil {
+		// 	log.Fatal(err)
+		// }
 
-		byteOut, err := io.ReadAll(res.Body)
-		res.Body.Close()
+		// byteOut, err := io.ReadAll(res.Body)
+		// res.Body.Close()
 
-		if err != nil {
-			log.Fatal(err)
-		}
+		// if err != nil {
+		// 	log.Fatal(err)
+		// }
 
-		fmt.Printf("%s", byteOut)
+		// fmt.Printf("%s", byteOut)
 
 		var got []int
 
 		want := []int{0, 1}
 
-		err = GetJSON(ts.URL, &got)
+		err := GetJSON(ts.URL, &got)
 		if err != nil {
 			t.Fatalf("Expected no error, got %v", err)
 		}
